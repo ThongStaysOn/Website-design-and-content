@@ -1,0 +1,105 @@
+/* Tablet: 768px */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: var(--space-xl) var(--space-md);
+  }
+
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 18, 0.98);
+    flex-direction: column;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+  }
+  .nav__links.open {
+    display: flex;
+  }
+  .nav__hamburger {
+    display: flex;
+  }
+
+  .vision__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .economy__pepecoin {
+    grid-template-columns: 1fr;
+  }
+  .economy__nft-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .world__zones {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .world__kekpads {
+    grid-template-columns: 1fr;
+  }
+
+  .gameplay__kekcreator {
+    grid-template-columns: 1fr;
+  }
+  .gameplay__minigame-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .events__seasonal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .community__social-posts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .community__billboards {
+    grid-template-columns: 1fr;
+  }
+  .community__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile: 480px */
+@media (max-width: 480px) {
+  .economy__nft-gallery {
+    grid-template-columns: 1fr;
+  }
+  .economy__loop-diagram {
+    flex-direction: column;
+  }
+  .economy__loop-arrow {
+    transform: rotate(90deg);
+  }
+
+  .world__zones {
+    grid-template-columns: 1fr;
+  }
+
+  .gameplay__minigame-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .community__social-posts {
+    grid-template-columns: 1fr;
+  }
+  .community__gallery {
+    grid-template-columns: 1fr;
+  }
+  .community__stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .community__photo:nth-child(odd),
+  .community__photo:nth-child(even) {
+    transform: none;
+  }
+
+  .closing__ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+}
