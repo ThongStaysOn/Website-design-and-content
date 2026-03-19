@@ -1,0 +1,116 @@
+.roadmap {
+  background: var(--color-bg-secondary);
+}
+
+.roadmap__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  padding-left: var(--space-xl);
+}
+
+.roadmap__timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-green) 0%,
+    var(--color-accent-orange) 50%,
+    var(--color-accent-purple) 100%
+  );
+}
+
+.roadmap__tier {
+  position: relative;
+}
+
+.roadmap__tier-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.roadmap__tier-label::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-xl) + 2px);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+.roadmap__tier-label--delivered {
+  color: var(--color-accent-green);
+}
+.roadmap__tier-label--delivered::before {
+  background: var(--color-accent-green);
+  border-color: var(--color-accent-green);
+}
+.roadmap__tier-label--progress {
+  color: var(--color-accent-orange);
+}
+.roadmap__tier-label--progress::before {
+  background: transparent;
+  border-color: var(--color-accent-orange);
+}
+.roadmap__tier-label--horizon {
+  color: var(--color-accent-purple);
+}
+.roadmap__tier-label--horizon::before {
+  background: transparent;
+  border-color: var(--color-accent-purple);
+  opacity: 0.5;
+}
+
+.roadmap__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.roadmap__item {
+  color: var(--color-text-secondary);
+  padding-left: var(--space-md);
+  position: relative;
+  font-size: 0.9rem;
+}
+.roadmap__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+}
+.roadmap__item--delivered::before {
+  content: '\2713';
+  color: var(--color-accent-green);
+  font-size: 0.8rem;
+  top: 0;
+}
+.roadmap__item--progress::before {
+  background: var(--color-accent-orange);
+  border-radius: 50%;
+}
+.roadmap__item--horizon::before {
+  background: var(--color-accent-purple);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.roadmap__confidence {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  color: var(--color-accent-green);
+  max-width: 500px;
+  margin: 0 auto;
+}
