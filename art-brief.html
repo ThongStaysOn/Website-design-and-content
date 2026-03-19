@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kekspace Game Bible — Art Brief</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a12; color: #fff; line-height: 1.6; }
+
+    .header { background: #12121f; padding: 40px; text-align: center; border-bottom: 3px solid #a855f7; }
+    .header h1 { font-size: 2rem; margin-bottom: 8px; }
+    .header p { color: #b0b0c8; font-size: 1.1rem; }
+
+    .legend { display: flex; gap: 24px; justify-content: center; padding: 24px; background: #1a1a2e; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+    .dot--use { background: #4ade80; }
+    .dot--crop { background: #fb923c; }
+    .dot--create { background: #f472b6; }
+    .dot--ref { background: #22d3ee; }
+    .dot--kill { background: #ef4444; }
+
+    .section { padding: 40px 24px; max-width: 1400px; margin: 0 auto; }
+    .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #a855f7; }
+    .section-number { background: #a855f7; color: #0a0a12; font-weight: 800; font-size: 1.2rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+    .section-title { font-size: 1.5rem; }
+    .section-subtitle { color: #b0b0c8; font-size: 0.95rem; margin-top: 4px; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+
+    .card { background: #12121f; border: 1px solid #2a2a3e; border-radius: 8px; overflow: hidden; }
+    .card--create { border: 2px dashed #f472b6; }
+    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #1a1a2e; }
+    .card-body { padding: 16px; }
+    .card-source { font-size: 0.75rem; color: #666; font-family: monospace; margin-bottom: 8px; word-break: break-all; }
+    .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+
+    .badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .badge--use { background: #4ade80; color: #0a0a12; }
+    .badge--crop { background: #fb923c; color: #0a0a12; }
+    .badge--create { background: #f472b6; color: #0a0a12; }
+    .badge--ref { background: #22d3ee; color: #0a0a12; }
+
+    .card-desc { font-size: 0.85rem; color: #b0b0c8; }
+
+    .tone-box { background: #1a1a2e; border-left: 4px solid #4ade80; padding: 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .tone-box h4 { color: #4ade80; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .tone-box p { color: #b0b0c8; font-size: 0.9rem; }
+
+    .kill-box { background: #1a1a2e; border-left: 4px solid #ef4444; padding: 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .kill-box h4 { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .kill-box p, .kill-box li { color: #b0b0c8; font-size: 0.9rem; }
+    .kill-box ul { padding-left: 20px; list-style: disc; }
+    .kill-box li { margin-bottom: 4px; }
+
+    .new-copy { background: #1a1a2e; border-left: 4px solid #a855f7; padding: 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .new-copy h4 { color: #a855f7; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .new-copy p { color: #fff; font-size: 0.95rem; font-style: italic; }
+
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, #a855f7, transparent); margin: 60px auto; max-width: 600px; }
+
+    .create-list { background: #1a1a2e; border: 2px dashed #f472b6; border-radius: 8px; padding: 24px; margin: 24px 0; }
+    .create-list h4 { color: #f472b6; font-size: 1rem; margin-bottom: 16px; }
+    .create-list table { width: 100%; border-collapse: collapse; }
+    .create-list th { text-align: left; color: #f472b6; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid #2a2a3e; }
+    .create-list td { padding: 8px 12px; font-size: 0.9rem; color: #b0b0c8; border-bottom: 1px solid #1f1f2f; }
+    .create-list td:first-child { color: #fff; font-weight: 500; }
+
+    .summary { background: #12121f; padding: 40px; text-align: center; border-top: 3px solid #a855f7; }
+    .summary h2 { font-size: 1.5rem; margin-bottom: 16px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+    .summary-stat { }
+    .summary-num { font-size: 2rem; font-weight: 800; color: #4ade80; }
+    .summary-label { font-size: 0.85rem; color: #b0b0c8; }
+
+    @media (max-width: 768px) {
+      .cards { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .legend { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Kekspace Game Bible — Art Brief</h1>
+  <p>What to use, what to crop, what to create, and what to kill</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="dot dot--use"></span> Use as-is</div>
+  <div class="legend-item"><span class="dot dot--crop"></span> Crop / clean up</div>
+  <div class="legend-item"><span class="dot dot--create"></span> Needs to be created</div>
+  <div class="legend-item"><span class="dot dot--ref"></span> Reference only</div>
+  <div class="legend-item"><span class="dot dot--kill"></span> Do not use</div>
+</div>
+
+<!-- =============================== -->
+<!-- SECTION 1: HERO -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div>
+      <div class="section-title">Hero / Landing</div>
+      <div class="section-subtitle">Full-screen background, logo, tagline, two CTA buttons</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/8.png" alt="City West" />
+      <div class="card-body">
+        <span class="badge badge--use">Use as-is</span>
+        <div class="card-source">content/8.png</div>
+        <div class="card-title">Hero Background — City West Side</div>
+        <div class="card-desc">Full-viewport background image. The sprawling city with beach and octopus. Best overview shot we have.</div>
+      </div>
+    </div>
+    <div class="card card--create">
+      <div style="width:100%;aspect-ratio:16/10;background:#1a1a2e;display:flex;align-items:center;justify-content:center;color:#f472b6;font-size:3rem;">?</div>
+      <div class="card-body">
+        <span class="badge badge--create">Create new</span>
+        <div class="card-title">Kekspace Logo (transparent PNG)</div>
+        <div class="card-desc">Clean logo file, no background. Centered on hero. ~400px wide. The pixel-art "KEKSPACE" text works — just need it as an isolated asset.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="new-copy">
+    <h4>New tagline</h4>
+    <p>"The social world where meme culture meets real ownership"</p>
+  </div>
+
+  <div class="kill-box">
+    <h4>Kill these</h4>
+    <ul>
+      <li>"MINT GLORY" / "MASTER THE MEME ECONOMY" / "$$STACK PIZZA"</li>
+      <li>"Where degens grind and legends are minted"</li>
+      <li>All .exe filenames and glitch text</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 2: VISION -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <div>
+      <div class="section-title">Vision — "What is Kekspace?"</div>
+      <div class="section-subtitle">Two-column: text block (left) + 3 screenshots (right)</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/10.png" alt="Community" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">content/10.png</div>
+        <div class="card-title">Community Gathering Scene</div>
+        <div class="card-desc">Crop out the best crowd/gathering screenshot. Remove all callout boxes, Twitter posts, and text overlays. Just the clean game scene.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/1.png" alt="KekCreator" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">content/1.png</div>
+        <div class="card-title">Character Customization Screenshot</div>
+        <div class="card-desc">Crop the character editor view — just the character on the grid with the palette. Remove all text labels and system windows.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesArcadeSaloon.png" alt="Arcade" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesArcadeSaloon.png</div>
+        <div class="card-title">Zone Interior — Arcade Saloon</div>
+        <div class="card-desc">Crop just the isometric arcade scene. Remove the Pepe character art, callout boxes, and labels. Clean screenshot only.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="new-copy">
+    <h4>New copy</h4>
+    <p>"Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership."</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 3: ECONOMY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div>
+      <div class="section-title">Economy — "Own the Meme"</div>
+      <div class="section-subtitle">Pepecoin intro + play-to-value diagram + NFT gallery + "Get Pepecoin" CTA</div>
+    </div>
+  </div>
+
+  <div class="create-list">
+    <h4>Assets to create (all new)</h4>
+    <table>
+      <tr><th>Asset</th><th>Size</th><th>Description</th></tr>
+      <tr><td>Pepecoin Logo</td><td>150x150px</td><td>Clean Pepecoin logo, transparent background. Pixel-art style preferred.</td></tr>
+      <tr><td>Icon: Explore</td><td>48x48px</td><td>Pixel-art icon — magnifying glass or compass. For the play-to-value diagram.</td></tr>
+      <tr><td>Icon: Gather</td><td>48x48px</td><td>Pixel-art icon — pickaxe or mining tool.</td></tr>
+      <tr><td>Icon: Craft</td><td>48x48px</td><td>Pixel-art icon — hammer or anvil.</td></tr>
+      <tr><td>Icon: Equip or Sell</td><td>48x48px</td><td>Pixel-art icon — sword or trade arrows.</td></tr>
+      <tr><td>Icon: Mint</td><td>48x48px</td><td>Pixel-art icon — gem or blockchain cube.</td></tr>
+    </table>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/other manual/Equipment.png" alt="Equipment" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/Equipment.png</div>
+        <div class="card-title">NFT Gear Showcase</div>
+        <div class="card-desc">Crop the best equipment items. Remove all ERC labels, stat text, and technical jargon. Just show beautiful items.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/FurnitureSystem2.png" alt="Room" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/FurnitureSystem2.png</div>
+        <div class="card-title">Decorated Room Showcase</div>
+        <div class="card-desc">Crop one of the room screenshots — the classic or seasonal. Remove text overlays.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/Cosmetic.png" alt="Character" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/Cosmetic.png</div>
+        <div class="card-title">Character in Full Drip</div>
+        <div class="card-desc">Crop the best-dressed character. Remove skin category labels. Show one aspirational character.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="new-copy">
+    <h4>Play-to-value loop copy</h4>
+    <p>"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</p>
+  </div>
+
+  <div class="kill-box">
+    <h4>Kill these</h4>
+    <ul>
+      <li>All "ERC-721", "ERC-1155", "ERC-20" references</li>
+      <li>"BUY POWER WITH ETH"</li>
+      <li>"A WEB3 METAVERSE BUILT BY THE PEPECOIN COMMUNITY"</li>
+      <li>Loot box mechanics, fusion mechanics, stat breakdowns</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 4: WORLD -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <div>
+      <div class="section-title">World — "Step Into the Grid"</div>
+      <div class="section-subtitle">City overview map + 8 zone cards (one screenshot + one-liner each) + Kekpads teaser</div>
+    </div>
+  </div>
+
+  <div class="tone-box">
+    <h4>What each zone needs</h4>
+    <p>One clean screenshot per zone. No text overlays, no callout boxes, no Pepe character art in the corners, no fake file paths. Just the isometric game scene, cropped cleanly.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/other manual/ZonesSpawn.png" alt="Spawn" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesSpawn.png</div>
+        <div class="card-title">Spawn — "Where everyone arrives"</div>
+        <div class="card-desc">Crop just the isometric building scene. Remove all billboard callouts, labels, and the border.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesArcadeSaloon.png" alt="Arcade" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesArcadeSaloon.png</div>
+        <div class="card-title">Arcade Saloon — "Games and tickets"</div>
+        <div class="card-desc">Crop the arcade interior. Remove the large Pepe face in the corner and the smaller inset image.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesAmplexus.png" alt="Amplexus" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesAmplexus.png</div>
+        <div class="card-title">Amplexus — "The nightclub that never closes"</div>
+        <div class="card-desc">Crop just the nightclub scene. Remove the bouncer character art, system dump text, and all error messages.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesKekmart.png" alt="Kekmart" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesKekmart.png</div>
+        <div class="card-title">Kekmart — "Shopping"</div>
+        <div class="card-desc">Crop the store interior. Remove the popup window, Pepe clerk character, and wet floor sign.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesAdventureGuild.png" alt="Guild" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesAdventureGuild.png</div>
+        <div class="card-title">Adventure Guild — "Quests and lore"</div>
+        <div class="card-desc">Crop the guild hall. Remove the magnified callout bubble and file labels.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesCementery.png" alt="Cemetery" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesCementery.png</div>
+        <div class="card-title">Cemetery / Kekmaze — "The dark and mysterious side"</div>
+        <div class="card-desc">Crop the graveyard scene. Remove the Grim Reaper character, callout boxes, and bottom text panel.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesGMCoffee.png" alt="GM Coffee" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesGMCoffee.png</div>
+        <div class="card-title">GM Coffee — "The social hangout"</div>
+        <div class="card-desc">Crop the coffee shop interior. Remove loading text, SYNTAX ERROR labels, inset images, and the Pepe face.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/ZonesTouchGrassPark.png" alt="Park" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/ZonesTouchGrassPark.png</div>
+        <div class="card-title">Touch Grass Park — "The chill zone"</div>
+        <div class="card-desc">Crop the park scene. Remove Executive Pepe, speech bubbles, loading bars, and IP addresses.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kill-box">
+    <h4>Remove from ALL zone images</h4>
+    <ul>
+      <li>All fake file paths (.exe, .dll, .tiff, .dot, .sip, .zip)</li>
+      <li>All "SYSTEM HALTED", "SYNTAX ERROR", "FATAL" text</li>
+      <li>All large Pepe character art in corners</li>
+      <li>All callout boxes and speech bubbles</li>
+      <li>All loading bars and progress indicators</li>
+      <li>The purple border frame around each image</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 5: GAMEPLAY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <div>
+      <div class="section-title">Gameplay — "More Than Just Hanging Out"</div>
+      <div class="section-subtitle">KekCreator anatomy + 5 minigame cards + quests blurb + HUD screenshot</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/5.png" alt="Anatomy" />
+      <div class="card-body">
+        <span class="badge badge--use">Use as-is</span>
+        <div class="card-source">content/5.png</div>
+        <div class="card-title">KekCreator Anatomy Diagram</div>
+        <div class="card-desc">The labeled character with all customization slots. This is one of the strongest assets — use the right-side anatomy diagram as-is. It's already clean and reads well.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/18.png" alt="HUD" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">content/18.png</div>
+        <div class="card-title">HUD / Interface Screenshot</div>
+        <div class="card-desc">Crop just the game screenshot in the center. Remove the colored callout boxes around the edges. One clean screenshot of the interface.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-list">
+    <h4>Minigame screenshots needed (crop from existing or capture new)</h4>
+    <table>
+      <tr><th>Minigame</th><th>Source</th><th>What to do</th></tr>
+      <tr><td>Survivor</td><td>content/7.png or other manual/ArcadeSaloon_Minigames.png</td><td>Crop the top-down shooter screen. Square aspect ratio.</td></tr>
+      <tr><td>Frog Bowling</td><td>content/7.png or other manual/ArcadeSaloon_Minigames.png</td><td>Crop the bowling lane screen. Square aspect ratio.</td></tr>
+      <tr><td>Whack-A-Meme</td><td>content/7.png or other manual/ArcadeSaloon_Minigames.png</td><td>Crop the meme grid game screen. Square aspect ratio.</td></tr>
+      <tr><td>Pokek (Poker)</td><td>other manual/Pokek.png</td><td>Crop just the poker table from above. Remove all text labels.</td></tr>
+      <tr><td>Fishing</td><td>other manual/Fishing.png</td><td>Crop the fishing gameplay UI. Remove the license and text blocks.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 6: EVENTS -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <div>
+      <div class="section-title">Events & Partnerships — "Proof It Works"</div>
+      <div class="section-subtitle">Krakening showcase + 2 seasonal event cards + partner pitch</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/other manual/Exclusive.png" alt="Krakening crowd" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/Exclusive.png</div>
+        <div class="card-title">Krakening Event — Crowd Shot</div>
+        <div class="card-desc">Crop the massive crowd screenshot from the bottom of this page. This is the money shot — hundreds of players gathered. Remove all text and borders.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/Exclusive.png" alt="Krakening items" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/Exclusive.png</div>
+        <div class="card-title">Krakening Exclusive Items Grid</div>
+        <div class="card-desc">Crop the purple exclusive items collection from the top of this page. Clean grid of items only, no text.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/EventHalloween.png" alt="Halloween" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/EventHalloween.png</div>
+        <div class="card-title">Halloween Event</div>
+        <div class="card-desc">Crop the best Halloween game scene. Remove "TRICK OR TREAT" header, "THE LABYRINTH HUNGERS" text, and all narrative copy.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/EventXmas2025.png" alt="Christmas" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/EventXmas2025.png</div>
+        <div class="card-title">Christmas 2025 Event</div>
+        <div class="card-desc">Crop the Christmas tree scene with presents. Remove text, snowman character, and borders. Clean festive scene.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 7: COMMUNITY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <div>
+      <div class="section-title">Community — "Built by the People in It"</div>
+      <div class="section-subtitle">4 community scene photos + 3 social media post screenshots + stats + billboard</div>
+    </div>
+  </div>
+
+  <div class="tone-box">
+    <h4>What we need</h4>
+    <p>4-6 candid community screenshots showing real player gatherings. These should feel organic — not staged. Also need 2-3 real social media posts (Twitter/X) screenshotted and styled as cards. Crop cleanly, remove all manual-page overlays.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="content/other manual/SocialAndCommunity.png" alt="Social" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/SocialAndCommunity.png</div>
+        <div class="card-title">Community Gathering + Social Posts</div>
+        <div class="card-desc">This page has both crowd screenshots AND embedded Twitter posts. Crop them separately — the crowd scenes go in the gallery, the tweets become social post cards.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="content/other manual/BillboardNetwork.png" alt="Billboards" />
+      <div class="card-body">
+        <span class="badge badge--crop">Crop</span>
+        <div class="card-source">other manual/BillboardNetwork.png</div>
+        <div class="card-title">Billboard Network In-World</div>
+        <div class="card-desc">Crop the city scene showing billboards. Remove all text callouts and the right-side description panel.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 8 & 9: ROADMAP + CLOSING -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">8-9</div>
+    <div>
+      <div class="section-title">Roadmap + Closing</div>
+      <div class="section-subtitle">No images needed — text only sections</div>
+    </div>
+  </div>
+
+  <div class="tone-box">
+    <h4>No art needed for these sections</h4>
+    <p>The Roadmap is a styled text timeline (Delivered / In Progress / On the Horizon). The Closing is two CTA buttons, social links, and the logo. All handled in code — no image assets required.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- FULL SUMMARY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">!</div>
+    <div>
+      <div class="section-title">Full Asset Checklist</div>
+      <div class="section-subtitle">Everything the art team needs to deliver</div>
+    </div>
+  </div>
+
+  <div class="create-list">
+    <h4>New assets to create from scratch</h4>
+    <table>
+      <tr><th>Asset</th><th>Size / Format</th><th>Section</th></tr>
+      <tr><td>Kekspace Logo (transparent)</td><td>~400px wide, PNG</td><td>Hero + Closing</td></tr>
+      <tr><td>Pepecoin Logo</td><td>150x150px, PNG</td><td>Economy</td></tr>
+      <tr><td>Icon: Explore</td><td>48x48px, PNG</td><td>Economy diagram</td></tr>
+      <tr><td>Icon: Gather</td><td>48x48px, PNG</td><td>Economy diagram</td></tr>
+      <tr><td>Icon: Craft</td><td>48x48px, PNG</td><td>Economy diagram</td></tr>
+      <tr><td>Icon: Equip/Sell</td><td>48x48px, PNG</td><td>Economy diagram</td></tr>
+      <tr><td>Icon: Mint</td><td>48x48px, PNG</td><td>Economy diagram</td></tr>
+      <tr><td>Favicon</td><td>32x32px, SVG or ICO</td><td>Browser tab</td></tr>
+      <tr><td>OG Image</td><td>1200x630px, PNG</td><td>Social sharing</td></tr>
+    </table>
+  </div>
+
+  <div class="create-list">
+    <h4>Existing images to crop / clean up</h4>
+    <table>
+      <tr><th>What</th><th>Source</th><th>Section</th></tr>
+      <tr><td>3 vision screenshots</td><td>content/10.png, content/1.png, ZonesArcadeSaloon.png</td><td>Vision</td></tr>
+      <tr><td>3 NFT gallery images</td><td>Equipment.png, FurnitureSystem2.png, Cosmetic.png</td><td>Economy</td></tr>
+      <tr><td>8 zone screenshots</td><td>All Zones*.png files</td><td>World</td></tr>
+      <tr><td>KekCreator anatomy (right side)</td><td>content/5.png</td><td>Gameplay</td></tr>
+      <tr><td>HUD screenshot (center only)</td><td>content/18.png</td><td>Gameplay</td></tr>
+      <tr><td>5 minigame screenshots</td><td>content/7.png, Pokek.png, Fishing.png</td><td>Gameplay</td></tr>
+      <tr><td>Krakening crowd shot</td><td>Exclusive.png (bottom)</td><td>Events</td></tr>
+      <tr><td>Krakening items grid</td><td>Exclusive.png (top)</td><td>Events</td></tr>
+      <tr><td>Halloween scene</td><td>EventHalloween.png</td><td>Events</td></tr>
+      <tr><td>Christmas scene</td><td>EventXmas2025.png</td><td>Events</td></tr>
+      <tr><td>4 community crowd photos</td><td>SocialAndCommunity.png, TheCommunity.png</td><td>Community</td></tr>
+      <tr><td>3 social media post screenshots</td><td>SocialAndCommunity.png (tweets)</td><td>Community</td></tr>
+      <tr><td>Billboard in-world shot</td><td>BillboardNetwork.png</td><td>Community</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="summary">
+  <h2>Summary</h2>
+  <div class="summary-grid">
+    <div class="summary-stat">
+      <div class="summary-num">9</div>
+      <div class="summary-label">New assets to create</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-num">~25</div>
+      <div class="summary-label">Images to crop/clean</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-num">0</div>
+      <div class="summary-label">Glitch text remaining</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-num">9</div>
+      <div class="summary-label">Site sections</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
