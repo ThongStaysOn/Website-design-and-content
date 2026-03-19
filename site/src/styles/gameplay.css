@@ -1,0 +1,108 @@
+.gameplay {
+  background: var(--color-bg-primary);
+}
+
+.gameplay__kekcreator {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+.gameplay__kekcreator-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-accent-cyan);
+  margin-bottom: var(--space-md);
+}
+.gameplay__kekcreator-text p {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+.gameplay__anatomy {
+  max-width: 100%;
+}
+
+.gameplay__minigames {
+  margin-bottom: var(--space-2xl);
+}
+.gameplay__minigames > h3 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-accent-orange);
+  margin-bottom: var(--space-lg);
+}
+.gameplay__minigame-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.gameplay__minigame {
+  background: var(--color-bg-surface);
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  text-align: center;
+  padding-bottom: var(--space-md);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+.gameplay__minigame:hover {
+  border-color: var(--color-accent-orange);
+  transform: translateY(-4px);
+}
+.gameplay__minigame img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.gameplay__minigame h4 {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  color: var(--color-text-primary);
+  padding: var(--space-sm) var(--space-sm) 0;
+}
+.gameplay__minigame p {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+}
+.gameplay__minigame-hook {
+  text-align: center;
+  color: var(--color-accent-green);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+}
+
+.gameplay__quests {
+  background: var(--color-bg-surface);
+  padding: var(--space-xl);
+  border-left: 4px solid var(--color-accent-purple);
+  margin-bottom: var(--space-2xl);
+}
+.gameplay__quests h3 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-accent-purple);
+  margin-bottom: var(--space-md);
+}
+.gameplay__quests p {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.gameplay__hud {
+  text-align: center;
+}
+.gameplay__hud h3 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-lg);
+}
+.gameplay__hud img {
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+.gameplay__hud-caption {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
