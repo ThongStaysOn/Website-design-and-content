@@ -41,7 +41,6 @@ body {
 
 .pixel-border {
   border: var(--pixel-border);
-  image-rendering: pixelated;
 }
 
 .tape-corner {

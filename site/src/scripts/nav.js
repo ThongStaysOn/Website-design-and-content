@@ -4,9 +4,10 @@ const navLinks = document.getElementById('nav-links');
 hamburger?.addEventListener('click', () => {
   const isOpen = hamburger.classList.toggle('open');
   navLinks.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
 });
 
+// Close mobile menu on link click or Escape
 navLinks?.querySelectorAll('.nav__link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
@@ -15,7 +16,30 @@ navLinks?.querySelectorAll('.nav__link').forEach(link => {
   });
 });
 
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks?.classList.contains('open')) {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.focus();
+  }
+});
+
+// Scroll handlers — throttled with rAF
 const progressBar = document.getElementById('nav-progress');
+const sections = document.querySelectorAll('main .section[id]');
+let scrollTicking = false;
+
+function onScroll() {
+  if (!scrollTicking) {
+    requestAnimationFrame(() => {
+      updateProgress();
+      updateActiveLink();
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+}
 
 function updateProgress() {
   const scrollTop = window.scrollY;
@@ -23,10 +47,6 @@ function updateProgress() {
   const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
   if (progressBar) progressBar.style.width = `${progress}%`;
 }
-
-window.addEventListener('scroll', updateProgress, { passive: true });
-
-const sections = document.querySelectorAll('main .section[id]');
 
 function updateActiveLink() {
   const scrollPos = window.scrollY + 100;
@@ -47,4 +67,4 @@ function updateActiveLink() {
   });
 }
 
-window.addEventListener('scroll', updateActiveLink, { passive: true });
+window.addEventListener('scroll', onScroll, { passive: true });
