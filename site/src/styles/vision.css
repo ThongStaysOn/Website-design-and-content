@@ -1,0 +1,38 @@
+.vision {
+  background: var(--color-bg-secondary);
+}
+
+.vision__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.vision__text {
+  position: relative;
+}
+.vision__text h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-accent-green);
+  margin-bottom: var(--space-md);
+}
+.vision__text p {
+  margin-bottom: var(--space-md);
+  line-height: 1.8;
+  color: var(--color-text-on-surface);
+}
+.vision__text p:last-child {
+  margin-bottom: 0;
+}
+
+.vision__images {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.vision__img {
+  width: 100%;
+  border: var(--pixel-border);
+}

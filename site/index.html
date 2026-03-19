@@ -58,9 +58,99 @@
   </header>
 
   <main>
-    <section class="hero section" id="hero"></section>
-    <section class="vision section" id="vision"></section>
-    <section class="economy section" id="economy"></section>
+    <section class="hero section" id="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__animations" aria-hidden="true"></div>
+      <div class="hero__content container">
+        <h1 class="sr-only">Kekspace</h1>
+        <img src="/images/logo-kekspace.png" alt="Kekspace" class="hero__logo pixel-art" width="400" height="120" />
+        <p class="hero__tagline">The social world where meme culture meets real ownership</p>
+        <div class="hero__ctas">
+          <a href="#" class="cta cta--primary">Get Pepecoin</a>
+          <a href="#" class="cta cta--secondary">Play Now</a>
+        </div>
+      </div>
+      <div class="hero__pixel-border"></div>
+    </section>
+    <section class="vision section" id="vision">
+      <div class="container">
+        <h2 class="section__title fade-in">What is Kekspace?</h2>
+        <div class="vision__grid">
+          <div class="vision__text manual-page fade-in">
+            <h3>A world that feels like home</h3>
+            <p>Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership.</p>
+            <p>It's built for communities, creators, degens, and curious newcomers who want a space that's as fun as it is functional. Every item you earn, every room you build, every skin you wear — it's yours.</p>
+          </div>
+          <div class="vision__images fade-in">
+            <img src="/images/gameplay/community-gathering.png" alt="Players gathering in Kekspace" class="vision__img tape-corner" loading="lazy" />
+            <img src="/images/gameplay/character-custom.png" alt="Character customization in KekCreator" class="vision__img" loading="lazy" />
+            <img src="/images/zones/arcade-interior.png" alt="The Arcade Saloon zone" class="vision__img" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="economy section" id="economy">
+      <div class="container">
+        <h2 class="section__title fade-in">Own the Meme</h2>
+        <p class="section__subtitle fade-in">The economy isn't a feature — it's the foundation.</p>
+
+        <div class="economy__pepecoin fade-in">
+          <div class="economy__pepecoin-text">
+            <h3>Pepecoin</h3>
+            <p>The first and longest-running Pepe-themed cryptocurrency. Community-mined since 2016 with no presale and no funny business. Pepecoin is the fuel that powers everything in Kekspace — from in-game purchases to NFT minting.</p>
+          </div>
+          <div class="economy__pepecoin-visual">
+            <img src="/images/economy/pepecoin-logo.png" alt="Pepecoin" class="pixel-art" loading="lazy" />
+            <span class="economy__fuel-label">Fuel of the world</span>
+          </div>
+        </div>
+
+        <div class="economy__loop fade-in">
+          <h3>The Play-to-Value Loop</h3>
+          <div class="economy__loop-diagram">
+            <div class="economy__loop-step">
+              <img src="/images/economy/icon-explore.png" alt="" class="economy__loop-icon pixel-art" width="48" height="48" />
+              <span class="economy__loop-label">Explore</span>
+            </div>
+            <span class="economy__loop-arrow pixel-art">&rarr;</span>
+            <div class="economy__loop-step">
+              <img src="/images/economy/icon-gather.png" alt="" class="economy__loop-icon pixel-art" width="48" height="48" />
+              <span class="economy__loop-label">Gather</span>
+            </div>
+            <span class="economy__loop-arrow pixel-art">&rarr;</span>
+            <div class="economy__loop-step">
+              <img src="/images/economy/icon-craft.png" alt="" class="economy__loop-icon pixel-art" width="48" height="48" />
+              <span class="economy__loop-label">Craft</span>
+            </div>
+            <span class="economy__loop-arrow pixel-art">&rarr;</span>
+            <div class="economy__loop-step">
+              <img src="/images/economy/icon-equip.png" alt="" class="economy__loop-icon pixel-art" width="48" height="48" />
+              <span class="economy__loop-label">Equip or Sell</span>
+            </div>
+            <span class="economy__loop-arrow pixel-art">&rarr;</span>
+            <div class="economy__loop-step">
+              <img src="/images/economy/icon-mint.png" alt="" class="economy__loop-icon pixel-art" width="48" height="48" />
+              <span class="economy__loop-label">Mint</span>
+            </div>
+          </div>
+          <p class="economy__loop-copy">Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property.</p>
+        </div>
+
+        <div class="economy__nfts fade-in">
+          <h3>Digital Ownership, Not Just Collectibles</h3>
+          <p>Skins, furniture, equipment — everything you earn or create in Kekspace is ownable on-chain. Craft it, upgrade it, enchant it, trade it. Your progress has real value.</p>
+          <div class="economy__nft-gallery">
+            <img src="/images/economy/nft-gear.png" alt="In-game NFT equipment" class="pixel-border" loading="lazy" />
+            <img src="/images/economy/nft-room.png" alt="Player-decorated room" class="pixel-border" loading="lazy" />
+            <img src="/images/economy/nft-character.png" alt="Fully customized character" class="pixel-border" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="economy__cta fade-in">
+          <a href="#" class="cta cta--primary">Get Pepecoin</a>
+        </div>
+      </div>
+    </section>
     <section class="world section" id="world"></section>
     <section class="gameplay section" id="gameplay"></section>
     <section class="events section" id="events"></section>

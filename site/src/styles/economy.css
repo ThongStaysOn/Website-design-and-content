@@ -1,0 +1,113 @@
+.economy {
+  background: var(--color-bg-primary);
+}
+
+.economy__pepecoin {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+.economy__pepecoin-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-accent-green);
+  margin-bottom: var(--space-md);
+}
+.economy__pepecoin-text p {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+.economy__pepecoin-visual {
+  text-align: center;
+}
+.economy__pepecoin-visual img {
+  max-width: 150px;
+  margin: 0 auto var(--space-sm);
+}
+.economy__fuel-label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  color: var(--color-accent-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.economy__loop {
+  background: var(--color-bg-surface);
+  border: var(--pixel-border);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+}
+.economy__loop h3 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-accent-cyan);
+  margin-bottom: var(--space-lg);
+}
+.economy__loop-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+.economy__loop-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.economy__loop-icon {
+  width: 48px;
+  height: 48px;
+}
+.economy__loop-label {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--color-text-primary);
+}
+.economy__loop-arrow {
+  font-size: 1.5rem;
+  color: var(--color-accent-green);
+}
+.economy__loop-copy {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.economy__nfts {
+  margin-bottom: var(--space-2xl);
+}
+.economy__nfts h3 {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-accent-purple);
+  margin-bottom: var(--space-md);
+}
+.economy__nfts > p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  max-width: 600px;
+  line-height: 1.8;
+}
+.economy__nft-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+.economy__nft-gallery img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.economy__cta {
+  text-align: center;
+  padding-top: var(--space-lg);
+}
