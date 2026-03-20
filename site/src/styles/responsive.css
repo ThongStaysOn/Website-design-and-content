@@ -61,6 +61,10 @@
   .community__stats {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .section-decor {
+    display: none;
+  }
 }
 
 /* Mobile: 480px */

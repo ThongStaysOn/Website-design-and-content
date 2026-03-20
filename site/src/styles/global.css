@@ -143,3 +143,20 @@ img {
 img.pixel-art {
   image-rendering: pixelated;
 }
+
+/* Decorative NPC sprites */
+.section-decor {
+  position: absolute;
+  bottom: var(--space-lg);
+  max-height: 180px;
+  width: auto;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-decor--right {
+  right: var(--space-lg);
+}
+.section-decor--left {
+  left: var(--space-lg);
+}
