@@ -48,9 +48,27 @@
     .copy-label--input { color: #f472b6; }
 
     .copy-text { background: #0a0a12; border: 1px solid #2a2a3e; border-radius: 4px; padding: 14px 16px; font-size: 0.9rem; color: #b0b0c8; line-height: 1.7; }
-    .copy-text--new { border-color: #4ade80; color: #fff; }
+    .copy-text--new { border-color: #4ade80; color: #fff; cursor: text; }
+    .copy-text--new:focus { outline: 2px solid #4ade80; outline-offset: 2px; background: #111122; }
+    .copy-text--new:hover { background: #0d0d18; }
     .copy-text--strike { text-decoration: line-through; opacity: 0.5; }
-    .copy-text--input { border-color: #f472b6; border-style: dashed; color: #f472b6; font-style: italic; }
+    .copy-text--input { border-color: #f472b6; border-style: dashed; color: #f472b6; cursor: text; }
+    .copy-text--input:focus { outline: 2px solid #f472b6; outline-offset: 2px; background: #111122; color: #fff; font-style: normal; }
+    .copy-text--input:hover { background: #0d0d18; }
+
+    .edit-hint { font-size: 0.7rem; color: #555; margin-top: 4px; display: none; }
+    .copy-text--new:focus ~ .edit-hint,
+    .copy-text--input:focus ~ .edit-hint { display: block; }
+
+    .save-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a2e; border-top: 2px solid #4ade80; padding: 12px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 100; transform: translateY(100%); transition: transform 0.3s ease; }
+    .save-bar.visible { transform: translateY(0); }
+    .save-bar button { font-family: inherit; font-size: 0.85rem; font-weight: 600; padding: 8px 24px; border: none; border-radius: 4px; cursor: pointer; }
+    .save-bar .btn-save { background: #4ade80; color: #0a0a12; }
+    .save-bar .btn-save:hover { background: #22c55e; }
+    .save-bar .btn-export { background: #a855f7; color: #fff; }
+    .save-bar .btn-export:hover { background: #9333ea; }
+    .save-bar .btn-reset { background: transparent; color: #ef4444; border: 1px solid #ef4444; }
+    .save-bar .save-status { color: #4ade80; font-size: 0.85rem; }
 
     .divider { height: 1px; background: linear-gradient(90deg, transparent, #a855f7, transparent); margin: 48px auto; max-width: 600px; }
 
@@ -119,7 +137,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"The social world where meme culture meets real ownership"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The social world where meme culture meets real ownership"</div>
       </div>
     </div>
   </div>
@@ -135,11 +153,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Button text</div>
-        <div class="copy-text copy-text--new">"Get Pepecoin"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Get Pepecoin"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">URL needed</div>
-        <div class="copy-text copy-text--input">Where does this link? Exchange page? pepecoin.io? Provide the URL.</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Where does this link? Exchange page? pepecoin.io? Provide the URL.</div>
       </div>
     </div>
   </div>
@@ -155,11 +173,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Button text</div>
-        <div class="copy-text copy-text--new">"Play Now"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Play Now"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">URL needed</div>
-        <div class="copy-text copy-text--input">Where does this link? Web client? Download page? Epic Store listing?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Where does this link? Web client? Download page? Epic Store listing?</div>
       </div>
     </div>
   </div>
@@ -188,7 +206,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"What is Kekspace?"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"What is Kekspace?"</div>
       </div>
     </div>
   </div>
@@ -204,7 +222,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"A world that feels like home"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"A world that feels like home"</div>
       </div>
     </div>
   </div>
@@ -224,7 +242,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership."</div>
       </div>
     </div>
   </div>
@@ -244,7 +262,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"It's built for communities, creators, degens, and curious newcomers who want a space that's as fun as it is functional. Every item you earn, every room you build, every skin you wear — it's yours."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"It's built for communities, creators, degens, and curious newcomers who want a space that's as fun as it is functional. Every item you earn, every room you build, every skin you wear — it's yours."</div>
       </div>
     </div>
   </div>
@@ -273,11 +291,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new">"Own the Meme"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Own the Meme"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new">"The economy isn't a feature — it's the foundation."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The economy isn't a feature — it's the foundation."</div>
       </div>
     </div>
   </div>
@@ -299,11 +317,11 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"The first and longest-running Pepe-themed cryptocurrency. Community-mined since 2016 with no presale and no funny business. Pepecoin is the fuel that powers everything in Kekspace — from in-game purchases to NFT minting."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The first and longest-running Pepe-themed cryptocurrency. Community-mined since 2016 with no presale and no funny business. Pepecoin is the fuel that powers everything in Kekspace — from in-game purchases to NFT minting."</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Verify</div>
-        <div class="copy-text copy-text--input">Are these claims accurate? "First and longest-running", "2016", "community-mined", "no presale" — please confirm or correct before publishing.</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Are these claims accurate? "First and longest-running", "2016", "community-mined", "no presale" — please confirm or correct before publishing.</div>
       </div>
     </div>
   </div>
@@ -325,7 +343,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft — 5 clean labels</div>
-        <div class="copy-text copy-text--new">Explore → Gather → Craft → Equip or Sell → Mint</div>
+        <div class="copy-text copy-text--new" contenteditable="true">Explore → Gather → Craft → Equip or Sell → Mint</div>
       </div>
     </div>
   </div>
@@ -345,7 +363,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</div>
       </div>
     </div>
   </div>
@@ -367,11 +385,11 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New heading</div>
-        <div class="copy-text copy-text--new">"Digital Ownership, Not Just Collectibles"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Digital Ownership, Not Just Collectibles"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New body</div>
-        <div class="copy-text copy-text--new">"Skins, furniture, equipment — everything you earn or create in Kekspace is ownable on-chain. Craft it, upgrade it, enchant it, trade it. Your progress has real value."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Skins, furniture, equipment — everything you earn or create in Kekspace is ownable on-chain. Craft it, upgrade it, enchant it, trade it. Your progress has real value."</div>
       </div>
     </div>
   </div>
@@ -400,11 +418,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new">"Step Into the Grid"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Step Into the Grid"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new">"A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</div>
       </div>
     </div>
   </div>
@@ -420,7 +438,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Zone descriptions</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           <strong>Spawn</strong> — Where everyone arrives<br/>
           <strong>Arcade Saloon</strong> — Games and tickets<br/>
           <strong>Amplexus</strong> — The nightclub that never closes<br/>
@@ -449,11 +467,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Own and customize your own private room. Decorate it, invite friends, make it yours."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Own and customize your own private room. Decorate it, invite friends, make it yours."</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm status</div>
-        <div class="copy-text copy-text--input">Is Kekpads currently "Live" or "Coming Soon"? Are basic rooms available now with expansion planned, or is the whole feature upcoming?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Is Kekpads currently "Live" or "Coming Soon"? Are basic rooms available now with expansion planned, or is the whole feature upcoming?</div>
       </div>
     </div>
   </div>
@@ -486,7 +504,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Thousands of combinations. Every slot is a layer. Every layer is a statement. Head, hair, shirt, pants, shoes, pet, backpack, glasses, gloves — all modular, all yours. Skins can be NFTs you actually own."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Thousands of combinations. Every slot is a layer. Every layer is a statement. Head, hair, shirt, pants, shoes, pet, backpack, glasses, gloves — all modular, all yours. Skins can be NFTs you actually own."</div>
       </div>
     </div>
   </div>
@@ -502,7 +520,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           <strong>Survivor</strong> — Wave-based top-down shooter <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
           <strong>Frog Bowling</strong> — Classic lanes <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
           <strong>Whack-A-Meme</strong> — Tap and smash <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
@@ -512,7 +530,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm statuses</div>
-        <div class="copy-text copy-text--input">Are Survivor, Bowling, and Whack-A-Meme all live? Is Pokek and Fishing "Coming Soon" or "On the Horizon"? Are there other minigames we're missing (Trash cleanup? Rock Paper Scissors)?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Are Survivor, Bowling, and Whack-A-Meme all live? Is Pokek and Fishing "Coming Soon" or "On the Horizon"? Are there other minigames we're missing (Trash cleanup? Rock Paper Scissors)?</div>
       </div>
     </div>
   </div>
@@ -528,7 +546,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Every game earns tickets. Tickets earn rewards. Rewards have real value."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Every game earns tickets. Tickets earn rewards. Rewards have real value."</div>
       </div>
     </div>
   </div>
@@ -548,7 +566,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer's Book tracks your journey. The more you play, the more you earn, the higher you climb."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer's Book tracks your journey. The more you play, the more you earn, the higher you climb."</div>
       </div>
     </div>
   </div>
@@ -564,7 +582,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don't."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don't."</div>
       </div>
     </div>
   </div>
@@ -597,7 +615,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there."</div>
       </div>
     </div>
   </div>
@@ -613,7 +631,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Not a banner ad. A living brand experience inside a living world."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Not a banner ad. A living brand experience inside a living world."</div>
       </div>
     </div>
   </div>
@@ -629,7 +647,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"The world transforms with the seasons. New quests, exclusive loot, and reasons to come back."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The world transforms with the seasons. New quests, exclusive loot, and reasons to come back."</div>
       </div>
     </div>
   </div>
@@ -645,7 +663,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           <strong>Halloween</strong> — Maze, costumes, cursed candies, themed quests<br/>
           <strong>Christmas 2025</strong> — Advent calendar, daily gifts, world transformation
         </div>
@@ -664,7 +682,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Kekspace turns brand partnerships into interactive experiences players actually want. If your brand has a community, we can put them in the world."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace turns brand partnerships into interactive experiences players actually want. If your brand has a community, we can put them in the world."</div>
       </div>
     </div>
   </div>
@@ -697,11 +715,11 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new">"Built by the People in It"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Built by the People in It"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new">"A community that shows up, stays loud, and keeps building."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"A community that shows up, stays loud, and keeps building."</div>
       </div>
     </div>
   </div>
@@ -717,15 +735,15 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--input">Player count</div>
-        <div class="copy-text copy-text--input">How many players? Total registered? Monthly active? Pick the most impressive real number.</div>
+        <div class="copy-text copy-text--input" contenteditable="true">How many players? Total registered? Monthly active? Pick the most impressive real number.</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Community members</div>
-        <div class="copy-text copy-text--input">Discord + Telegram member count? Or total across all platforms?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Discord + Telegram member count? Or total across all platforms?</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Social followers</div>
-        <div class="copy-text copy-text--input">Twitter/X follower count? Combined social reach?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Twitter/X follower count? Combined social reach?</div>
       </div>
     </div>
   </div>
@@ -741,11 +759,11 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static."</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm status</div>
-        <div class="copy-text copy-text--input">Is the Billboard Network "Live", "Coming Soon", or "On the Horizon"?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Is the Billboard Network "Live", "Coming Soon", or "On the Horizon"?</div>
       </div>
     </div>
   </div>
@@ -774,7 +792,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           Core world and zones<br/>
           KekCreator character system<br/>
           Arcade minigames<br/>
@@ -786,7 +804,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input">Is this list accurate and complete? Anything missing from "delivered"? Anything listed that isn't actually live?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Is this list accurate and complete? Anything missing from "delivered"? Anything listed that isn't actually live?</div>
       </div>
     </div>
   </div>
@@ -802,7 +820,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           Fishing minigame<br/>
           Pokek — on-chain poker<br/>
           Equipment crafting and refining<br/>
@@ -811,7 +829,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input">What's actually in active development right now? Should any of these move to "On the Horizon" instead?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">What's actually in active development right now? Should any of these move to "On the Horizon" instead?</div>
       </div>
     </div>
   </div>
@@ -827,7 +845,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new">
+        <div class="copy-text copy-text--new" contenteditable="true">
           Kekpads expansion — player-owned spaces<br/>
           More brand partnerships<br/>
           Epic Games Store launch<br/>
@@ -836,7 +854,7 @@
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input">Is this the right list? Anything else on the horizon you want to tease? Should Epic Store / INK be here or in "In Progress"?</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Is this the right list? Anything else on the horizon you want to tease? Should Epic Store / INK be here or in "In Progress"?</div>
       </div>
     </div>
   </div>
@@ -852,7 +870,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Every feature listed above is either live or in active development. No vapor. No empty roadmaps."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Every feature listed above is either live or in active development. No vapor. No empty roadmaps."</div>
       </div>
     </div>
   </div>
@@ -881,7 +899,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"The world is live. The economy is real. The community is growing."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The world is live. The economy is real. The community is growing."</div>
       </div>
     </div>
   </div>
@@ -897,19 +915,19 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--input">Discord URL</div>
-        <div class="copy-text copy-text--input">Provide your Discord invite link</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Provide your Discord invite link</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Telegram URL</div>
-        <div class="copy-text copy-text--input">Provide your Telegram group/channel link</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Provide your Telegram group/channel link</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Twitter/X URL</div>
-        <div class="copy-text copy-text--input">Provide your Twitter/X profile link</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Provide your Twitter/X profile link</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Partner contact</div>
-        <div class="copy-text copy-text--input">Email address or form URL for brand partnership inquiries</div>
+        <div class="copy-text copy-text--input" contenteditable="true">Email address or form URL for brand partnership inquiries</div>
       </div>
     </div>
   </div>
@@ -938,7 +956,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Kekspace — The Social World Where Meme Culture Meets Real Ownership"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace — The Social World Where Meme Culture Meets Real Ownership"</div>
       </div>
     </div>
   </div>
@@ -954,7 +972,7 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new">"Kekspace is a social virtual world powered by Pepecoin. Hang out, play games, collect items, and own everything on-chain."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace is a social virtual world powered by Pepecoin. Hang out, play games, collect items, and own everything on-chain."</div>
       </div>
     </div>
   </div>
@@ -970,15 +988,15 @@
     <div class="content-block-body">
       <div class="copy-row">
         <div class="copy-label copy-label--new">Title</div>
-        <div class="copy-text copy-text--new">"Kekspace — Own the Meme"</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace — Own the Meme"</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--new">Description</div>
-        <div class="copy-text copy-text--new">"The social world where meme culture meets real ownership. Powered by Pepecoin."</div>
+        <div class="copy-text copy-text--new" contenteditable="true">"The social world where meme culture meets real ownership. Powered by Pepecoin."</div>
       </div>
       <div class="copy-row">
         <div class="copy-label copy-label--input">Site URL</div>
-        <div class="copy-text copy-text--input">What domain will this be hosted on? Needed for og:url and absolute image paths.</div>
+        <div class="copy-text copy-text--input" contenteditable="true">What domain will this be hosted on? Needed for og:url and absolute image paths.</div>
       </div>
     </div>
   </div>
@@ -1012,6 +1030,133 @@
     </div>
   </div>
 </div>
+
+<div class="save-bar" id="save-bar">
+  <span class="save-status" id="save-status"></span>
+  <button class="btn-save" onclick="saveAll()">Save Changes</button>
+  <button class="btn-export" onclick="exportJSON()">Export as JSON</button>
+  <button class="btn-reset" onclick="resetAll()">Reset to Defaults</button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'kekspace-content-planner';
+
+  // Track editable fields
+  const editables = document.querySelectorAll('[contenteditable="true"]');
+  const saveBar = document.getElementById('save-bar');
+  const saveStatus = document.getElementById('save-status');
+  let hasChanges = false;
+
+  // Show save bar when any field is edited
+  editables.forEach((el, i) => {
+    el.dataset.fieldId = i;
+
+    el.addEventListener('input', () => {
+      hasChanges = true;
+      saveBar.classList.add('visible');
+      saveStatus.textContent = 'Unsaved changes';
+    });
+
+    el.addEventListener('focus', () => {
+      // Clear placeholder text on first focus for input fields
+      if (el.classList.contains('copy-text--input') && el.dataset.original === undefined) {
+        el.dataset.original = el.textContent;
+      }
+    });
+  });
+
+  // Save to localStorage
+  function saveAll() {
+    const data = {};
+    editables.forEach(el => {
+      data[el.dataset.fieldId] = el.innerHTML;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    hasChanges = false;
+    saveStatus.textContent = 'Saved!';
+    setTimeout(() => {
+      if (!hasChanges) saveBar.classList.remove('visible');
+    }, 2000);
+  }
+
+  // Load from localStorage on page load
+  function loadSaved() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    editables.forEach(el => {
+      if (data[el.dataset.fieldId] !== undefined) {
+        el.innerHTML = data[el.dataset.fieldId];
+      }
+    });
+  }
+
+  // Export all content as JSON
+  function exportJSON() {
+    const sections = {};
+    document.querySelectorAll('.section').forEach(section => {
+      const titleEl = section.querySelector('.section-title');
+      if (!titleEl) return;
+      const sectionName = titleEl.textContent.trim();
+      const blocks = {};
+
+      section.querySelectorAll('.content-block').forEach(block => {
+        const labelEl = block.querySelector('.content-block-label');
+        if (!labelEl) return;
+        const blockName = labelEl.textContent.trim();
+        const fields = {};
+
+        block.querySelectorAll('[contenteditable="true"]').forEach(el => {
+          const labelRow = el.closest('.copy-row');
+          const label = labelRow?.querySelector('.copy-label')?.textContent.trim() || 'content';
+          fields[label] = el.textContent.trim();
+        });
+
+        if (Object.keys(fields).length > 0) {
+          blocks[blockName] = fields;
+        }
+      });
+
+      if (Object.keys(blocks).length > 0) {
+        sections[sectionName] = blocks;
+      }
+    });
+
+    const blob = new Blob([JSON.stringify(sections, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'kekspace-content-' + new Date().toISOString().split('T')[0] + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Reset to original content
+  function resetAll() {
+    if (!confirm('Reset all fields to defaults? Your edits will be lost.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  // Warn before leaving with unsaved changes
+  window.addEventListener('beforeunload', (e) => {
+    if (hasChanges) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  // Keyboard shortcut: Cmd/Ctrl+S to save
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+      e.preventDefault();
+      saveAll();
+    }
+  });
+
+  // Load saved content on startup
+  loadSaved();
+</script>
 
 </body>
 </html>
