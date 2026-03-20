@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kekspace Game Bible — Content Planner</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a12; color: #fff; line-height: 1.6; }
+
+    .header { background: #12121f; padding: 40px; text-align: center; border-bottom: 3px solid #a855f7; }
+    .header h1 { font-size: 2rem; margin-bottom: 8px; }
+    .header p { color: #b0b0c8; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+    .legend { display: flex; gap: 24px; justify-content: center; padding: 20px; background: #1a1a2e; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #b0b0c8; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot--draft { background: #fb923c; }
+    .dot--review { background: #22d3ee; }
+    .dot--approved { background: #4ade80; }
+    .dot--needs-input { background: #f472b6; }
+
+    .section { padding: 40px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .section-number { background: #a855f7; color: #0a0a12; font-weight: 800; font-size: 1.2rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; flex-shrink: 0; }
+    .section-title { font-size: 1.4rem; }
+    .section-purpose { color: #b0b0c8; font-size: 0.9rem; margin-bottom: 24px; padding-left: 56px; }
+
+    .content-block { background: #12121f; border: 1px solid #2a2a3e; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+    .content-block-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #1a1a2e; border-bottom: 1px solid #2a2a3e; }
+    .content-block-label { font-weight: 600; font-size: 0.95rem; }
+    .content-block-type { font-size: 0.75rem; color: #888; font-family: monospace; }
+
+    .status { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .status--draft { background: #fb923c; color: #0a0a12; }
+    .status--review { background: #22d3ee; color: #0a0a12; }
+    .status--approved { background: #4ade80; color: #0a0a12; }
+    .status--needs-input { background: #f472b6; color: #0a0a12; }
+
+    .content-block-body { padding: 20px; }
+
+    .copy-row { margin-bottom: 16px; }
+    .copy-row:last-child { margin-bottom: 0; }
+    .copy-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-weight: 600; }
+    .copy-label--current { color: #ef4444; }
+    .copy-label--new { color: #4ade80; }
+    .copy-label--note { color: #fb923c; }
+    .copy-label--input { color: #f472b6; }
+
+    .copy-text { background: #0a0a12; border: 1px solid #2a2a3e; border-radius: 4px; padding: 14px 16px; font-size: 0.9rem; color: #b0b0c8; line-height: 1.7; }
+    .copy-text--new { border-color: #4ade80; color: #fff; }
+    .copy-text--strike { text-decoration: line-through; opacity: 0.5; }
+    .copy-text--input { border-color: #f472b6; border-style: dashed; color: #f472b6; font-style: italic; }
+
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, #a855f7, transparent); margin: 48px auto; max-width: 600px; }
+
+    .sub-label { font-family: monospace; font-size: 0.8rem; color: #a855f7; margin-bottom: 16px; padding: 6px 12px; background: #1a1a2e; border-radius: 4px; display: inline-block; }
+
+    .progress { background: #12121f; padding: 40px; text-align: center; border-top: 3px solid #a855f7; }
+    .progress h2 { font-size: 1.3rem; margin-bottom: 20px; }
+    .progress-bar-bg { background: #1a1a2e; height: 24px; border-radius: 4px; max-width: 600px; margin: 0 auto 12px; overflow: hidden; }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, #4ade80, #22d3ee); border-radius: 4px; width: 30%; }
+    .progress-label { color: #b0b0c8; font-size: 0.85rem; }
+    .progress-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 600px; margin: 24px auto 0; }
+    .progress-stat-num { font-size: 1.5rem; font-weight: 800; }
+    .progress-stat-num--draft { color: #fb923c; }
+    .progress-stat-num--review { color: #22d3ee; }
+    .progress-stat-num--approved { color: #4ade80; }
+    .progress-stat-num--input { color: #f472b6; }
+    .progress-stat-label { font-size: 0.75rem; color: #888; }
+
+    @media (max-width: 768px) {
+      .section { padding: 24px 16px; }
+      .legend { flex-direction: column; align-items: center; }
+      .progress-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Content Planner</h1>
+  <p>Every piece of written content for the Kekspace Game Bible. We work through each block together — draft, review, approve — then build it into the site.</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="dot dot--draft"></span> First draft</div>
+  <div class="legend-item"><span class="dot dot--review"></span> Ready for review</div>
+  <div class="legend-item"><span class="dot dot--approved"></span> Approved</div>
+  <div class="legend-item"><span class="dot dot--needs-input"></span> Needs your input</div>
+</div>
+
+<!-- =============================== -->
+<!-- SECTION 1: HERO -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div class="section-title">Hero / Landing</div>
+  </div>
+  <div class="section-purpose">First thing anyone sees. Must hook in 3 seconds. Logo, one tagline, two buttons.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Tagline</div>
+        <div class="content-block-type">one line, below logo</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old versions (killed)</div>
+        <div class="copy-text copy-text--strike">"Where degens grind and legends are minted"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old versions (killed)</div>
+        <div class="copy-text copy-text--strike">"OWN THE MEME. BECOME THE MEME."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"The social world where meme culture meets real ownership"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Primary CTA Button</div>
+        <div class="content-block-type">green button, left</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Button text</div>
+        <div class="copy-text copy-text--new">"Get Pepecoin"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">URL needed</div>
+        <div class="copy-text copy-text--input">Where does this link? Exchange page? pepecoin.io? Provide the URL.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Secondary CTA Button</div>
+        <div class="content-block-type">purple button, right</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Button text</div>
+        <div class="copy-text copy-text--new">"Play Now"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">URL needed</div>
+        <div class="copy-text copy-text--input">Where does this link? Web client? Download page? Epic Store listing?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 2: VISION -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <div class="section-title">Vision — "What is Kekspace?"</div>
+  </div>
+  <div class="section-purpose">Immediately answers the question. Text block on left (manual-page style), screenshots on right.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Section Heading</div>
+        <div class="content-block-type">h2, top of section</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"What is Kekspace?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Sub-heading</div>
+        <div class="content-block-type">h3, green text, inside manual-page block</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"A world that feels like home"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Body Copy — Paragraph 1</div>
+        <div class="content-block-type">what it is + why it matters</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Kekspace is a social hangout for Web3 communities... virtual rooms, living out with friends, trading and crafting..."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Body Copy — Paragraph 2</div>
+        <div class="content-block-type">who it's for</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Kekspace is designed for users, projects, communities, and enthusiasts who want a social platform that's fun and functional."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"It's built for communities, creators, degens, and curious newcomers who want a space that's as fun as it is functional. Every item you earn, every room you build, every skin you wear — it's yours."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 3: ECONOMY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div class="section-title">Economy — "Own the Meme"</div>
+  </div>
+  <div class="section-purpose">The most important section. Pepecoin as the core, play-to-value loop, NFT ownership. Ends with "Get Pepecoin" CTA.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Section Heading + Subtitle</div>
+        <div class="content-block-type">h2 + subtitle text</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Heading</div>
+        <div class="copy-text copy-text--new">"Own the Meme"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Subtitle</div>
+        <div class="copy-text copy-text--new">"The economy isn't a feature — it's the foundation."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-label">3a: Pepecoin</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Pepecoin Origin Story</div>
+        <div class="content-block-type">paragraph next to Pepecoin logo</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"PepeCoin | $PEPECOIN is the first and longest-running Pepe-themed cryptocurrency. It originally launched on March 5th 2016 on its own proof-of-work blockchain but migrated to the Ethereum blockchain as an ERC-20 token."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"The first and longest-running Pepe-themed cryptocurrency. Community-mined since 2016 with no presale and no funny business. Pepecoin is the fuel that powers everything in Kekspace — from in-game purchases to NFT minting."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Verify</div>
+        <div class="copy-text copy-text--input">Are these claims accurate? "First and longest-running", "2016", "community-mined", "no presale" — please confirm or correct before publishing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-label">3b: Play-to-Value Loop</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Loop Diagram Labels</div>
+        <div class="content-block-type">5 steps with arrows between them</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version (dense flowchart)</div>
+        <div class="copy-text copy-text--strike">"EXPLORATION CREATES RESOURCES → QUESTS INJECT RARE MATERIALS → MATERIALS BECOME CRAFTABLE OBJECTS → CRAFTED ITEMS: TWO PATHS (EQUIP/SELL) → MINTING CONVERTS PLAY INTO PROPERTY"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft — 5 clean labels</div>
+        <div class="copy-text copy-text--new">Explore → Gather → Craft → Equip or Sell → Mint</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Loop Summary Line</div>
+        <div class="content-block-type">italic text below the diagram</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"EFFORT BECOMES VALUE / VALUE BECOMES PORTABLE / IDENTITY SHAPES THE WORLD / IT'S A WORLD WHERE OWNERSHIP EMERGES NATURALLY FROM PLAY"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-label">3c: NFTs & Digital Ownership</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">NFT Section Copy</div>
+        <div class="content-block-type">heading + paragraph above 3-image gallery</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Every item exists as an ERC-721, unique from its origin, with its own identity and full on-chain traceability. No copies. No replacements."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New heading</div>
+        <div class="copy-text copy-text--new">"Digital Ownership, Not Just Collectibles"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New body</div>
+        <div class="copy-text copy-text--new">"Skins, furniture, equipment — everything you earn or create in Kekspace is ownable on-chain. Craft it, upgrade it, enchant it, trade it. Your progress has real value."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 4: WORLD -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <div class="section-title">World — "Step Into the Grid"</div>
+  </div>
+  <div class="section-purpose">City overview image, then 8 zone cards (screenshot + name + one-liner each), then Kekpads teaser.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Section Heading + Subtitle</div>
+        <div class="content-block-type">h2 + subtitle</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Heading</div>
+        <div class="copy-text copy-text--new">"Step Into the Grid"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Subtitle</div>
+        <div class="copy-text copy-text--new">"A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Zone One-Liners (8 zones)</div>
+        <div class="content-block-type">short description under each zone name</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Zone descriptions</div>
+        <div class="copy-text copy-text--new">
+          <strong>Spawn</strong> — Where everyone arrives<br/>
+          <strong>Arcade Saloon</strong> — Games and tickets<br/>
+          <strong>Amplexus</strong> — The nightclub that never closes<br/>
+          <strong>Kekmart</strong> — Shopping<br/>
+          <strong>Adventure Guild</strong> — Quests and lore<br/>
+          <strong>Cemetery / Kekmaze</strong> — The dark and mysterious side<br/>
+          <strong>GM Coffee</strong> — The social hangout<br/>
+          <strong>Touch Grass Park</strong> — The chill zone
+        </div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--note">Note</div>
+        <div class="copy-text">These are intentionally short. The screenshots do the heavy lifting. But if any descriptions feel too thin or could be more evocative, let's refine them.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Kekpads Teaser</div>
+        <div class="content-block-type">heading + one-liner + "Live" tag</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Own and customize your own private room. Decorate it, invite friends, make it yours."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm status</div>
+        <div class="copy-text copy-text--input">Is Kekpads currently "Live" or "Coming Soon"? Are basic rooms available now with expansion planned, or is the whole feature upcoming?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 5: GAMEPLAY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <div class="section-title">Gameplay — "More Than Just Hanging Out"</div>
+  </div>
+  <div class="section-purpose">KekCreator, 5 minigame cards, quests & progression, HUD screenshot.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">KekCreator Copy</div>
+        <div class="content-block-type">paragraph next to anatomy diagram</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Grid online. Dive in and mod your avatar till the RAM cries. Thousands of combos to flex on the pixel map. Max customization until you're just background NPC dust."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Thousands of combinations. Every slot is a layer. Every layer is a statement. Head, hair, shirt, pants, shoes, pet, backpack, glasses, gloves — all modular, all yours. Skins can be NFTs you actually own."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Minigame Descriptions (5 cards)</div>
+        <div class="content-block-type">name + one-liner + status tag per card</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Current draft</div>
+        <div class="copy-text copy-text--new">
+          <strong>Survivor</strong> — Wave-based top-down shooter <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
+          <strong>Frog Bowling</strong> — Classic lanes <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
+          <strong>Whack-A-Meme</strong> — Tap and smash <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
+          <strong>Pokek</strong> — On-chain poker <span class="status status--draft" style="font-size:0.6rem">Coming Soon</span><br/>
+          <strong>Fishing</strong> — Cast, catch, collect <span class="status status--draft" style="font-size:0.6rem">Coming Soon</span>
+        </div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm statuses</div>
+        <div class="copy-text copy-text--input">Are Survivor, Bowling, and Whack-A-Meme all live? Is Pokek and Fishing "Coming Soon" or "On the Horizon"? Are there other minigames we're missing (Trash cleanup? Rock Paper Scissors)?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Minigame Hook Line</div>
+        <div class="content-block-type">centered text below the cards</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Every game earns tickets. Tickets earn rewards. Rewards have real value."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Quests & Progression</div>
+        <div class="content-block-type">purple-bordered callout block</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Every action inside kek.space contributes to a persistent progression ecosystem where playing earns badges, climbing leaderboards shapes status, and daily activities outside the game compound rewards."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer's Book tracks your journey. The more you play, the more you earn, the higher you climb."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">HUD Caption</div>
+        <div class="content-block-type">one line below the interface screenshot</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don't."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 6: EVENTS -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <div class="section-title">Events & Partnerships — "Proof It Works"</div>
+  </div>
+  <div class="section-purpose">Krakening showcase, seasonal event cards, partner pitch. This is the social proof section.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Krakening Description</div>
+        <div class="content-block-type">paragraph below the crowd screenshot</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid's history. The event generated thousands of in-game interactions and social posts, proving the potential of branded experiences to drive organic engagement."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Krakening Quote Line</div>
+        <div class="content-block-type">cyan highlight text, stands alone</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Not a banner ad. A living brand experience inside a living world."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Seasonal Events Intro</div>
+        <div class="content-block-type">heading + one-liner above Halloween/Christmas cards</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"The world transforms with the seasons. New quests, exclusive loot, and reasons to come back."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Event Card Descriptions</div>
+        <div class="content-block-type">short text under each event card image</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">
+          <strong>Halloween</strong> — Maze, costumes, cursed candies, themed quests<br/>
+          <strong>Christmas 2025</strong> — Advent calendar, daily gifts, world transformation
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Partner Pitch</div>
+        <div class="content-block-type">manual-page styled callout block</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Kekspace turns brand partnerships into interactive experiences players actually want. If your brand has a community, we can put them in the world."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 7: COMMUNITY -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <div class="section-title">Community — "Built by the People in It"</div>
+  </div>
+  <div class="section-purpose">Photo gallery, social posts, stats, billboard network. The "real people play this" section.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Section Heading + Subtitle</div>
+        <div class="content-block-type">h2 + subtitle</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--current">Old version</div>
+        <div class="copy-text copy-text--strike">"Chaos, screenshots, raids, gatherings the grid never planned. Each crowd shot proves the world stays alive and independent. The community redraws the map as it moves."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Heading</div>
+        <div class="copy-text copy-text--new">"Built by the People in It"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Subtitle</div>
+        <div class="copy-text copy-text--new">"A community that shows up, stays loud, and keeps building."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Community Stats</div>
+        <div class="content-block-type">3 big numbers with labels</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Player count</div>
+        <div class="copy-text copy-text--input">How many players? Total registered? Monthly active? Pick the most impressive real number.</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Community members</div>
+        <div class="copy-text copy-text--input">Discord + Telegram member count? Or total across all platforms?</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Social followers</div>
+        <div class="copy-text copy-text--input">Twitter/X follower count? Combined social reach?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Billboard Network Blurb</div>
+        <div class="content-block-type">heading + paragraph</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm status</div>
+        <div class="copy-text copy-text--input">Is the Billboard Network "Live", "Coming Soon", or "On the Horizon"?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 8: ROADMAP -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">8</div>
+    <div class="section-title">Roadmap — "What's Next"</div>
+  </div>
+  <div class="section-purpose">Three-tier timeline. No images. Each item = name + one sentence max.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Delivered (checkmarked)</div>
+        <div class="content-block-type">green tier — what's already live</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Current draft</div>
+        <div class="copy-text copy-text--new">
+          Core world and zones<br/>
+          KekCreator character system<br/>
+          Arcade minigames<br/>
+          NFT inventory and wallet integration<br/>
+          Kraken brand partnership<br/>
+          Seasonal events (Halloween, Christmas)<br/>
+          Quest system and NPCs
+        </div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm</div>
+        <div class="copy-text copy-text--input">Is this list accurate and complete? Anything missing from "delivered"? Anything listed that isn't actually live?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">In Progress</div>
+        <div class="content-block-type">orange tier — actively being built</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Current draft</div>
+        <div class="copy-text copy-text--new">
+          Fishing minigame<br/>
+          Pokek — on-chain poker<br/>
+          Equipment crafting and refining<br/>
+          Creator API for community-made minigames
+        </div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm</div>
+        <div class="copy-text copy-text--input">What's actually in active development right now? Should any of these move to "On the Horizon" instead?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">On the Horizon</div>
+        <div class="content-block-type">purple tier — planned, not yet started</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Current draft</div>
+        <div class="copy-text copy-text--new">
+          Kekpads expansion — player-owned spaces<br/>
+          More brand partnerships<br/>
+          Epic Games Store launch<br/>
+          INK — on-chain art creation tool
+        </div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Confirm</div>
+        <div class="copy-text copy-text--input">Is this the right list? Anything else on the horizon you want to tease? Should Epic Store / INK be here or in "In Progress"?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Confidence Line</div>
+        <div class="content-block-type">centered text at bottom of roadmap</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Every feature listed above is either live or in active development. No vapor. No empty roadmaps."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SECTION 9: CLOSING -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">9</div>
+    <div class="section-title">Closing — CTAs</div>
+  </div>
+  <div class="section-purpose">The final conversion push. Headline, two big buttons, social links, partner link.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Closing Headline</div>
+        <div class="content-block-type">large centered text</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"The world is live. The economy is real. The community is growing."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Social Links</div>
+        <div class="content-block-type">row of text links below CTAs</div>
+      </div>
+      <span class="status status--needs-input">Needs Input</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Discord URL</div>
+        <div class="copy-text copy-text--input">Provide your Discord invite link</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Telegram URL</div>
+        <div class="copy-text copy-text--input">Provide your Telegram group/channel link</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Twitter/X URL</div>
+        <div class="copy-text copy-text--input">Provide your Twitter/X profile link</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Partner contact</div>
+        <div class="copy-text copy-text--input">Email address or form URL for brand partnership inquiries</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- SEO / META -->
+<!-- =============================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">+</div>
+    <div class="section-title">SEO & Social Sharing</div>
+  </div>
+  <div class="section-purpose">How the site appears in search results and when shared on Discord, Telegram, Twitter.</div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Page Title</div>
+        <div class="content-block-type">browser tab + search results</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Kekspace — The Social World Where Meme Culture Meets Real Ownership"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Meta Description</div>
+        <div class="content-block-type">search result snippet, ~160 chars</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">New draft</div>
+        <div class="copy-text copy-text--new">"Kekspace is a social virtual world powered by Pepecoin. Hang out, play games, collect items, and own everything on-chain."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="content-block-header">
+      <div>
+        <div class="content-block-label">Social Share Preview</div>
+        <div class="content-block-type">what people see when the link is shared in Discord/Telegram/Twitter</div>
+      </div>
+      <span class="status status--draft">Draft</span>
+    </div>
+    <div class="content-block-body">
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Title</div>
+        <div class="copy-text copy-text--new">"Kekspace — Own the Meme"</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--new">Description</div>
+        <div class="copy-text copy-text--new">"The social world where meme culture meets real ownership. Powered by Pepecoin."</div>
+      </div>
+      <div class="copy-row">
+        <div class="copy-label copy-label--input">Site URL</div>
+        <div class="copy-text copy-text--input">What domain will this be hosted on? Needed for og:url and absolute image paths.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================== -->
+<!-- PROGRESS -->
+<!-- =============================== -->
+<div class="progress">
+  <h2>Content Status</h2>
+  <div class="progress-bar-bg">
+    <div class="progress-bar"></div>
+  </div>
+  <div class="progress-label">~30% complete — drafts written, needs your review and input</div>
+  <div class="progress-grid">
+    <div>
+      <div class="progress-stat-num progress-stat-num--draft">22</div>
+      <div class="progress-stat-label">First drafts</div>
+    </div>
+    <div>
+      <div class="progress-stat-num progress-stat-num--input">11</div>
+      <div class="progress-stat-label">Need your input</div>
+    </div>
+    <div>
+      <div class="progress-stat-num progress-stat-num--review">0</div>
+      <div class="progress-stat-label">Ready for review</div>
+    </div>
+    <div>
+      <div class="progress-stat-num progress-stat-num--approved">0</div>
+      <div class="progress-stat-label">Approved</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
