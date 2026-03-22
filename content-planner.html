@@ -1,1162 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kekspace Game Bible — Content Planner</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a12; color: #fff; line-height: 1.6; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kekspace — Content Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-0:#08080f;--bg-1:#0e0e1a;--bg-2:#151525;--bg-3:#1c1c32;--bg-4:#24243e;
+  --tx-0:#f0f0f8;--tx-1:#b8b8d0;--tx-2:#7878a0;
+  --green:#4ade80;--purple:#a855f7;--cyan:#22d3ee;--orange:#fb923c;--pink:#f472b6;--red:#ef4444;
+  --font-mono:'JetBrains Mono',monospace;--font-sans:'DM Sans',sans-serif;
+}
+body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-height:1.6;padding-bottom:80px}
 
-    .header { background: #12121f; padding: 40px; text-align: center; border-bottom: 3px solid #a855f7; }
-    .header h1 { font-size: 2rem; margin-bottom: 8px; }
-    .header p { color: #b0b0c8; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+.topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(14,14,26,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--bg-3)}
+.topbar-title{font-family:var(--font-mono);font-weight:700;font-size:13px;color:var(--green);letter-spacing:.08em}
+.topbar-right{display:flex;gap:8px}
+.btn{font-family:var(--font-mono);font-size:11px;padding:6px 14px;border:1px solid var(--bg-4);background:var(--bg-2);color:var(--tx-1);border-radius:4px;cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--bg-3);color:var(--tx-0);border-color:var(--purple)}
+.btn--green{background:var(--green);color:var(--bg-0);border-color:var(--green)}
+.btn--green:hover{background:#22c55e}
 
-    .legend { display: flex; gap: 24px; justify-content: center; padding: 20px; background: #1a1a2e; flex-wrap: wrap; }
-    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #b0b0c8; }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot--draft { background: #fb923c; }
-    .dot--review { background: #22d3ee; }
-    .dot--approved { background: #4ade80; }
-    .dot--needs-input { background: #f472b6; }
+.site-section{max-width:1000px;margin:0 auto;padding:48px 24px 0}
+.site-section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px;padding-bottom:14px;border-bottom:2px solid var(--purple)}
+.site-section-num{background:var(--purple);color:var(--bg-0);font-weight:800;font-size:1.1rem;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0}
+.site-section-title{font-size:1.3rem}
+.site-section-desc{color:var(--tx-2);font-size:.85rem;margin-bottom:28px;padding-left:50px}
 
-    .section { padding: 40px 24px; max-width: 1100px; margin: 0 auto; }
-    .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
-    .section-number { background: #a855f7; color: #0a0a12; font-weight: 800; font-size: 1.2rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; flex-shrink: 0; }
-    .section-title { font-size: 1.4rem; }
-    .section-purpose { color: #b0b0c8; font-size: 0.9rem; margin-bottom: 24px; padding-left: 56px; }
+/* Slide card */
+.slide{background:var(--bg-1);border:1px solid var(--bg-3);border-radius:8px;margin-bottom:24px;overflow:hidden}
+.slide-img{width:100%;max-height:400px;object-fit:contain;background:var(--bg-2);display:block;border-bottom:1px solid var(--bg-3);cursor:pointer;transition:max-height .3s}
+.slide-img.collapsed{max-height:60px;object-fit:cover}
+.slide-meta{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg-2);border-bottom:1px solid var(--bg-3)}
+.slide-name{font-family:var(--font-mono);font-size:.75rem;color:var(--tx-2)}
+.slide-status{display:flex;gap:6px;align-items:center}
 
-    .content-block { background: #12121f; border: 1px solid #2a2a3e; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
-    .content-block-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #1a1a2e; border-bottom: 1px solid #2a2a3e; }
-    .content-block-label { font-weight: 600; font-size: 0.95rem; }
-    .content-block-type { font-size: 0.75rem; color: #888; font-family: monospace; }
+.badge{font-family:var(--font-mono);font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}
+.badge--approved{background:var(--green);color:var(--bg-0)}
+.badge--draft{background:var(--orange);color:var(--bg-0)}
+.badge--input{background:var(--pink);color:var(--bg-0)}
+.badge--not-started{background:var(--bg-4);color:var(--tx-2)}
 
-    .status { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .status--draft { background: #fb923c; color: #0a0a12; }
-    .status--review { background: #22d3ee; color: #0a0a12; }
-    .status--approved { background: #4ade80; color: #0a0a12; }
-    .status--needs-input { background: #f472b6; color: #0a0a12; }
+select.status-select{font-family:var(--font-mono);font-size:.65rem;padding:2px 6px;background:var(--bg-0);color:var(--tx-1);border:1px solid var(--bg-3);border-radius:3px;outline:none}
 
-    .content-block-body { padding: 20px; }
+/* Content block within a slide */
+.block{margin:0 16px 12px;background:var(--bg-0);border:1px solid var(--bg-3);border-radius:6px;overflow:hidden}
+.block:first-of-type{margin-top:12px}
+.block-label{font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--cyan);padding:8px 12px;background:var(--bg-2);border-bottom:1px solid var(--bg-3)}
 
-    .copy-row { margin-bottom: 16px; }
-    .copy-row:last-child { margin-bottom: 0; }
-    .copy-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-weight: 600; }
-    .copy-label--current { color: #ef4444; }
-    .copy-label--new { color: #4ade80; }
-    .copy-label--note { color: #fb923c; }
-    .copy-label--input { color: #f472b6; }
+.pair{padding:10px 12px}
+.pair-label{font-family:var(--font-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:600}
+.pair-label--old{color:var(--red)}
+.pair-label--new{color:var(--green)}
+.pair-text{background:var(--bg-2);border:1px solid var(--bg-3);border-radius:4px;padding:10px 12px;font-size:.85rem;color:var(--tx-1);line-height:1.7;min-height:40px}
+.pair-text--old{opacity:.5;text-decoration:line-through}
+.pair-text--new{border-color:var(--green);color:var(--tx-0);cursor:text}
+.pair-text--new:focus{outline:2px solid var(--green);outline-offset:1px;background:var(--bg-1)}
+.pair-text--new:hover{background:rgba(15,15,25,.8)}
+.pair+.pair{border-top:1px solid var(--bg-3)}
 
-    .copy-text { background: #0a0a12; border: 1px solid #2a2a3e; border-radius: 4px; padding: 14px 16px; font-size: 0.9rem; color: #b0b0c8; line-height: 1.7; }
-    .copy-text--new { border-color: #4ade80; color: #fff; cursor: text; }
-    .copy-text--new:focus { outline: 2px solid #4ade80; outline-offset: 2px; background: #111122; }
-    .copy-text--new:hover { background: #0d0d18; }
-    .copy-text--strike { text-decoration: line-through; opacity: 0.5; }
-    .copy-text--input { border-color: #f472b6; border-style: dashed; color: #f472b6; cursor: text; }
-    .copy-text--input:focus { outline: 2px solid #f472b6; outline-offset: 2px; background: #111122; color: #fff; font-style: normal; }
-    .copy-text--input:hover { background: #0d0d18; }
+/* Notes */
+.slide-notes{margin:0 16px 16px;background:var(--bg-0);border:1px dashed var(--orange);border-radius:6px;padding:10px 12px}
+.slide-notes-label{font-family:var(--font-mono);font-size:.6rem;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:600}
+.slide-notes-text{font-size:.8rem;color:var(--tx-1);min-height:20px;cursor:text}
+.slide-notes-text:focus{outline:1px solid var(--orange);outline-offset:2px}
 
-    .edit-hint { font-size: 0.7rem; color: #555; margin-top: 4px; display: none; }
-    .copy-text--new:focus ~ .edit-hint,
-    .copy-text--input:focus ~ .edit-hint { display: block; }
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--purple),transparent);margin:48px auto;max-width:500px}
 
-    .save-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a2e; border-top: 2px solid #4ade80; padding: 12px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 100; transform: translateY(100%); transition: transform 0.3s ease; }
-    .save-bar.visible { transform: translateY(0); }
-    .save-bar button { font-family: inherit; font-size: 0.85rem; font-weight: 600; padding: 8px 24px; border: none; border-radius: 4px; cursor: pointer; }
-    .save-bar .btn-save { background: #4ade80; color: #0a0a12; }
-    .save-bar .btn-save:hover { background: #22c55e; }
-    .save-bar .btn-export { background: #a855f7; color: #fff; }
-    .save-bar .btn-export:hover { background: #9333ea; }
-    .save-bar .btn-reset { background: transparent; color: #ef4444; border: 1px solid #ef4444; }
-    .save-bar .save-status { color: #4ade80; font-size: 0.85rem; }
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:var(--bg-0);font-family:var(--font-mono);font-size:12px;font-weight:700;padding:8px 20px;border-radius:4px;opacity:0;transition:all .3s;z-index:999;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, #a855f7, transparent); margin: 48px auto; max-width: 600px; }
-
-    .sub-label { font-family: monospace; font-size: 0.8rem; color: #a855f7; margin-bottom: 16px; padding: 6px 12px; background: #1a1a2e; border-radius: 4px; display: inline-block; }
-
-    .progress { background: #12121f; padding: 40px; text-align: center; border-top: 3px solid #a855f7; }
-    .progress h2 { font-size: 1.3rem; margin-bottom: 20px; }
-    .progress-bar-bg { background: #1a1a2e; height: 24px; border-radius: 4px; max-width: 600px; margin: 0 auto 12px; overflow: hidden; }
-    .progress-bar { height: 100%; background: linear-gradient(90deg, #4ade80, #22d3ee); border-radius: 4px; width: 30%; }
-    .progress-label { color: #b0b0c8; font-size: 0.85rem; }
-    .progress-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 600px; margin: 24px auto 0; }
-    .progress-stat-num { font-size: 1.5rem; font-weight: 800; }
-    .progress-stat-num--draft { color: #fb923c; }
-    .progress-stat-num--review { color: #22d3ee; }
-    .progress-stat-num--approved { color: #4ade80; }
-    .progress-stat-num--input { color: #f472b6; }
-    .progress-stat-label { font-size: 0.75rem; color: #888; }
-
-    @media (max-width: 768px) {
-      .section { padding: 24px 16px; }
-      .legend { flex-direction: column; align-items: center; }
-      .progress-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+@media(max-width:768px){
+  .site-section{padding:24px 12px 0}
+  .slide-img{max-height:250px}
+}
+</style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Content Planner</h1>
-  <p>Every piece of written content for the Kekspace Game Bible. We work through each block together — draft, review, approve — then build it into the site.</p>
-</div>
-
-<div class="legend">
-  <div class="legend-item"><span class="dot dot--draft"></span> First draft</div>
-  <div class="legend-item"><span class="dot dot--review"></span> Ready for review</div>
-  <div class="legend-item"><span class="dot dot--approved"></span> Approved</div>
-  <div class="legend-item"><span class="dot dot--needs-input"></span> Needs your input</div>
-</div>
-
-<!-- =============================== -->
-<!-- SECTION 1: HERO -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">1</div>
-    <div class="section-title">Hero / Landing</div>
-  </div>
-  <div class="section-purpose">First thing anyone sees. Must hook in 3 seconds. Logo, one tagline, two buttons.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Tagline</div>
-        <div class="content-block-type">one line, below logo</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old versions (killed)</div>
-        <div class="copy-text copy-text--strike">"Where degens grind and legends are minted"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old versions (killed)</div>
-        <div class="copy-text copy-text--strike">"OWN THE MEME. BECOME THE MEME."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The social world where meme culture meets real ownership"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Primary CTA Button</div>
-        <div class="content-block-type">green button, left</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Button text</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Get Pepecoin"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">URL needed</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Where does this link? Exchange page? pepecoin.io? Provide the URL.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Secondary CTA Button</div>
-        <div class="content-block-type">purple button, right</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Button text</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Play Now"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">URL needed</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Where does this link? Web client? Download page? Epic Store listing?</div>
-      </div>
-    </div>
+<div class="topbar">
+  <div class="topbar-title">KEKSPACE CONTENT PLANNER</div>
+  <div class="topbar-right">
+    <button class="btn" onclick="exportJSON()">Export</button>
+    <button class="btn btn--green" onclick="saveAll()">Save (Cmd+S)</button>
   </div>
 </div>
 
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 2: VISION -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">2</div>
-    <div class="section-title">Vision — "What is Kekspace?"</div>
-  </div>
-  <div class="section-purpose">Immediately answers the question. Text block on left (manual-page style), screenshots on right.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Section Heading</div>
-        <div class="content-block-type">h2, top of section</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"What is Kekspace?"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Sub-heading</div>
-        <div class="content-block-type">h3, green text, inside manual-page block</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"A world that feels like home"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Body Copy — Paragraph 1</div>
-        <div class="content-block-type">what it is + why it matters</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Kekspace is a social hangout for Web3 communities... virtual rooms, living out with friends, trading and crafting..."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace is a social virtual world powered by Pepecoin where players hang out, play games, collect items, and own everything on-chain. Think of the social worlds you grew up in — rebuilt with real digital ownership."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Body Copy — Paragraph 2</div>
-        <div class="content-block-type">who it's for</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Kekspace is designed for users, projects, communities, and enthusiasts who want a social platform that's fun and functional."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"It's built for communities, creators, degens, and curious newcomers who want a space that's as fun as it is functional. Every item you earn, every room you build, every skin you wear — it's yours."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 3: ECONOMY -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">3</div>
-    <div class="section-title">Economy — "Own the Meme"</div>
-  </div>
-  <div class="section-purpose">The most important section. Pepecoin as the core, play-to-value loop, NFT ownership. Ends with "Get Pepecoin" CTA.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Section Heading + Subtitle</div>
-        <div class="content-block-type">h2 + subtitle text</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Own the Meme"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The economy isn't a feature — it's the foundation."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sub-label">3a: Pepecoin</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Pepecoin Origin Story</div>
-        <div class="content-block-type">paragraph next to Pepecoin logo</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"PepeCoin | $PEPECOIN is the first and longest-running Pepe-themed cryptocurrency. It originally launched on March 5th 2016 on its own proof-of-work blockchain but migrated to the Ethereum blockchain as an ERC-20 token."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The first and longest-running Pepe-themed cryptocurrency. Community-mined since 2016 with no presale and no funny business. Pepecoin is the fuel that powers everything in Kekspace — from in-game purchases to NFT minting."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Verify</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Are these claims accurate? "First and longest-running", "2016", "community-mined", "no presale" — please confirm or correct before publishing.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sub-label">3b: Play-to-Value Loop</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Loop Diagram Labels</div>
-        <div class="content-block-type">5 steps with arrows between them</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version (dense flowchart)</div>
-        <div class="copy-text copy-text--strike">"EXPLORATION CREATES RESOURCES → QUESTS INJECT RARE MATERIALS → MATERIALS BECOME CRAFTABLE OBJECTS → CRAFTED ITEMS: TWO PATHS (EQUIP/SELL) → MINTING CONVERTS PLAY INTO PROPERTY"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft — 5 clean labels</div>
-        <div class="copy-text copy-text--new" contenteditable="true">Explore → Gather → Craft → Equip or Sell → Mint</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Loop Summary Line</div>
-        <div class="content-block-type">italic text below the diagram</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"EFFORT BECOMES VALUE / VALUE BECOMES PORTABLE / IDENTITY SHAPES THE WORLD / IT'S A WORLD WHERE OWNERSHIP EMERGES NATURALLY FROM PLAY"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sub-label">3c: NFTs & Digital Ownership</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">NFT Section Copy</div>
-        <div class="content-block-type">heading + paragraph above 3-image gallery</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Every item exists as an ERC-721, unique from its origin, with its own identity and full on-chain traceability. No copies. No replacements."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New heading</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Digital Ownership, Not Just Collectibles"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New body</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Skins, furniture, equipment — everything you earn or create in Kekspace is ownable on-chain. Craft it, upgrade it, enchant it, trade it. Your progress has real value."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 4: WORLD -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">4</div>
-    <div class="section-title">World — "Step Into the Grid"</div>
-  </div>
-  <div class="section-purpose">City overview image, then 8 zone cards (screenshot + name + one-liner each), then Kekpads teaser.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Section Heading + Subtitle</div>
-        <div class="content-block-type">h2 + subtitle</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Step Into the Grid"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Zone One-Liners (8 zones)</div>
-        <div class="content-block-type">short description under each zone name</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Zone descriptions</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          <strong>Spawn</strong> — Where everyone arrives<br/>
-          <strong>Arcade Saloon</strong> — Games and tickets<br/>
-          <strong>Amplexus</strong> — The nightclub that never closes<br/>
-          <strong>Kekmart</strong> — Shopping<br/>
-          <strong>Adventure Guild</strong> — Quests and lore<br/>
-          <strong>Cemetery / Kekmaze</strong> — The dark and mysterious side<br/>
-          <strong>GM Coffee</strong> — The social hangout<br/>
-          <strong>Touch Grass Park</strong> — The chill zone
-        </div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--note">Note</div>
-        <div class="copy-text">These are intentionally short. The screenshots do the heavy lifting. But if any descriptions feel too thin or could be more evocative, let's refine them.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Kekpads Teaser</div>
-        <div class="content-block-type">heading + one-liner + "Live" tag</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Own and customize your own private room. Decorate it, invite friends, make it yours."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm status</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Is Kekpads currently "Live" or "Coming Soon"? Are basic rooms available now with expansion planned, or is the whole feature upcoming?</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 5: GAMEPLAY -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">5</div>
-    <div class="section-title">Gameplay — "More Than Just Hanging Out"</div>
-  </div>
-  <div class="section-purpose">KekCreator, 5 minigame cards, quests & progression, HUD screenshot.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">KekCreator Copy</div>
-        <div class="content-block-type">paragraph next to anatomy diagram</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Grid online. Dive in and mod your avatar till the RAM cries. Thousands of combos to flex on the pixel map. Max customization until you're just background NPC dust."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Thousands of combinations. Every slot is a layer. Every layer is a statement. Head, hair, shirt, pants, shoes, pet, backpack, glasses, gloves — all modular, all yours. Skins can be NFTs you actually own."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Minigame Descriptions (5 cards)</div>
-        <div class="content-block-type">name + one-liner + status tag per card</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          <strong>Survivor</strong> — Wave-based top-down shooter <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
-          <strong>Frog Bowling</strong> — Classic lanes <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
-          <strong>Whack-A-Meme</strong> — Tap and smash <span class="status status--approved" style="font-size:0.6rem">Live</span><br/>
-          <strong>Pokek</strong> — On-chain poker <span class="status status--draft" style="font-size:0.6rem">Coming Soon</span><br/>
-          <strong>Fishing</strong> — Cast, catch, collect <span class="status status--draft" style="font-size:0.6rem">Coming Soon</span>
-        </div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm statuses</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Are Survivor, Bowling, and Whack-A-Meme all live? Is Pokek and Fishing "Coming Soon" or "On the Horizon"? Are there other minigames we're missing (Trash cleanup? Rock Paper Scissors)?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Minigame Hook Line</div>
-        <div class="content-block-type">centered text below the cards</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Every game earns tickets. Tickets earn rewards. Rewards have real value."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Quests & Progression</div>
-        <div class="content-block-type">purple-bordered callout block</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Every action inside kek.space contributes to a persistent progression ecosystem where playing earns badges, climbing leaderboards shapes status, and daily activities outside the game compound rewards."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer's Book tracks your journey. The more you play, the more you earn, the higher you climb."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">HUD Caption</div>
-        <div class="content-block-type">one line below the interface screenshot</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don't."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 6: EVENTS -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">6</div>
-    <div class="section-title">Events & Partnerships — "Proof It Works"</div>
-  </div>
-  <div class="section-purpose">Krakening showcase, seasonal event cards, partner pitch. This is the social proof section.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Krakening Description</div>
-        <div class="content-block-type">paragraph below the crowd screenshot</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid's history. The event generated thousands of in-game interactions and social posts, proving the potential of branded experiences to drive organic engagement."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Krakening Quote Line</div>
-        <div class="content-block-type">cyan highlight text, stands alone</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Not a banner ad. A living brand experience inside a living world."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Seasonal Events Intro</div>
-        <div class="content-block-type">heading + one-liner above Halloween/Christmas cards</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The world transforms with the seasons. New quests, exclusive loot, and reasons to come back."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Event Card Descriptions</div>
-        <div class="content-block-type">short text under each event card image</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          <strong>Halloween</strong> — Maze, costumes, cursed candies, themed quests<br/>
-          <strong>Christmas 2025</strong> — Advent calendar, daily gifts, world transformation
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Partner Pitch</div>
-        <div class="content-block-type">manual-page styled callout block</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace turns brand partnerships into interactive experiences players actually want. If your brand has a community, we can put them in the world."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 7: COMMUNITY -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">7</div>
-    <div class="section-title">Community — "Built by the People in It"</div>
-  </div>
-  <div class="section-purpose">Photo gallery, social posts, stats, billboard network. The "real people play this" section.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Section Heading + Subtitle</div>
-        <div class="content-block-type">h2 + subtitle</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--current">Old version</div>
-        <div class="copy-text copy-text--strike">"Chaos, screenshots, raids, gatherings the grid never planned. Each crowd shot proves the world stays alive and independent. The community redraws the map as it moves."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Heading</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Built by the People in It"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Subtitle</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"A community that shows up, stays loud, and keeps building."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Community Stats</div>
-        <div class="content-block-type">3 big numbers with labels</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Player count</div>
-        <div class="copy-text copy-text--input" contenteditable="true">How many players? Total registered? Monthly active? Pick the most impressive real number.</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Community members</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Discord + Telegram member count? Or total across all platforms?</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Social followers</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Twitter/X follower count? Combined social reach?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Billboard Network Blurb</div>
-        <div class="content-block-type">heading + paragraph</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm status</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Is the Billboard Network "Live", "Coming Soon", or "On the Horizon"?</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 8: ROADMAP -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">8</div>
-    <div class="section-title">Roadmap — "What's Next"</div>
-  </div>
-  <div class="section-purpose">Three-tier timeline. No images. Each item = name + one sentence max.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Delivered (checkmarked)</div>
-        <div class="content-block-type">green tier — what's already live</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          Core world and zones<br/>
-          KekCreator character system<br/>
-          Arcade minigames<br/>
-          NFT inventory and wallet integration<br/>
-          Kraken brand partnership<br/>
-          Seasonal events (Halloween, Christmas)<br/>
-          Quest system and NPCs
-        </div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Is this list accurate and complete? Anything missing from "delivered"? Anything listed that isn't actually live?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">In Progress</div>
-        <div class="content-block-type">orange tier — actively being built</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          Fishing minigame<br/>
-          Pokek — on-chain poker<br/>
-          Equipment crafting and refining<br/>
-          Creator API for community-made minigames
-        </div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input" contenteditable="true">What's actually in active development right now? Should any of these move to "On the Horizon" instead?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">On the Horizon</div>
-        <div class="content-block-type">purple tier — planned, not yet started</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Current draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">
-          Kekpads expansion — player-owned spaces<br/>
-          More brand partnerships<br/>
-          Epic Games Store launch<br/>
-          INK — on-chain art creation tool
-        </div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Confirm</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Is this the right list? Anything else on the horizon you want to tease? Should Epic Store / INK be here or in "In Progress"?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Confidence Line</div>
-        <div class="content-block-type">centered text at bottom of roadmap</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Every feature listed above is either live or in active development. No vapor. No empty roadmaps."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SECTION 9: CLOSING -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">9</div>
-    <div class="section-title">Closing — CTAs</div>
-  </div>
-  <div class="section-purpose">The final conversion push. Headline, two big buttons, social links, partner link.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Closing Headline</div>
-        <div class="content-block-type">large centered text</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The world is live. The economy is real. The community is growing."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Social Links</div>
-        <div class="content-block-type">row of text links below CTAs</div>
-      </div>
-      <span class="status status--needs-input">Needs Input</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Discord URL</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Provide your Discord invite link</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Telegram URL</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Provide your Telegram group/channel link</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Twitter/X URL</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Provide your Twitter/X profile link</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Partner contact</div>
-        <div class="copy-text copy-text--input" contenteditable="true">Email address or form URL for brand partnership inquiries</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- =============================== -->
-<!-- SEO / META -->
-<!-- =============================== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-number">+</div>
-    <div class="section-title">SEO & Social Sharing</div>
-  </div>
-  <div class="section-purpose">How the site appears in search results and when shared on Discord, Telegram, Twitter.</div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Page Title</div>
-        <div class="content-block-type">browser tab + search results</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace — The Social World Where Meme Culture Meets Real Ownership"</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Meta Description</div>
-        <div class="content-block-type">search result snippet, ~160 chars</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">New draft</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace is a social virtual world powered by Pepecoin. Hang out, play games, collect items, and own everything on-chain."</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-block">
-    <div class="content-block-header">
-      <div>
-        <div class="content-block-label">Social Share Preview</div>
-        <div class="content-block-type">what people see when the link is shared in Discord/Telegram/Twitter</div>
-      </div>
-      <span class="status status--draft">Draft</span>
-    </div>
-    <div class="content-block-body">
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Title</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"Kekspace — Own the Meme"</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--new">Description</div>
-        <div class="copy-text copy-text--new" contenteditable="true">"The social world where meme culture meets real ownership. Powered by Pepecoin."</div>
-      </div>
-      <div class="copy-row">
-        <div class="copy-label copy-label--input">Site URL</div>
-        <div class="copy-text copy-text--input" contenteditable="true">What domain will this be hosted on? Needed for og:url and absolute image paths.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================== -->
-<!-- PROGRESS -->
-<!-- =============================== -->
-<div class="progress">
-  <h2>Content Status</h2>
-  <div class="progress-bar-bg">
-    <div class="progress-bar"></div>
-  </div>
-  <div class="progress-label">~30% complete — drafts written, needs your review and input</div>
-  <div class="progress-grid">
-    <div>
-      <div class="progress-stat-num progress-stat-num--draft">22</div>
-      <div class="progress-stat-label">First drafts</div>
-    </div>
-    <div>
-      <div class="progress-stat-num progress-stat-num--input">11</div>
-      <div class="progress-stat-label">Need your input</div>
-    </div>
-    <div>
-      <div class="progress-stat-num progress-stat-num--review">0</div>
-      <div class="progress-stat-label">Ready for review</div>
-    </div>
-    <div>
-      <div class="progress-stat-num progress-stat-num--approved">0</div>
-      <div class="progress-stat-label">Approved</div>
-    </div>
-  </div>
-</div>
-
-<div class="save-bar" id="save-bar">
-  <span class="save-status" id="save-status"></span>
-  <button class="btn-save" onclick="saveAll()">Save Changes</button>
-  <button class="btn-export" onclick="exportJSON()">Export as JSON</button>
-  <button class="btn-reset" onclick="resetAll()">Reset to Defaults</button>
-</div>
+<div id="app"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-  const STORAGE_KEY = 'kekspace-content-planner';
+const STORAGE_KEY='kekspace-content-planner-v2';
+let dirty=false;
 
-  // Track editable fields
-  const editables = document.querySelectorAll('[contenteditable="true"]');
-  const saveBar = document.getElementById('save-bar');
-  const saveStatus = document.getElementById('save-status');
-  let hasChanges = false;
+const SECTIONS=[
+  {num:'1',title:'Hero / Landing',desc:'Full-screen background, logo, tagline, two CTA buttons',slides:[
+    {img:'content/organized/01-hero/city-west-overview.png',name:'city-west-overview.png',status:'Not started',blocks:[
+      {label:'Tagline',old:'"Where degens grind and legends are minted"',new_text:'"The social world where meme culture meets real ownership"'}
+    ],notes:'Hero background image. Also need: Kekspace logo (transparent PNG), Get Pepecoin URL, Play Now URL.'}
+  ]},
+  {num:'2',title:'Vision — "What is Kekspace?"',desc:'Answers who, what, and why. The first section after the hero.',slides:[
+    {img:'content/organized/02-vision/welcome-pepecoin-origin.png',name:'welcome-pepecoin-origin.png',status:'Approved',blocks:[
+      {label:'Welcome text',old:'PepeCoin ($PEPECOIN) is the first and longest-running Pepe-themed cryptocurrency. It originally hatched on March 5th, 2016 on its own proof-of-work blockchain. Fairly mined by the community, with no pre-sale, no insider funding/sniping, and no funny business',new_text:'You made it. Kekspace is what happens when a community mines a frog coin in 2016 and refuses to stop building. A social world powered by Pepecoin — built by the people in it.'}
+    ],notes:'Pepecoin origin details moved to Economy section. This is the warm welcome.'},
+    {img:'content/organized/02-vision/about-what-is-kekspace.png',name:'about-what-is-kekspace.png',status:'Approved',blocks:[
+      {label:'What is Kekspace?',old:'Kekspace is a social interface for Web3 that blends the social elements of early 2000\'s social MMOs with Web3/DeFi utility.',new_text:'Kekspace is a social interface for Web3 that blends the social elements of early 2000\'s social MMOs with Web3/DeFi utility.'},
+      {label:'What can you do in Kekspace?',old:'Play games, collect items, create your own virtual rooms, hang out with frens, access DeFi apps, and contribute funds, assets, and more!',new_text:'Play games, customize your character, decorate your own room, hang out with the community, and earn rewards. That\'s what\'s live right now — with a lot more to come.'},
+      {label:'Who is it for?',old:'Kekspace is designed for users, projects, developers, communities, and companies who would like a Web3 native space that is both fun and functional.',new_text:'Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. If you\'re reading this, you\'re already the right audience.'},
+      {label:'Tagline',old:'OWN THE MEME. BECOME THE MEME.',new_text:'OWN THE MEME. BECOME THE MEME.'},
+      {label:'Players',old:'By incentivizing developers to make Kekspace their primary form of advertisement in the crypto sphere, this will become a central hub for gaming where social engagement, competition, and monetization are at its core.',new_text:''},
+      {label:'Developers',old:'Kekspace is designed to become the major crypto platform for the promotion of gaming and entertainment. By providing developers with an exciting community, a visual landscape, and significant cultural liquidity, developers will enable the success of their products with a fraction of the cost or effort.',new_text:''}
+    ],notes:'Art direction: Replace kekspace_banner.png with a character lineup — a row of colorful, diverse NPCs. Pick the most vibrant characters to show off the art style.'},
+    {img:'content/organized/02-vision/about-audience-producers-flexers.png',name:'about-audience-producers-flexers.png',status:'Not started',blocks:[
+      {label:'Producers',old:'Producer\'s will have an amazing platform not only to create, but market everything they do. Kekspace will provide competitive ad locations for producers to buy as top exposure throughout the crypto community.',new_text:''},
+      {label:'Flexers',old:'Kekspace will provide endless ways for consumers to stay engaged. Through ownership of NFT\'s, consumers will be able to own virtual land where they can show off their proudest achievements.',new_text:''}
+    ],notes:''},
+    {img:'content/organized/02-vision/welcome-page-loading-screens.png',name:'welcome-page-loading-screens.png',status:'Not started',blocks:[
+      {label:'Page content',old:'',new_text:''}
+    ],notes:'Reference only — loading screens.'}
+  ]},
+  {num:'3',title:'Economy — "Own the Meme"',desc:'Pepecoin, play-to-value loop, NFT ownership. Primary CTA section.',slides:[
+    {img:'content/organized/03-economy/pepecoin/wallet-connection-ui.png',name:'wallet-connection-ui.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/pepecoin/onchain-skins-wallet.png',name:'onchain-skins-wallet.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/pepecoin/about-and-economy-spread.png',name:'about-and-economy-spread.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/play-to-value/loop-exploration-to-crafting.png',name:'loop-exploration-to-crafting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/play-to-value/loop-crafting-to-minting.png',name:'loop-crafting-to-minting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/nft-gallery-bob-ross.png',name:'nft-gallery-bob-ross.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/skins-system-overview.png',name:'skins-system-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/skins-lootboxes-exclusivity.png',name:'skins-lootboxes-exclusivity.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/nft-equipment-erc721.png',name:'nft-equipment-erc721.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/equipment-upgrade-enchant.png',name:'equipment-upgrade-enchant.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/furniture-grid-placement.png',name:'furniture-grid-placement.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/furniture-decorated-rooms.png',name:'furniture-decorated-rooms.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/furniture-system-spread.png',name:'furniture-system-spread.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''}
+  ]},
+  {num:'4',title:'World — "Step Into the Grid"',desc:'City overview, 8 zone cards, Kekpads teaser.',slides:[
+    {img:'content/organized/04-world/city-overview/city-east-overview.png',name:'city-east-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/04-world/city-overview/city-west-manual.png',name:'city-west-manual.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/04-world/zones/zone-spawn.png',name:'zone-spawn.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Where everyone arrives'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-arcade-saloon.png',name:'zone-arcade-saloon.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Games and tickets'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-amplexus-nightclub.png',name:'zone-amplexus-nightclub.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The nightclub that never closes'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-kekmart-store.png',name:'zone-kekmart-store.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Shopping'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-adventure-guild.png',name:'zone-adventure-guild.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Quests and lore'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-cemetery.png',name:'zone-cemetery.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The dark and mysterious side'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-gm-coffee.png',name:'zone-gm-coffee.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The social hangout'}],notes:''},
+    {img:'content/organized/04-world/zones/zone-touch-grass-park.png',name:'zone-touch-grass-park.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The chill zone'}],notes:''}
+  ]},
+  {num:'5',title:'Gameplay — "More Than Just Hanging Out"',desc:'KekCreator, minigames, quests, HUD.',slides:[
+    {img:'content/organized/05-gameplay/kekcreator/characters-anatomy-diagram.png',name:'characters-anatomy-diagram.png',status:'Not started',blocks:[{label:'KekCreator copy',old:'',new_text:'Thousands of combinations. Every slot is a layer. Every layer is a statement.'}],notes:''},
+    {img:'content/organized/05-gameplay/minigames/arcade-minigames-overview.png',name:'arcade-minigames-overview.png',status:'Not started',blocks:[{label:'Minigames hook',old:'',new_text:'Every game earns tickets. Tickets earn rewards. Rewards have real value.'}],notes:''},
+    {img:'content/organized/05-gameplay/minigames/fishing-mechanic-license.png',name:'fishing-mechanic-license.png',status:'Not started',blocks:[{label:'Fishing description',old:'',new_text:'Cast, catch, collect'}],notes:''},
+    {img:'content/organized/05-gameplay/minigames/pokek-poker-table.png',name:'pokek-poker-table.png',status:'Not started',blocks:[{label:'Pokek description',old:'',new_text:'On-chain poker'}],notes:''},
+    {img:'content/organized/05-gameplay/quests/ranking-badges-leaderboards.png',name:'ranking-badges-leaderboards.png',status:'Not started',blocks:[{label:'Quests & Progression',old:'Every action inside kek.space contributes to a persistent progression ecosystem where playing earns badges, climbing leaderboards shapes status, and daily activities outside the game compound rewards.',new_text:'NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer\'s Book tracks your journey. The more you play, the more you earn, the higher you climb.'}],notes:''},
+    {img:'content/organized/05-gameplay/hud/hud-annotated-callouts.png',name:'hud-annotated-callouts.png',status:'Not started',blocks:[{label:'HUD caption',old:'',new_text:'Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don\'t.'}],notes:''}
+  ]},
+  {num:'6',title:'Events & Partnerships — "Proof It Works"',desc:'Krakening, seasonal events, partner pitch.',slides:[
+    {img:'content/organized/06-events/krakening/krakening-kraken-creature.png',name:'krakening-kraken-creature.png',status:'Not started',blocks:[{label:'Krakening description',old:'The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid\'s history.',new_text:'Kraken\'s identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there.'},
+      {label:'Quote line',old:'',new_text:'Not a banner ad. A living brand experience inside a living world.'}],notes:''},
+    {img:'content/organized/06-events/krakening/krakening-exclusive-items-crowd.png',name:'krakening-exclusive-items-crowd.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'Crop: crowd shot from bottom, exclusive items grid from top.'},
+    {img:'content/organized/06-events/halloween/halloween-trick-or-treat.png',name:'halloween-trick-or-treat.png',status:'Not started',blocks:[{label:'Halloween description',old:'',new_text:'Maze, costumes, cursed candies, themed quests'}],notes:''},
+    {img:'content/organized/06-events/christmas/christmas-tree-scene.png',name:'christmas-tree-scene.png',status:'Not started',blocks:[{label:'Christmas description',old:'',new_text:'Advent calendar, daily gifts, world transformation'}],notes:''},
+  ]},
+  {num:'7',title:'Community — "Built by the People in It"',desc:'Gallery, social posts, stats, billboard network.',slides:[
+    {img:'content/organized/07-community/scenes/community-social-collage.png',name:'community-social-collage.png',status:'Not started',blocks:[{label:'Section subtitle',old:'',new_text:'A community that shows up, stays loud, and keeps building.'}],notes:'Crop individual crowd shots and social media posts from this page.'},
+    {img:'content/organized/07-community/billboards/billboard-network-city.png',name:'billboard-network-city.png',status:'Not started',blocks:[{label:'Billboard Network',old:'Kek.space features a distributed in-game billboard network designed for brands, creators, and community promotions.',new_text:'An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static.'}],notes:''}
+  ]},
+  {num:'8',title:'Roadmap — "What\'s Next"',desc:'Delivered / In Progress / On the Horizon. No images needed.',slides:[]},
+  {num:'9',title:'Closing — CTAs',desc:'Final conversion. Two big buttons, social links, partner link. No images needed.',slides:[]}
+];
 
-  // Show save bar when any field is edited
-  editables.forEach((el, i) => {
-    el.dataset.fieldId = i;
+// Load saved edits from localStorage
+let savedEdits={};
+try{const s=localStorage.getItem(STORAGE_KEY);if(s)savedEdits=JSON.parse(s)}catch(e){}
 
-    el.addEventListener('input', () => {
-      hasChanges = true;
-      saveBar.classList.add('visible');
-      saveStatus.textContent = 'Unsaved changes';
-    });
+function getKey(sectionIdx,slideIdx,blockIdx,field){
+  return `${sectionIdx}-${slideIdx}-${blockIdx}-${field}`;
+}
+function getSaved(key,fallback){
+  return savedEdits[key]!==undefined?savedEdits[key]:fallback;
+}
 
-    el.addEventListener('focus', () => {
-      // Clear placeholder text on first focus for input fields
-      if (el.classList.contains('copy-text--input') && el.dataset.original === undefined) {
-        el.dataset.original = el.textContent;
-      }
-    });
-  });
+function render(){
+  const app=document.getElementById('app');
+  let html='';
 
-  // Save to localStorage
-  function saveAll() {
-    const data = {};
-    editables.forEach(el => {
-      data[el.dataset.fieldId] = el.innerHTML;
-    });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    hasChanges = false;
-    saveStatus.textContent = 'Saved!';
-    setTimeout(() => {
-      if (!hasChanges) saveBar.classList.remove('visible');
-    }, 2000);
-  }
+  SECTIONS.forEach((sec,si)=>{
+    html+=`<div class="site-section">
+      <div class="site-section-header">
+        <div class="site-section-num">${sec.num}</div>
+        <div class="site-section-title">${sec.title}</div>
+      </div>
+      <div class="site-section-desc">${sec.desc}</div>`;
 
-  // Load from localStorage on page load
-  function loadSaved() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return;
-    const data = JSON.parse(saved);
-    editables.forEach(el => {
-      if (data[el.dataset.fieldId] !== undefined) {
-        el.innerHTML = data[el.dataset.fieldId];
-      }
-    });
-  }
+    if(!sec.slides.length){
+      html+=`<div style="color:var(--tx-2);font-size:.85rem;padding:16px 0 32px;font-style:italic">No slides for this section — text-only content handled in the site code.</div>`;
+    }
 
-  // Export all content as JSON
-  function exportJSON() {
-    const sections = {};
-    document.querySelectorAll('.section').forEach(section => {
-      const titleEl = section.querySelector('.section-title');
-      if (!titleEl) return;
-      const sectionName = titleEl.textContent.trim();
-      const blocks = {};
+    sec.slides.forEach((slide,sli)=>{
+      const statusKey=`${si}-${sli}-status`;
+      const notesKey=`${si}-${sli}-notes`;
+      const currentStatus=getSaved(statusKey,slide.status);
+      const currentNotes=getSaved(notesKey,slide.notes);
+      const badgeClass=currentStatus==='Approved'?'badge--approved':currentStatus==='Draft'?'badge--draft':'badge--not-started';
 
-      section.querySelectorAll('.content-block').forEach(block => {
-        const labelEl = block.querySelector('.content-block-label');
-        if (!labelEl) return;
-        const blockName = labelEl.textContent.trim();
-        const fields = {};
+      html+=`<div class="slide">
+        <img class="slide-img" src="${slide.img}" alt="${slide.name}" loading="lazy" onclick="this.classList.toggle('collapsed')" title="Click to collapse/expand"/>
+        <div class="slide-meta">
+          <span class="slide-name">${slide.name}</span>
+          <div class="slide-status">
+            <select class="status-select" data-key="${statusKey}" onchange="onEdit(this.dataset.key,this.value)">
+              <option${currentStatus==='Not started'?' selected':''}>Not started</option>
+              <option${currentStatus==='Draft'?' selected':''}>Draft</option>
+              <option${currentStatus==='Approved'?' selected':''}>Approved</option>
+            </select>
+          </div>
+        </div>`;
 
-        block.querySelectorAll('[contenteditable="true"]').forEach(el => {
-          const labelRow = el.closest('.copy-row');
-          const label = labelRow?.querySelector('.copy-label')?.textContent.trim() || 'content';
-          fields[label] = el.textContent.trim();
-        });
+      slide.blocks.forEach((block,bi)=>{
+        const newKey=getKey(si,sli,bi,'new');
+        const currentNew=getSaved(newKey,block.new_text);
 
-        if (Object.keys(fields).length > 0) {
-          blocks[blockName] = fields;
+        html+=`<div class="block">
+          <div class="block-label">${block.label||'Content'}</div>`;
+
+        if(block.old){
+          html+=`<div class="pair">
+            <div class="pair-label pair-label--old">Original</div>
+            <div class="pair-text pair-text--old">${esc(block.old)}</div>
+          </div>`;
         }
+
+        html+=`<div class="pair">
+            <div class="pair-label pair-label--new">New version</div>
+            <div class="pair-text pair-text--new" contenteditable="true" data-key="${newKey}" oninput="onEdit(this.dataset.key,this.textContent)">${esc(currentNew)}</div>
+          </div>
+        </div>`;
       });
 
-      if (Object.keys(blocks).length > 0) {
-        sections[sectionName] = blocks;
-      }
+      html+=`<div class="slide-notes">
+        <div class="slide-notes-label">Notes</div>
+        <div class="slide-notes-text" contenteditable="true" data-key="${notesKey}" oninput="onEdit(this.dataset.key,this.textContent)">${esc(currentNotes)}</div>
+      </div></div>`;
     });
 
-    const blob = new Blob([JSON.stringify(sections, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'kekspace-content-' + new Date().toISOString().split('T')[0] + '.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  // Reset to original content
-  function resetAll() {
-    if (!confirm('Reset all fields to defaults? Your edits will be lost.')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-  }
-
-  // Warn before leaving with unsaved changes
-  window.addEventListener('beforeunload', (e) => {
-    if (hasChanges) {
-      e.preventDefault();
-      e.returnValue = '';
-    }
+    html+=`</div><div class="divider"></div>`;
   });
 
-  // Keyboard shortcut: Cmd/Ctrl+S to save
-  document.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-      e.preventDefault();
-      saveAll();
-    }
-  });
+  app.innerHTML=html;
+}
 
-  // Load saved content on startup
-  loadSaved();
+function esc(s){
+  if(!s)return'';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function onEdit(key,value){
+  savedEdits[key]=value;
+  dirty=true;
+}
+
+function saveAll(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(savedEdits));
+  dirty=false;
+  showToast('Saved');
+}
+
+function exportJSON(){
+  const out=[];
+  SECTIONS.forEach((sec,si)=>{
+    sec.slides.forEach((slide,sli)=>{
+      const entry={section:sec.title,image:slide.img,name:slide.name,status:getSaved(`${si}-${sli}-status`,slide.status),blocks:[],notes:getSaved(`${si}-${sli}-notes`,slide.notes)};
+      slide.blocks.forEach((block,bi)=>{
+        entry.blocks.push({label:block.label,original:block.old,rewrite:getSaved(getKey(si,sli,bi,'new'),block.new_text)});
+      });
+      out.push(entry);
+    });
+  });
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='kekspace-content-planner-'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Exported');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='s'){e.preventDefault();saveAll()}
+});
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+
+render();
 </script>
-
 </body>
 </html>
