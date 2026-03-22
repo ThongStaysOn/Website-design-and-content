@@ -112,6 +112,20 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
 .filter-bar .spacer{flex:1}
 .filter-bar .count{font-family:var(--font-mono);font-size:11px;color:var(--tx-2)}
 
+/* CONTENT BLOCKS */
+.block{background:var(--bg-0);border:1px solid var(--bg-3);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.block-header{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--bg-2);border-bottom:1px solid var(--bg-3)}
+.block-header input{flex:1;font-family:var(--font-mono);font-size:11px;padding:4px 8px;background:var(--bg-0);color:var(--ac-cyan);border:1px solid var(--bg-3);border-radius:3px;outline:none}
+.block-header input:focus{border-color:var(--ac-cyan)}
+.block-header input::placeholder{color:var(--tx-2)}
+.block-remove{background:none;border:none;color:var(--ac-red);cursor:pointer;font-size:14px;padding:2px 6px;opacity:.5;transition:opacity .15s}
+.block-remove:hover{opacity:1}
+.block-body{padding:10px}
+.block-body textarea{margin-bottom:6px}
+.block-body textarea:last-child{margin-bottom:0}
+.block-pair-label{font-family:var(--font-mono);font-size:9px;color:var(--tx-2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;margin-top:6px}
+.block-pair-label:first-child{margin-top:0}
+
 /* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ac-green);color:var(--bg-0);font-family:var(--font-mono);font-size:12px;font-weight:700;padding:8px 20px;border-radius:var(--radius);opacity:0;transition:all .3s;z-index:999;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -237,12 +251,9 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
         </select>
       </div>
       <div class="editor-section">
-        <div class="editor-label"><span class="dot" style="background:var(--ac-red)"></span>Original text (what's on the image now)</div>
-        <textarea class="editor-textarea original" id="ed-original" placeholder="Transcribe the text currently on this image..." oninput="onFieldChange()"></textarea>
-      </div>
-      <div class="editor-section">
-        <div class="editor-label"><span class="dot" style="background:var(--ac-green)"></span>Rewritten text (new version)</div>
-        <textarea class="editor-textarea rewrite" id="ed-rewrite" placeholder="Write the new, tone-corrected version here..." oninput="onFieldChange()"></textarea>
+        <div class="editor-label"><span class="dot" style="background:var(--ac-purple)"></span>Content Blocks</div>
+        <button class="btn btn--small" onclick="addBlock()" style="margin-bottom:8px">+ Add block</button>
+        <div id="ed-blocks"></div>
       </div>
       <div class="editor-section">
         <div class="editor-label"><span class="dot" style="background:var(--ac-orange)"></span>Notes &amp; instructions</div>
@@ -382,7 +393,13 @@ function init(){
   const saved=localStorage.getItem(STORAGE_KEY);
   if(saved){try{data=JSON.parse(saved)}catch(e){data={}}}
   IMAGES.forEach((_,i)=>{
-    if(!data[i])data[i]={section:'',action:'',status:'Not started',original:'',rewrite:'',notes:''};
+    if(!data[i])data[i]={section:'',action:'',status:'Not started',blocks:[{label:'',original:'',rewrite:''}],notes:''};
+    // Migrate old format: single original/rewrite → blocks array
+    if(!data[i].blocks){
+      data[i].blocks=[{label:'',original:data[i].original||'',rewrite:data[i].rewrite||''}];
+      delete data[i].original;
+      delete data[i].rewrite;
+    }
   });
   applyFilters();
   renderThumbs();
@@ -473,9 +490,8 @@ function selectImage(i){
   document.getElementById('ed-section').value=d.section||'';
   document.getElementById('ed-action').value=d.action||'';
   document.getElementById('ed-status').value=d.status||'Not started';
-  document.getElementById('ed-original').value=d.original||'';
-  document.getElementById('ed-rewrite').value=d.rewrite||'';
   document.getElementById('ed-notes').value=d.notes||'';
+  renderBlocks(d.blocks||[]);
 
   renderThumbs();
 }
@@ -485,8 +501,7 @@ function onFieldChange(){
     section:document.getElementById('ed-section').value,
     action:document.getElementById('ed-action').value,
     status:document.getElementById('ed-status').value,
-    original:document.getElementById('ed-original').value,
-    rewrite:document.getElementById('ed-rewrite').value,
+    blocks:readBlocksFromDOM(),
     notes:document.getElementById('ed-notes').value,
   };
   dirty=true;
@@ -505,6 +520,65 @@ function onFieldChange(){
     if(dot)dot.style.background=statusColor(d.status);
   }
   updateProgress();
+}
+
+function renderBlocks(blocks){
+  const container=document.getElementById('ed-blocks');
+  container.innerHTML='';
+  if(!blocks.length)blocks=[{label:'',original:'',rewrite:''}];
+  blocks.forEach((b,i)=>{
+    const div=document.createElement('div');
+    div.className='block';
+    div.dataset.idx=i;
+    div.innerHTML=`
+      <div class="block-header">
+        <input type="text" value="${escHtml(b.label)}" placeholder="Section name (e.g. What is Kekspace?)" oninput="onFieldChange()"/>
+        <button class="block-remove" onclick="removeBlock(${i})" title="Remove block">&times;</button>
+      </div>
+      <div class="block-body">
+        <div class="block-pair-label">Original</div>
+        <textarea class="editor-textarea original" placeholder="What's currently on the image..." oninput="onFieldChange()">${escHtml(b.original)}</textarea>
+        <div class="block-pair-label">Rewrite</div>
+        <textarea class="editor-textarea rewrite" placeholder="New version..." oninput="onFieldChange()">${escHtml(b.rewrite)}</textarea>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function readBlocksFromDOM(){
+  const blocks=[];
+  document.querySelectorAll('#ed-blocks .block').forEach(div=>{
+    const label=div.querySelector('.block-header input').value;
+    const texts=div.querySelectorAll('.block-body textarea');
+    blocks.push({label,original:texts[0].value,rewrite:texts[1].value});
+  });
+  return blocks.length?blocks:[{label:'',original:'',rewrite:''}];
+}
+
+function addBlock(){
+  const d=data[currentIdx];
+  if(!d.blocks)d.blocks=[];
+  d.blocks.push({label:'',original:'',rewrite:''});
+  renderBlocks(d.blocks);
+  dirty=true;
+  // Focus the new block's label input
+  const blocks=document.querySelectorAll('#ed-blocks .block');
+  const last=blocks[blocks.length-1];
+  if(last)last.querySelector('.block-header input').focus();
+}
+
+function removeBlock(idx){
+  const d=data[currentIdx];
+  if(!d.blocks||d.blocks.length<=1)return;
+  d.blocks.splice(idx,1);
+  renderBlocks(d.blocks);
+  dirty=true;
+  onFieldChange();
+}
+
+function escHtml(s){
+  if(!s)return'';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function navigate(dir){
@@ -535,13 +609,20 @@ function saveAll(){
 }
 
 function exportJSON(){
-  const out=IMAGES.map((img,i)=>({
-    index:i+1,
-    file:img.path,
-    name:img.name,
-    folder:img.folder,
-    ...data[i]
-  }));
+  const out=IMAGES.map((img,i)=>{
+    const d=data[i]||{};
+    return {
+      index:i+1,
+      file:img.path,
+      name:img.name,
+      folder:img.folder,
+      section:d.section||'',
+      action:d.action||'',
+      status:d.status||'Not started',
+      blocks:d.blocks||[],
+      notes:d.notes||''
+    };
+  });
   const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
@@ -563,12 +644,17 @@ function importJSON(e){
         arr.forEach(item=>{
           const idx=(item.index||1)-1;
           if(idx>=0&&idx<IMAGES.length){
+            // Support both old format (original/rewrite) and new format (blocks)
+            let blocks=item.blocks||[];
+            if(!blocks.length&&(item.original||item.rewrite)){
+              blocks=[{label:'',original:item.original||'',rewrite:item.rewrite||''}];
+            }
+            if(!blocks.length)blocks=[{label:'',original:'',rewrite:''}];
             data[idx]={
               section:item.section||'',
               action:item.action||'',
               status:item.status||'Not started',
-              original:item.original||'',
-              rewrite:item.rewrite||'',
+              blocks:blocks,
               notes:item.notes||''
             };
           }
