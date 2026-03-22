@@ -61,6 +61,8 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 /* Image annotation system */
 .slide-img-wrap{position:relative;border-bottom:2px solid var(--bg-3)}
 .slide-img-wrap .slide-img{border-bottom:none}
+.collapse-btn{position:absolute;top:8px;left:8px;background:rgba(8,8,15,.7);border:1px solid var(--bg-4);color:var(--tx-2);font-size:10px;width:24px;height:24px;border-radius:4px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.collapse-btn:hover{background:rgba(8,8,15,.9);color:var(--tx-0);border-color:var(--purple)}
 .slide-img-wrap .annotate-hint{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:9px;color:var(--tx-2);background:rgba(8,8,15,.7);padding:3px 8px;border-radius:3px;pointer-events:none;opacity:0;transition:opacity .2s}
 .slide-img-wrap:hover .annotate-hint{opacity:1}
 .pin{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--pink);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
@@ -289,7 +291,8 @@ function render(){
 
       html+=`<div class="slide${sideBySide?' slide--sidebyside':''}">
         <div class="slide-img-wrap" data-pin-key="${pinKey}" ondblclick="addPin(event,'${pinKey}',${si},${sli})">
-          <img class="slide-img" src="${slide.img}" alt="${slide.name}" loading="lazy" onclick="this.classList.toggle('collapsed')" title="Click to collapse · Double-click to add note pin"/>
+          <img class="slide-img" src="${slide.img}" alt="${slide.name}" loading="lazy"/>
+          <button class="collapse-btn" onclick="this.parentElement.querySelector('.slide-img').classList.toggle('collapsed')" title="Collapse/expand image">&#9660;</button>
           <div class="annotate-hint">Double-click to add pin</div>
           ${renderPins(pins,pinKey,si,sli)}
         </div>
@@ -497,7 +500,11 @@ function renderPins(pins,pinKey,si,sli){
 }
 
 function addPin(e,pinKey,si,sli){
+  // Don't add pin if clicking on a pin, tooltip, button, or textarea
+  if(e.target.closest('.pin')||e.target.closest('.pin-tooltip')||e.target.tagName==='BUTTON'||e.target.tagName==='TEXTAREA')return;
   const wrap=e.currentTarget;
+  const img=wrap.querySelector('.slide-img');
+  if(img.classList.contains('collapsed'))return;
   const rect=wrap.getBoundingClientRect();
   const x=((e.clientX-rect.left)/rect.width)*100;
   const y=((e.clientY-rect.top)/rect.height)*100;
