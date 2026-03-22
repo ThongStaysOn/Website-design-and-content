@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kekspace — Content Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-0:#08080f;--bg-1:#0e0e1a;--bg-2:#151525;--bg-3:#1c1c32;--bg-4:#24243e;
+  --tx-0:#f0f0f8;--tx-1:#b8b8d0;--tx-2:#7878a0;
+  --ac-green:#4ade80;--ac-purple:#a855f7;--ac-cyan:#22d3ee;--ac-orange:#fb923c;--ac-pink:#f472b6;--ac-red:#ef4444;
+  --font-mono:'JetBrains Mono',monospace;--font-sans:'DM Sans',sans-serif;
+  --radius:6px;
+}
+html{height:100%}
+body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);height:100%;overflow:hidden;font-size:14px}
+
+/* TOP BAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 16px;background:var(--bg-1);border-bottom:1px solid var(--bg-3);flex-shrink:0;z-index:10}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-family:var(--font-mono);font-weight:700;font-size:13px;color:var(--ac-green);letter-spacing:.08em}
+.topbar-divider{width:1px;height:20px;background:var(--bg-3)}
+.topbar-progress{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--tx-2)}
+.topbar-progress-bar{width:120px;height:6px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+.topbar-progress-fill{height:100%;background:linear-gradient(90deg,var(--ac-green),var(--ac-cyan));border-radius:3px;transition:width .3s}
+.topbar-counter{font-family:var(--font-mono);font-size:11px}
+.topbar-right{display:flex;align-items:center;gap:6px}
+
+/* BUTTONS */
+.btn{font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--bg-4);background:var(--bg-2);color:var(--tx-1);border-radius:var(--radius);cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn:hover{background:var(--bg-3);color:var(--tx-0);border-color:var(--ac-purple)}
+.btn--accent{background:var(--ac-purple);color:#fff;border-color:var(--ac-purple)}
+.btn--accent:hover{background:#9333ea}
+.btn--green{background:var(--ac-green);color:var(--bg-0);border-color:var(--ac-green)}
+.btn--green:hover{background:#22c55e}
+.btn--small{padding:4px 8px;font-size:10px}
+
+/* LAYOUT */
+.app{display:flex;flex-direction:column;height:100vh}
+.main{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR — THUMBNAIL STRIP */
+.sidebar{width:110px;background:var(--bg-1);border-right:1px solid var(--bg-3);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-header{padding:8px;border-bottom:1px solid var(--bg-3)}
+.sidebar-filter{width:100%;font-family:var(--font-mono);font-size:10px;padding:4px 6px;background:var(--bg-2);color:var(--tx-1);border:1px solid var(--bg-3);border-radius:var(--radius);outline:none}
+.sidebar-filter:focus{border-color:var(--ac-purple)}
+.thumbs{flex:1;overflow-y:auto;padding:6px}
+.thumbs::-webkit-scrollbar{width:4px}
+.thumbs::-webkit-scrollbar-track{background:transparent}
+.thumbs::-webkit-scrollbar-thumb{background:var(--bg-4);border-radius:2px}
+.thumb{position:relative;margin-bottom:6px;cursor:pointer;border:2px solid transparent;border-radius:4px;overflow:hidden;transition:border-color .15s;opacity:.6;transition:opacity .15s,border-color .15s}
+.thumb:hover{opacity:.9}
+.thumb.active{border-color:var(--ac-purple);opacity:1}
+.thumb img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--bg-2)}
+.thumb-dot{position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;border:1px solid var(--bg-0)}
+.thumb-idx{position:absolute;bottom:2px;left:4px;font-family:var(--font-mono);font-size:8px;color:var(--tx-2);text-shadow:0 1px 2px rgba(0,0,0,.8)}
+
+/* CENTER — IMAGE VIEWER */
+.viewer{flex:1;display:flex;flex-direction:column;background:var(--bg-0);min-width:0}
+.viewer-toolbar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--bg-1);border-bottom:1px solid var(--bg-3);flex-shrink:0}
+.viewer-nav{display:flex;align-items:center;gap:8px}
+.viewer-nav .btn{min-width:32px;text-align:center}
+.viewer-title{font-family:var(--font-mono);font-size:12px;color:var(--tx-1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:400px}
+.viewer-badges{display:flex;gap:6px}
+.viewer-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:auto;padding:16px;background:repeating-conic-gradient(var(--bg-1) 0% 25%,var(--bg-0) 0% 50%) 0 0/20px 20px}
+.viewer-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+
+/* BADGE */
+.badge{font-family:var(--font-mono);font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em}
+.badge--not-started{background:var(--bg-3);color:var(--tx-2)}
+.badge--in-progress{background:var(--ac-orange);color:var(--bg-0)}
+.badge--review{background:var(--ac-cyan);color:var(--bg-0)}
+.badge--approved{background:var(--ac-green);color:var(--bg-0)}
+.badge--use{background:var(--ac-green);color:var(--bg-0)}
+.badge--crop{background:var(--ac-orange);color:var(--bg-0)}
+.badge--create{background:var(--ac-pink);color:var(--bg-0)}
+.badge--reference{background:var(--ac-cyan);color:var(--bg-0)}
+.badge--exclude{background:var(--ac-red);color:#fff}
+.badge--unset{background:var(--bg-3);color:var(--tx-2)}
+
+/* RIGHT PANEL — EDITOR */
+.editor{width:380px;background:var(--bg-1);border-left:1px solid var(--bg-3);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.editor::-webkit-scrollbar{width:4px}
+.editor::-webkit-scrollbar-track{background:transparent}
+.editor::-webkit-scrollbar-thumb{background:var(--bg-4);border-radius:2px}
+.editor-section{padding:12px 16px;border-bottom:1px solid var(--bg-2)}
+.editor-section:last-child{border-bottom:none}
+.editor-label{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--tx-2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.editor-label .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+select.editor-select{width:100%;font-family:var(--font-mono);font-size:12px;padding:8px 10px;background:var(--bg-2);color:var(--tx-0);border:1px solid var(--bg-3);border-radius:var(--radius);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%237878a0' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+select.editor-select:focus{border-color:var(--ac-purple)}
+
+textarea.editor-textarea{width:100%;font-family:var(--font-sans);font-size:13px;padding:10px 12px;background:var(--bg-0);color:var(--tx-0);border:1px solid var(--bg-3);border-radius:var(--radius);outline:none;resize:vertical;min-height:80px;line-height:1.6}
+textarea.editor-textarea:focus{border-color:var(--ac-purple);box-shadow:0 0 0 2px rgba(168,85,247,.15)}
+textarea.editor-textarea::placeholder{color:var(--tx-2)}
+textarea.editor-textarea.original{color:var(--tx-2);font-style:italic;min-height:60px}
+textarea.editor-textarea.rewrite{border-color:var(--ac-green);min-height:100px}
+textarea.editor-textarea.rewrite:focus{border-color:var(--ac-green);box-shadow:0 0 0 2px rgba(74,222,128,.15)}
+textarea.editor-textarea.notes{border-color:var(--ac-orange);min-height:60px}
+textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 0 0 2px rgba(251,146,60,.15)}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:6px;padding:8px 16px;background:var(--bg-1);border-bottom:1px solid var(--bg-3);flex-shrink:0;align-items:center;flex-wrap:wrap}
+.filter-bar label{font-family:var(--font-mono);font-size:10px;color:var(--tx-2);text-transform:uppercase}
+.filter-bar select{font-family:var(--font-mono);font-size:11px;padding:4px 8px;background:var(--bg-2);color:var(--tx-1);border:1px solid var(--bg-3);border-radius:var(--radius);outline:none}
+.filter-bar select:focus{border-color:var(--ac-purple)}
+.filter-bar .spacer{flex:1}
+.filter-bar .count{font-family:var(--font-mono);font-size:11px;color:var(--tx-2)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ac-green);color:var(--bg-0);font-family:var(--font-mono);font-size:12px;font-weight:700;padding:8px 20px;border-radius:var(--radius);opacity:0;transition:all .3s;z-index:999;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* HIDDEN FILE INPUT */
+#import-input{display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{display:none}
+  .editor{width:100%;max-height:50vh;border-left:none;border-top:1px solid var(--bg-3)}
+  .main{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">KEKSPACE</div>
+      <div class="topbar-divider"></div>
+      <div class="topbar-progress">
+        <div class="topbar-progress-bar"><div class="topbar-progress-fill" id="progress-fill"></div></div>
+        <span class="topbar-counter" id="progress-text">0/0</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn" onclick="exportJSON()" title="Export all data as JSON">Export</button>
+      <button class="btn" onclick="document.getElementById('import-input').click()" title="Import JSON data">Import</button>
+      <input type="file" id="import-input" accept=".json" onchange="importJSON(event)"/>
+      <button class="btn btn--green" onclick="saveAll()" title="Cmd+S">Save</button>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <label>Section</label>
+    <select id="filter-section" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Hero">Hero</option>
+      <option value="Vision">Vision</option>
+      <option value="Economy">Economy</option>
+      <option value="World">World</option>
+      <option value="Gameplay">Gameplay</option>
+      <option value="Events">Events</option>
+      <option value="Community">Community</option>
+      <option value="Roadmap">Roadmap</option>
+      <option value="Closing">Closing</option>
+      <option value="Excluded">Excluded</option>
+      <option value="Unassigned">Unassigned</option>
+    </select>
+    <label>Status</label>
+    <select id="filter-status" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Not started">Not started</option>
+      <option value="In progress">In progress</option>
+      <option value="Ready for review">Ready for review</option>
+      <option value="Approved">Approved</option>
+    </select>
+    <label>Action</label>
+    <select id="filter-action" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Use as-is">Use as-is</option>
+      <option value="Crop/Clean">Crop/Clean</option>
+      <option value="Create new">Create new</option>
+      <option value="Reference only">Reference only</option>
+      <option value="Do not use">Do not use</option>
+    </select>
+    <div class="spacer"></div>
+    <span class="count" id="filter-count"></span>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+    <!-- THUMBNAIL SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <input class="sidebar-filter" type="text" placeholder="Search..." id="thumb-search" oninput="applyFilters()"/>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+
+    <!-- IMAGE VIEWER -->
+    <div class="viewer">
+      <div class="viewer-toolbar">
+        <div class="viewer-nav">
+          <button class="btn btn--small" onclick="navigate(-1)" title="Previous (←)">&#9664;</button>
+          <span class="viewer-title" id="viewer-title">—</span>
+          <button class="btn btn--small" onclick="navigate(1)" title="Next (→)">&#9654;</button>
+        </div>
+        <div class="viewer-badges" id="viewer-badges"></div>
+      </div>
+      <div class="viewer-img-wrap">
+        <img id="viewer-img" src="" alt=""/>
+      </div>
+    </div>
+
+    <!-- EDITOR PANEL -->
+    <div class="editor" id="editor">
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-purple)"></span>Section</div>
+        <select class="editor-select" id="ed-section" onchange="onFieldChange()">
+          <option value="">— Unassigned —</option>
+          <option>Hero</option><option>Vision</option><option>Economy</option><option>World</option>
+          <option>Gameplay</option><option>Events</option><option>Community</option><option>Roadmap</option>
+          <option>Closing</option><option>Excluded</option>
+        </select>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-cyan)"></span>Action</div>
+        <select class="editor-select" id="ed-action" onchange="onFieldChange()">
+          <option value="">— Not set —</option>
+          <option>Use as-is</option><option>Crop/Clean</option><option>Create new</option>
+          <option>Reference only</option><option>Do not use</option>
+        </select>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-orange)"></span>Status</div>
+        <select class="editor-select" id="ed-status" onchange="onFieldChange()">
+          <option>Not started</option><option>In progress</option><option>Ready for review</option><option>Approved</option>
+        </select>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-red)"></span>Original text (what's on the image now)</div>
+        <textarea class="editor-textarea original" id="ed-original" placeholder="Transcribe the text currently on this image..." oninput="onFieldChange()"></textarea>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-green)"></span>Rewritten text (new version)</div>
+        <textarea class="editor-textarea rewrite" id="ed-rewrite" placeholder="Write the new, tone-corrected version here..." oninput="onFieldChange()"></textarea>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label"><span class="dot" style="background:var(--ac-orange)"></span>Notes &amp; instructions</div>
+        <textarea class="editor-textarea notes" id="ed-notes" placeholder="Art team instructions, crop notes, internal comments..." oninput="onFieldChange()"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY='kekspace-content-editor';
+
+const IMAGES=[
+  ...Array.from({length:20},(_,i)=>({path:`content/${i+1}.png`,name:`${i+1}.png`,folder:'content'})),
+  ...['AboutTheGame','AboutTheGame2','AdventureBook','Anatomy','ArcadeSaloon_Minigames',
+  'BillboardNetwork','BillboardNetwork2','BlackPage','Characters','CityEast','CityEast2',
+  'CityWest','CityWest2','Cosmetic','Cosmetic2','Cover','CraftingMaterials','CraftingMaterials2',
+  'EconomyAndBlockchain','EconomyAndBlockchain2','EndPage','Equipment','Equipment2',
+  'EventHalloween','EventHalloween2','EventKrakening','EventXmas2025','EventXmas20252',
+  'Exclusive','Fishing','Fishing2','FromPlayToValue','FromPlayToValue2','FurnitureSystem',
+  'FurnitureSystem2','InterfaceHUD','InterfaceHUD2','Kekcreator','Kekcreator2','Kekcreator3',
+  'Kekcreator4','Kekpads','Kekpads2','KekspaceCreatorAPI','KekspaceCreatorAPI2','Membership',
+  'Membership2','NFTs','Pokek','Pokek2','RankUp_EarnBadges','RefiningSystem','RefiningSystem2',
+  'SocialAndCommunity','SocialAndCommunity2','TheCommunity','ThePepeningOnEpicStore_INK',
+  'ThePepeningOnEpicStore_INK2','Welcome','ZonesAdventureGuild','ZonesAmplexus',
+  'ZonesArcadeSaloon','ZonesBackstreet','ZonesCementery','ZonesGMCoffee','ZonesKekmart',
+  'ZonesKekmaze','ZonesKekmaze2','ZonesPepeGallery','ZonesPortal','ZonesPotionStore',
+  'ZonesSeedStore','ZonesSpawn','ZonesTouchGrassPark'
+  ].map(n=>({path:`content/other manual/${n}.png`,name:`${n}.png`,folder:'other manual'}))
+];
+
+let data={};
+let currentIdx=0;
+let filteredIndices=[];
+let dirty=false;
+
+function init(){
+  const saved=localStorage.getItem(STORAGE_KEY);
+  if(saved){try{data=JSON.parse(saved)}catch(e){data={}}}
+  IMAGES.forEach((_,i)=>{
+    if(!data[i])data[i]={section:'',action:'',status:'Not started',original:'',rewrite:'',notes:''};
+  });
+  applyFilters();
+  renderThumbs();
+  selectImage(0);
+  updateProgress();
+}
+
+function applyFilters(){
+  const fs=document.getElementById('filter-section').value;
+  const fst=document.getElementById('filter-status').value;
+  const fa=document.getElementById('filter-action').value;
+  const search=(document.getElementById('thumb-search').value||'').toLowerCase();
+
+  filteredIndices=IMAGES.map((_,i)=>i).filter(i=>{
+    const d=data[i]||{};
+    const img=IMAGES[i];
+    if(fs==='Unassigned'&&d.section)return false;
+    if(fs&&fs!=='Unassigned'&&d.section!==fs)return false;
+    if(fst&&d.status!==fst)return false;
+    if(fa&&d.action!==fa)return false;
+    if(search&&!img.name.toLowerCase().includes(search)&&!img.folder.toLowerCase().includes(search))return false;
+    return true;
+  });
+
+  document.getElementById('filter-count').textContent=`${filteredIndices.length} of ${IMAGES.length}`;
+  renderThumbs();
+  if(filteredIndices.length>0&&!filteredIndices.includes(currentIdx)){
+    selectImage(filteredIndices[0]);
+  }
+}
+
+function renderThumbs(){
+  const c=document.getElementById('thumbs');
+  c.innerHTML='';
+  filteredIndices.forEach(i=>{
+    const img=IMAGES[i];
+    const d=data[i]||{};
+    const div=document.createElement('div');
+    div.className='thumb'+(i===currentIdx?' active':'');
+    div.onclick=()=>selectImage(i);
+    div.innerHTML=`<img src="${img.path}" alt="${img.name}" loading="lazy"/><span class="thumb-dot" style="background:${statusColor(d.status)}"></span><span class="thumb-idx">${i+1}</span>`;
+    c.appendChild(div);
+  });
+}
+
+function statusColor(s){
+  switch(s){
+    case'In progress':return'var(--ac-orange)';
+    case'Ready for review':return'var(--ac-cyan)';
+    case'Approved':return'var(--ac-green)';
+    default:return'var(--bg-4)';
+  }
+}
+
+function actionBadgeClass(a){
+  switch(a){
+    case'Use as-is':return'badge--use';
+    case'Crop/Clean':return'badge--crop';
+    case'Create new':return'badge--create';
+    case'Reference only':return'badge--reference';
+    case'Do not use':return'badge--exclude';
+    default:return'badge--unset';
+  }
+}
+
+function statusBadgeClass(s){
+  switch(s){
+    case'In progress':return'badge--in-progress';
+    case'Ready for review':return'badge--review';
+    case'Approved':return'badge--approved';
+    default:return'badge--not-started';
+  }
+}
+
+function selectImage(i){
+  currentIdx=i;
+  const img=IMAGES[i];
+  const d=data[i]||{};
+
+  document.getElementById('viewer-img').src=img.path;
+  document.getElementById('viewer-title').textContent=`${i+1}/${IMAGES.length} — ${img.folder}/${img.name}`;
+
+  const badges=document.getElementById('viewer-badges');
+  badges.innerHTML=`<span class="badge ${statusBadgeClass(d.status)}">${d.status||'Not started'}</span>`+
+    (d.action?`<span class="badge ${actionBadgeClass(d.action)}">${d.action}</span>`:'')+
+    (d.section?`<span class="badge badge--use">${d.section}</span>`:'');
+
+  document.getElementById('ed-section').value=d.section||'';
+  document.getElementById('ed-action').value=d.action||'';
+  document.getElementById('ed-status').value=d.status||'Not started';
+  document.getElementById('ed-original').value=d.original||'';
+  document.getElementById('ed-rewrite').value=d.rewrite||'';
+  document.getElementById('ed-notes').value=d.notes||'';
+
+  renderThumbs();
+}
+
+function onFieldChange(){
+  data[currentIdx]={
+    section:document.getElementById('ed-section').value,
+    action:document.getElementById('ed-action').value,
+    status:document.getElementById('ed-status').value,
+    original:document.getElementById('ed-original').value,
+    rewrite:document.getElementById('ed-rewrite').value,
+    notes:document.getElementById('ed-notes').value,
+  };
+  dirty=true;
+
+  const d=data[currentIdx];
+  const badges=document.getElementById('viewer-badges');
+  badges.innerHTML=`<span class="badge ${statusBadgeClass(d.status)}">${d.status}</span>`+
+    (d.action?`<span class="badge ${actionBadgeClass(d.action)}">${d.action}</span>`:'')+
+    (d.section?`<span class="badge badge--use">${d.section}</span>`:'');
+
+  // Update thumb dot
+  const thumbs=document.getElementById('thumbs').children;
+  const pos=filteredIndices.indexOf(currentIdx);
+  if(pos>=0&&thumbs[pos]){
+    const dot=thumbs[pos].querySelector('.thumb-dot');
+    if(dot)dot.style.background=statusColor(d.status);
+  }
+  updateProgress();
+}
+
+function navigate(dir){
+  const pos=filteredIndices.indexOf(currentIdx);
+  let next=pos+dir;
+  if(next<0)next=filteredIndices.length-1;
+  if(next>=filteredIndices.length)next=0;
+  selectImage(filteredIndices[next]);
+
+  // Scroll thumb into view
+  const thumbs=document.getElementById('thumbs');
+  const el=thumbs.children[next];
+  if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+
+function updateProgress(){
+  const done=Object.values(data).filter(d=>d.status==='Approved').length;
+  const total=IMAGES.length;
+  const pct=total>0?(done/total)*100:0;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-text').textContent=`${done}/${total} approved`;
+}
+
+function saveAll(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  dirty=false;
+  showToast('Saved');
+}
+
+function exportJSON(){
+  const out=IMAGES.map((img,i)=>({
+    index:i+1,
+    file:img.path,
+    name:img.name,
+    folder:img.folder,
+    ...data[i]
+  }));
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='kekspace-content-'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Exported');
+}
+
+function importJSON(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      const arr=JSON.parse(ev.target.result);
+      if(Array.isArray(arr)){
+        arr.forEach(item=>{
+          const idx=(item.index||1)-1;
+          if(idx>=0&&idx<IMAGES.length){
+            data[idx]={
+              section:item.section||'',
+              action:item.action||'',
+              status:item.status||'Not started',
+              original:item.original||'',
+              rewrite:item.rewrite||'',
+              notes:item.notes||''
+            };
+          }
+        });
+      }
+      saveAll();
+      applyFilters();
+      selectImage(currentIdx);
+      showToast('Imported');
+    }catch(err){
+      showToast('Import failed: '+err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value='';
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')navigate(-1);
+  if(e.key==='ArrowRight')navigate(1);
+});
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='s'){
+    e.preventDefault();
+    saveAll();
+  }
+});
+window.addEventListener('beforeunload',e=>{
+  if(dirty){e.preventDefault();e.returnValue=''}
+});
+
+init();
+</script>
+</body>
+</html>
