@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/hero-bg.png') center / cover no-repeat fixed;
+  background: url('/images/hero/city-west-overview.png') center / cover no-repeat fixed;
   background-color: var(--color-bg-primary);
   overflow: hidden;
   padding-top: 60px;
