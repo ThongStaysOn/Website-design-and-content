@@ -258,22 +258,119 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
 const STORAGE_KEY='kekspace-content-editor';
 
 const IMAGES=[
-  ...Array.from({length:20},(_,i)=>({path:`content/${i+1}.png`,name:`${i+1}.png`,folder:'content'})),
-  ...['AboutTheGame','AboutTheGame2','AdventureBook','Anatomy','ArcadeSaloon_Minigames',
-  'BillboardNetwork','BillboardNetwork2','BlackPage','Characters','CityEast','CityEast2',
-  'CityWest','CityWest2','Cosmetic','Cosmetic2','Cover','CraftingMaterials','CraftingMaterials2',
-  'EconomyAndBlockchain','EconomyAndBlockchain2','EndPage','Equipment','Equipment2',
-  'EventHalloween','EventHalloween2','EventKrakening','EventXmas2025','EventXmas20252',
-  'Exclusive','Fishing','Fishing2','FromPlayToValue','FromPlayToValue2','FurnitureSystem',
-  'FurnitureSystem2','InterfaceHUD','InterfaceHUD2','Kekcreator','Kekcreator2','Kekcreator3',
-  'Kekcreator4','Kekpads','Kekpads2','KekspaceCreatorAPI','KekspaceCreatorAPI2','Membership',
-  'Membership2','NFTs','Pokek','Pokek2','RankUp_EarnBadges','RefiningSystem','RefiningSystem2',
-  'SocialAndCommunity','SocialAndCommunity2','TheCommunity','ThePepeningOnEpicStore_INK',
-  'ThePepeningOnEpicStore_INK2','Welcome','ZonesAdventureGuild','ZonesAmplexus',
-  'ZonesArcadeSaloon','ZonesBackstreet','ZonesCementery','ZonesGMCoffee','ZonesKekmart',
-  'ZonesKekmaze','ZonesKekmaze2','ZonesPepeGallery','ZonesPortal','ZonesPotionStore',
-  'ZonesSeedStore','ZonesSpawn','ZonesTouchGrassPark'
-  ].map(n=>({path:`content/other manual/${n}.png`,name:`${n}.png`,folder:'other manual'}))
+  // 01-hero
+  {path:'content/organized/01-hero/city-west-overview.png',name:'city-west-overview.png',folder:'01-hero'},
+  {path:'content/organized/01-hero/manual-cover.png',name:'manual-cover.png',folder:'01-hero'},
+  // 02-vision
+  {path:'content/organized/02-vision/about-what-is-kekspace.png',name:'about-what-is-kekspace.png',folder:'02-vision'},
+  {path:'content/organized/02-vision/about-audience-producers-flexers.png',name:'about-audience-producers-flexers.png',folder:'02-vision'},
+  {path:'content/organized/02-vision/welcome-pepecoin-origin.png',name:'welcome-pepecoin-origin.png',folder:'02-vision'},
+  {path:'content/organized/02-vision/welcome-page-loading-screens.png',name:'welcome-page-loading-screens.png',folder:'02-vision'},
+  // 03-economy/pepecoin
+  {path:'content/organized/03-economy/pepecoin/wallet-connection-ui.png',name:'wallet-connection-ui.png',folder:'03-economy/pepecoin'},
+  {path:'content/organized/03-economy/pepecoin/onchain-skins-wallet.png',name:'onchain-skins-wallet.png',folder:'03-economy/pepecoin'},
+  {path:'content/organized/03-economy/pepecoin/about-and-economy-spread.png',name:'about-and-economy-spread.png',folder:'03-economy/pepecoin'},
+  // 03-economy/play-to-value
+  {path:'content/organized/03-economy/play-to-value/loop-exploration-to-crafting.png',name:'loop-exploration-to-crafting.png',folder:'03-economy/play-to-value'},
+  {path:'content/organized/03-economy/play-to-value/loop-crafting-to-minting.png',name:'loop-crafting-to-minting.png',folder:'03-economy/play-to-value'},
+  // 03-economy/nfts
+  {path:'content/organized/03-economy/nfts/nft-gallery-bob-ross.png',name:'nft-gallery-bob-ross.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/skins-system-overview.png',name:'skins-system-overview.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/skins-lootboxes-exclusivity.png',name:'skins-lootboxes-exclusivity.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/nft-equipment-erc721.png',name:'nft-equipment-erc721.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/equipment-upgrade-enchant.png',name:'equipment-upgrade-enchant.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/furniture-grid-placement.png',name:'furniture-grid-placement.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/furniture-decorated-rooms.png',name:'furniture-decorated-rooms.png',folder:'03-economy/nfts'},
+  {path:'content/organized/03-economy/nfts/furniture-system-spread.png',name:'furniture-system-spread.png',folder:'03-economy/nfts'},
+  // 04-world/city-overview
+  {path:'content/organized/04-world/city-overview/city-east-overview.png',name:'city-east-overview.png',folder:'04-world/city-overview'},
+  {path:'content/organized/04-world/city-overview/city-west-manual.png',name:'city-west-manual.png',folder:'04-world/city-overview'},
+  {path:'content/organized/04-world/city-overview/city-west-manual-2.png',name:'city-west-manual-2.png',folder:'04-world/city-overview'},
+  {path:'content/organized/04-world/city-overview/city-east-manual.png',name:'city-east-manual.png',folder:'04-world/city-overview'},
+  {path:'content/organized/04-world/city-overview/city-east-manual-2.png',name:'city-east-manual-2.png',folder:'04-world/city-overview'},
+  // 04-world/zones
+  {path:'content/organized/04-world/zones/zone-spawn.png',name:'zone-spawn.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-arcade-saloon.png',name:'zone-arcade-saloon.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-amplexus-nightclub.png',name:'zone-amplexus-nightclub.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-kekmart-store.png',name:'zone-kekmart-store.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-adventure-guild.png',name:'zone-adventure-guild.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-cemetery.png',name:'zone-cemetery.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-gm-coffee.png',name:'zone-gm-coffee.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-touch-grass-park.png',name:'zone-touch-grass-park.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-portal-unknown.png',name:'zone-portal-unknown.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-backstreet.png',name:'zone-backstreet.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-potion-store.png',name:'zone-potion-store.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-seed-store.png',name:'zone-seed-store.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-pepe-gallery.png',name:'zone-pepe-gallery.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-kekmaze-overview.png',name:'zone-kekmaze-overview.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zone-kekmaze-details.png',name:'zone-kekmaze-details.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/kekpads-buy-rent.png',name:'kekpads-buy-rent.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/kekpads-access-roles.png',name:'kekpads-access-roles.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-amplexus-portal-spread.png',name:'zones-amplexus-portal-spread.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-amplexus-portal-spread-2.png',name:'zones-amplexus-portal-spread-2.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-backstreet-coffee-spread.png',name:'zones-backstreet-coffee-spread.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-cemetery-kekmaze-spread.png',name:'zones-cemetery-kekmaze-spread.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-kekmart-gallery-spread.png',name:'zones-kekmart-gallery-spread.png',folder:'04-world/zones'},
+  {path:'content/organized/04-world/zones/zones-potion-seed-spread.png',name:'zones-potion-seed-spread.png',folder:'04-world/zones'},
+  // 05-gameplay/kekcreator
+  {path:'content/organized/05-gameplay/kekcreator/characters-anatomy-diagram.png',name:'characters-anatomy-diagram.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/kekcreator-overview-editor.png',name:'kekcreator-overview-editor.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/anatomy-manual.png',name:'anatomy-manual.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/kekcreator-logo-menu.png',name:'kekcreator-logo-menu.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/kekcreator-colorshift.png',name:'kekcreator-colorshift.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/kekcreator-step1-step2.png',name:'kekcreator-step1-step2.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/kekcreator-step3-blueprint.png',name:'kekcreator-step3-blueprint.png',folder:'05-gameplay/kekcreator'},
+  {path:'content/organized/05-gameplay/kekcreator/characters-creation-lab.png',name:'characters-creation-lab.png',folder:'05-gameplay/kekcreator'},
+  // 05-gameplay/minigames
+  {path:'content/organized/05-gameplay/minigames/arcade-minigames-overview.png',name:'arcade-minigames-overview.png',folder:'05-gameplay/minigames'},
+  {path:'content/organized/05-gameplay/minigames/minigame-screens-grid.png',name:'minigame-screens-grid.png',folder:'05-gameplay/minigames'},
+  {path:'content/organized/05-gameplay/minigames/fishing-mechanic-license.png',name:'fishing-mechanic-license.png',folder:'05-gameplay/minigames'},
+  {path:'content/organized/05-gameplay/minigames/fishing-loadout-stats.png',name:'fishing-loadout-stats.png',folder:'05-gameplay/minigames'},
+  {path:'content/organized/05-gameplay/minigames/pokek-poker-table.png',name:'pokek-poker-table.png',folder:'05-gameplay/minigames'},
+  {path:'content/organized/05-gameplay/minigames/pokek-tournament-chips.png',name:'pokek-tournament-chips.png',folder:'05-gameplay/minigames'},
+  // 05-gameplay/quests
+  {path:'content/organized/05-gameplay/quests/adventure-book-open.png',name:'adventure-book-open.png',folder:'05-gameplay/quests'},
+  {path:'content/organized/05-gameplay/quests/ranking-badges-leaderboards.png',name:'ranking-badges-leaderboards.png',folder:'05-gameplay/quests'},
+  {path:'content/organized/05-gameplay/quests/adventure-guild-book-spread.png',name:'adventure-guild-book-spread.png',folder:'05-gameplay/quests'},
+  // 05-gameplay/hud
+  {path:'content/organized/05-gameplay/hud/hud-annotated-callouts.png',name:'hud-annotated-callouts.png',folder:'05-gameplay/hud'},
+  {path:'content/organized/05-gameplay/hud/hud-manual-overview.png',name:'hud-manual-overview.png',folder:'05-gameplay/hud'},
+  {path:'content/organized/05-gameplay/hud/hud-settings-actions.png',name:'hud-settings-actions.png',folder:'05-gameplay/hud'},
+  // 06-events/krakening
+  {path:'content/organized/06-events/krakening/krakening-kraken-creature.png',name:'krakening-kraken-creature.png',folder:'06-events/krakening'},
+  {path:'content/organized/06-events/krakening/krakening-exclusive-items-crowd.png',name:'krakening-exclusive-items-crowd.png',folder:'06-events/krakening'},
+  {path:'content/organized/06-events/krakening/krakening-exclusive-spread.png',name:'krakening-exclusive-spread.png',folder:'06-events/krakening'},
+  // 06-events/halloween
+  {path:'content/organized/06-events/halloween/halloween-trick-or-treat.png',name:'halloween-trick-or-treat.png',folder:'06-events/halloween'},
+  {path:'content/organized/06-events/halloween/halloween-costumes-rewards.png',name:'halloween-costumes-rewards.png',folder:'06-events/halloween'},
+  {path:'content/organized/06-events/halloween/halloween-spread.png',name:'halloween-spread.png',folder:'06-events/halloween'},
+  // 06-events/christmas
+  {path:'content/organized/06-events/christmas/christmas-tree-scene.png',name:'christmas-tree-scene.png',folder:'06-events/christmas'},
+  {path:'content/organized/06-events/christmas/christmas-advent-calendar.png',name:'christmas-advent-calendar.png',folder:'06-events/christmas'},
+  {path:'content/organized/06-events/christmas/christmas-spread.png',name:'christmas-spread.png',folder:'06-events/christmas'},
+  // 07-community/scenes
+  {path:'content/organized/07-community/scenes/community-social-collage.png',name:'community-social-collage.png',folder:'07-community/scenes'},
+  {path:'content/organized/07-community/scenes/community-gathering-posts.png',name:'community-gathering-posts.png',folder:'07-community/scenes'},
+  {path:'content/organized/07-community/scenes/community-unscripted-scenes.png',name:'community-unscripted-scenes.png',folder:'07-community/scenes'},
+  {path:'content/organized/07-community/scenes/community-event-screenshots.png',name:'community-event-screenshots.png',folder:'07-community/scenes'},
+  // 07-community/billboards
+  {path:'content/organized/07-community/billboards/billboard-network-city.png',name:'billboard-network-city.png',folder:'07-community/billboards'},
+  {path:'content/organized/07-community/billboards/billboard-manager-dashboard.png',name:'billboard-manager-dashboard.png',folder:'07-community/billboards'},
+  // 08-roadmap/creator-api
+  {path:'content/organized/08-roadmap/creator-api/creator-api-overview.png',name:'creator-api-overview.png',folder:'08-roadmap/creator-api'},
+  {path:'content/organized/08-roadmap/creator-api/creator-api-tech-stack.png',name:'creator-api-tech-stack.png',folder:'08-roadmap/creator-api'},
+  // 08-roadmap/epic-store
+  {path:'content/organized/08-roadmap/epic-store/epic-store-listing.png',name:'epic-store-listing.png',folder:'08-roadmap/epic-store'},
+  {path:'content/organized/08-roadmap/epic-store/ink-art-tool.png',name:'ink-art-tool.png',folder:'08-roadmap/epic-store'},
+  // excluded
+  {path:'content/organized/excluded/membership-tiers.png',name:'membership-tiers.png',folder:'excluded'},
+  {path:'content/organized/excluded/membership-benefits.png',name:'membership-benefits.png',folder:'excluded'},
+  {path:'content/organized/excluded/crafting-materials-base.png',name:'crafting-materials-base.png',folder:'excluded'},
+  {path:'content/organized/excluded/crafting-materials-modifiers.png',name:'crafting-materials-modifiers.png',folder:'excluded'},
+  {path:'content/organized/excluded/refining-flowchart.png',name:'refining-flowchart.png',folder:'excluded'},
+  {path:'content/organized/excluded/refining-enchanting.png',name:'refining-enchanting.png',folder:'excluded'},
+  {path:'content/organized/excluded/separator-black.png',name:'separator-black.png',folder:'excluded'},
+  {path:'content/organized/excluded/back-cover.png',name:'back-cover.png',folder:'excluded'},
 ];
 
 let data={};
