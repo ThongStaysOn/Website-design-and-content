@@ -112,6 +112,11 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
 .filter-bar .spacer{flex:1}
 .filter-bar .count{font-family:var(--font-mono);font-size:11px;color:var(--tx-2)}
 
+/* EDITOR PREVIEW IMAGE */
+.editor-preview{padding:0;border-bottom:2px solid var(--bg-3)}
+.editor-preview-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--bg-2)}
+.editor-preview-name{font-family:var(--font-mono);font-size:10px;color:var(--tx-2);padding:6px 12px;background:var(--bg-2)}
+
 /* CONTENT BLOCKS */
 .block{background:var(--bg-0);border:1px solid var(--bg-3);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
 .block-header{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--bg-2);border-bottom:1px solid var(--bg-3)}
@@ -158,6 +163,7 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
       <button class="btn" onclick="exportJSON()" title="Export all data as JSON">Export</button>
       <button class="btn" onclick="document.getElementById('import-input').click()" title="Import JSON data">Import</button>
       <input type="file" id="import-input" accept=".json" onchange="importJSON(event)"/>
+      <button class="btn" onclick="resetAll()" title="Reset to defaults from JSON">Reset</button>
       <button class="btn btn--green" onclick="saveAll()" title="Cmd+S">Save</button>
     </div>
   </div>
@@ -227,6 +233,10 @@ textarea.editor-textarea.notes:focus{border-color:var(--ac-orange);box-shadow:0 
 
     <!-- EDITOR PANEL -->
     <div class="editor" id="editor">
+      <div class="editor-section editor-preview">
+        <img id="ed-preview-img" src="" alt="" class="editor-preview-img"/>
+        <div class="editor-preview-name" id="ed-preview-name"></div>
+      </div>
       <div class="editor-section">
         <div class="editor-label"><span class="dot" style="background:var(--ac-purple)"></span>Section</div>
         <select class="editor-select" id="ed-section" onchange="onFieldChange()">
@@ -389,9 +399,27 @@ let currentIdx=0;
 let filteredIndices=[];
 let dirty=false;
 
-function init(){
+async function init(){
   const saved=localStorage.getItem(STORAGE_KEY);
-  if(saved){try{data=JSON.parse(saved)}catch(e){data={}}}
+  if(saved){
+    try{data=JSON.parse(saved)}catch(e){data={}}
+  } else {
+    // First run — try to load pre-populated data
+    try{
+      const resp=await fetch('content-editor-data.json');
+      if(resp.ok){
+        const arr=await resp.json();
+        arr.forEach(item=>{
+          const idx=(item.index||1)-1;
+          if(idx>=0&&idx<IMAGES.length){
+            let blocks=item.blocks||[];
+            if(!blocks.length)blocks=[{label:'',original:'',rewrite:''}];
+            data[idx]={section:item.section||'',action:item.action||'',status:item.status||'Not started',blocks,notes:item.notes||''};
+          }
+        });
+      }
+    }catch(e){}
+  }
   IMAGES.forEach((_,i)=>{
     if(!data[i])data[i]={section:'',action:'',status:'Not started',blocks:[{label:'',original:'',rewrite:''}],notes:''};
     // Migrate old format: single original/rewrite → blocks array
@@ -481,6 +509,8 @@ function selectImage(i){
 
   document.getElementById('viewer-img').src=img.path;
   document.getElementById('viewer-title').textContent=`${i+1}/${IMAGES.length} — ${img.folder}/${img.name}`;
+  document.getElementById('ed-preview-img').src=img.path;
+  document.getElementById('ed-preview-name').textContent=`${img.folder}/${img.name}`;
 
   const badges=document.getElementById('viewer-badges');
   badges.innerHTML=`<span class="badge ${statusBadgeClass(d.status)}">${d.status||'Not started'}</span>`+
@@ -677,6 +707,13 @@ function showToast(msg){
   t.textContent=msg;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+function resetAll(){
+  if(!confirm('Reset all fields? Your edits will be lost and data will reload from the pre-populated JSON.'))return;
+  localStorage.removeItem(STORAGE_KEY);
+  data={};
+  location.reload();
 }
 
 // Keyboard shortcuts
