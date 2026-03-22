@@ -65,11 +65,22 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .collapse-btn:hover{background:rgba(8,8,15,.9);color:var(--tx-0);border-color:var(--purple)}
 .slide-img-wrap .annotate-hint{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:9px;color:var(--tx-2);background:rgba(8,8,15,.7);padding:3px 8px;border-radius:3px;pointer-events:none;opacity:0;transition:opacity .2s}
 .slide-img-wrap:hover .annotate-hint{opacity:1}
-.pin{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--pink);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
-.pin:hover{box-shadow:0 2px 12px rgba(244,114,182,.5);z-index:11}
+.pin{position:absolute;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
+.pin:hover{box-shadow:0 2px 16px rgba(255,255,255,.3);z-index:11}
 .pin:active{cursor:grabbing}
-.pin-line{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:2px;height:20px;background:var(--pink);pointer-events:none}
-.pin-tooltip{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.92);border:1px solid var(--pink);border-radius:6px;padding:6px 8px;min-width:160px;max-width:240px;z-index:12;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.pin--0{background:#f472b6}.pin--1{background:#a855f7}.pin--2{background:#22d3ee}.pin--3{background:#4ade80}
+.pin--4{background:#fb923c}.pin--5{background:#ef4444}.pin--6{background:#eab308}.pin--7{background:#06b6d4}
+.pin--8{background:#8b5cf6}.pin--9{background:#ec4899}
+.pin-line{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:2px;height:20px;pointer-events:none}
+.pin--0 .pin-line{background:#f472b6}.pin--1 .pin-line{background:#a855f7}.pin--2 .pin-line{background:#22d3ee}
+.pin--3 .pin-line{background:#4ade80}.pin--4 .pin-line{background:#fb923c}.pin--5 .pin-line{background:#ef4444}
+.pin--6 .pin-line{background:#eab308}.pin--7 .pin-line{background:#06b6d4}.pin--8 .pin-line{background:#8b5cf6}
+.pin--9 .pin-line{background:#ec4899}
+.pin-tooltip{position:absolute;top:46px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.92);border:1px solid;border-radius:6px;padding:6px 8px;min-width:160px;max-width:240px;z-index:12;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.pin--0 .pin-tooltip{border-color:#f472b6}.pin--1 .pin-tooltip{border-color:#a855f7}.pin--2 .pin-tooltip{border-color:#22d3ee}
+.pin--3 .pin-tooltip{border-color:#4ade80}.pin--4 .pin-tooltip{border-color:#fb923c}.pin--5 .pin-tooltip{border-color:#ef4444}
+.pin--6 .pin-tooltip{border-color:#eab308}.pin--7 .pin-tooltip{border-color:#06b6d4}.pin--8 .pin-tooltip{border-color:#8b5cf6}
+.pin--9 .pin-tooltip{border-color:#ec4899}
 .pin-tooltip textarea{width:100%;font-family:var(--font-sans);font-size:.8rem;background:transparent;color:var(--tx-0);border:none;outline:none;resize:none;min-height:36px;line-height:1.5}
 .pin-tooltip textarea::placeholder{color:var(--tx-2)}
 .pin-tooltip-actions{display:flex;justify-content:flex-end;margin-top:4px;gap:4px}
@@ -77,7 +88,11 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .pin-delete:hover{opacity:1}
 .annotations-list{margin:4px 16px 8px;padding:0}
 .annotation-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:.8rem;color:var(--tx-1)}
-.annotation-num{background:var(--pink);color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.annotation-num{color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.annotation-num--0{background:#f472b6}.annotation-num--1{background:#a855f7}.annotation-num--2{background:#22d3ee}
+.annotation-num--3{background:#4ade80}.annotation-num--4{background:#fb923c}.annotation-num--5{background:#ef4444}
+.annotation-num--6{background:#eab308}.annotation-num--7{background:#06b6d4}.annotation-num--8{background:#8b5cf6}
+.annotation-num--9{background:#ec4899}
 
 /* Empty rewrite highlight */
 .pair-text--new:empty::before,.pair-text--new.is-empty::before{content:'Needs rewrite...';color:var(--pink);opacity:.5;font-style:italic}
@@ -337,7 +352,7 @@ function render(){
       if(pins.length){
         pinListHtml=`<div class="annotations-list">`;
         pins.forEach((p,pi)=>{
-          pinListHtml+=`<div class="annotation-item"><span class="annotation-num">${pi+1}</span><span>${esc(p.text)||'<em style="color:var(--tx-2)">No text</em>'}</span></div>`;
+          pinListHtml+=`<div class="annotation-item"><span class="annotation-num annotation-num--${pi%10}">${pi+1}</span><span>${esc(p.text)||'<em style="color:var(--tx-2)">No text</em>'}</span></div>`;
         });
         pinListHtml+=`</div>`;
       }
@@ -486,7 +501,7 @@ function savePins(key,pins){
 
 function renderPins(pins,pinKey,si,sli){
   return pins.map((p,i)=>`
-    <div class="pin" style="left:${p.x}%;top:${p.y}%" data-pin-idx="${i}" data-pin-key="${pinKey}"
+    <div class="pin pin--${i%10}" style="left:${p.x}%;top:${p.y}%" data-pin-idx="${i}" data-pin-key="${pinKey}"
       onmousedown="startDragPin(event,${i},'${pinKey}',${si},${sli})">
       ${i+1}
       <div class="pin-line"></div>
