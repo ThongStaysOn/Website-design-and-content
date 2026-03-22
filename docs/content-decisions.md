@@ -6,6 +6,20 @@ When a session wraps, these get imported into the content editor tool.
 
 ---
 
+## Slide: Hero Background (01-hero/city-west-overview.png)
+
+**Section:** Hero (Section 1)
+
+**Art direction:**
+- Remove the speech bubbles from the city scene
+- Remove the "Arcade Saloon" text/signage
+- Clean background image — no text overlays, just the isometric city
+
+**Notes:**
+- This image is used as a full-viewport background with a dark gradient overlay on top, so it doesn't need to be perfectly clean — but visible text elements like speech bubbles and signage labels are distracting under the logo and tagline
+
+---
+
 ## Slide: Welcome (02-vision/welcome-pepecoin-origin.png)
 
 **Section:** Vision (Section 2)
