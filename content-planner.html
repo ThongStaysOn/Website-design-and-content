@@ -58,6 +58,25 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .slide-img{width:100%;max-height:350px;object-fit:contain;background:var(--bg-0);display:block;border-bottom:2px solid var(--bg-3);cursor:pointer;transition:max-height .3s}
 .slide-img.collapsed{max-height:50px;object-fit:cover;opacity:.4}
 
+/* Image annotation system */
+.slide-img-wrap{position:relative;border-bottom:2px solid var(--bg-3)}
+.slide-img-wrap .slide-img{border-bottom:none}
+.slide-img-wrap .annotate-hint{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:9px;color:var(--tx-2);background:rgba(8,8,15,.7);padding:3px 8px;border-radius:3px;pointer-events:none;opacity:0;transition:opacity .2s}
+.slide-img-wrap:hover .annotate-hint{opacity:1}
+.pin{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--pink);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
+.pin:hover{box-shadow:0 2px 12px rgba(244,114,182,.5);z-index:11}
+.pin:active{cursor:grabbing}
+.pin-line{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:2px;height:20px;background:var(--pink);pointer-events:none}
+.pin-tooltip{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.92);border:1px solid var(--pink);border-radius:6px;padding:6px 8px;min-width:160px;max-width:240px;z-index:12;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.pin-tooltip textarea{width:100%;font-family:var(--font-sans);font-size:.8rem;background:transparent;color:var(--tx-0);border:none;outline:none;resize:none;min-height:36px;line-height:1.5}
+.pin-tooltip textarea::placeholder{color:var(--tx-2)}
+.pin-tooltip-actions{display:flex;justify-content:flex-end;margin-top:4px;gap:4px}
+.pin-delete{background:none;border:none;color:var(--red);font-family:var(--font-mono);font-size:9px;cursor:pointer;padding:2px 6px;opacity:.6}
+.pin-delete:hover{opacity:1}
+.annotations-list{margin:4px 16px 8px;padding:0}
+.annotation-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:.8rem;color:var(--tx-1)}
+.annotation-num{background:var(--pink);color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+
 /* Empty rewrite highlight */
 .pair-text--new:empty::before,.pair-text--new.is-empty::before{content:'Needs rewrite...';color:var(--pink);opacity:.5;font-style:italic}
 .pair-text--new.is-empty{border-color:var(--pink);border-style:dashed}
@@ -265,8 +284,15 @@ function render(){
       const currentStatus=getSaved(statusKey,slide.status);
       const currentNotes=getSaved(notesKey,slide.notes);
 
+      const pinKey=`${si}-${sli}-pins`;
+      const pins=getSavedPins(pinKey);
+
       html+=`<div class="slide${sideBySide?' slide--sidebyside':''}">
-        <img class="slide-img" src="${slide.img}" alt="${slide.name}" loading="lazy" onclick="this.classList.toggle('collapsed')" title="Click to collapse/expand"/>
+        <div class="slide-img-wrap" data-pin-key="${pinKey}" ondblclick="addPin(event,'${pinKey}',${si},${sli})">
+          <img class="slide-img" src="${slide.img}" alt="${slide.name}" loading="lazy" onclick="this.classList.toggle('collapsed')" title="Click to collapse · Double-click to add note pin"/>
+          <div class="annotate-hint">Double-click to add pin</div>
+          ${renderPins(pins,pinKey,si,sli)}
+        </div>
         <div class="slide-meta">
           <span class="slide-name">${sec.num}.${sli+1} — ${slide.name}</span>
           <div class="slide-status">
@@ -303,7 +329,17 @@ function render(){
 
       html+=`<button class="add-block-btn" onclick="addBlock(${si},${sli})">+ Add content block</button>`;
 
-      html+=`</div><div class="slide-notes">
+      // Annotation list below blocks
+      let pinListHtml='';
+      if(pins.length){
+        pinListHtml=`<div class="annotations-list">`;
+        pins.forEach((p,pi)=>{
+          pinListHtml+=`<div class="annotation-item"><span class="annotation-num">${pi+1}</span><span>${esc(p.text)||'<em style="color:var(--tx-2)">No text</em>'}</span></div>`;
+        });
+        pinListHtml+=`</div>`;
+      }
+
+      html+=`${pinListHtml}</div><div class="slide-notes">
         <div class="slide-notes-label">Notes</div>
         <div class="slide-notes-text" contenteditable="true" data-key="${notesKey}" oninput="onEdit(this.dataset.key,this.textContent)">${esc(currentNotes)}</div>
       </div></div>`;
@@ -431,6 +467,94 @@ function showToast(msg){
   t.textContent=msg;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// Pin annotation system
+function getSavedPins(key){
+  const raw=savedEdits[key];
+  if(!raw)return[];
+  try{return JSON.parse(raw)}catch(e){return[]}
+}
+
+function savePins(key,pins){
+  savedEdits[key]=JSON.stringify(pins);
+  dirty=true;
+}
+
+function renderPins(pins,pinKey,si,sli){
+  return pins.map((p,i)=>`
+    <div class="pin" style="left:${p.x}%;top:${p.y}%" data-pin-idx="${i}" data-pin-key="${pinKey}"
+      onmousedown="startDragPin(event,${i},'${pinKey}',${si},${sli})">
+      ${i+1}
+      <div class="pin-line"></div>
+      <div class="pin-tooltip" onclick="event.stopPropagation()">
+        <textarea placeholder="What needs to change here..." oninput="updatePinText('${pinKey}',${i},this.value,${si},${sli})">${esc(p.text)}</textarea>
+        <div class="pin-tooltip-actions">
+          <button class="pin-delete" onclick="deletePin('${pinKey}',${i},${si},${sli})">remove</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function addPin(e,pinKey,si,sli){
+  const wrap=e.currentTarget;
+  const rect=wrap.getBoundingClientRect();
+  const x=((e.clientX-rect.left)/rect.width)*100;
+  const y=((e.clientY-rect.top)/rect.height)*100;
+  const pins=getSavedPins(pinKey);
+  pins.push({x:Math.round(x*10)/10,y:Math.round(y*10)/10,text:''});
+  savePins(pinKey,pins);
+  render();
+  // Focus the new pin's textarea
+  setTimeout(()=>{
+    const allPins=document.querySelectorAll(`[data-pin-key="${pinKey}"]`);
+    const last=allPins[allPins.length-1];
+    if(last){const ta=last.querySelector('textarea');if(ta)ta.focus()}
+  },50);
+}
+
+function updatePinText(pinKey,idx,text,si,sli){
+  const pins=getSavedPins(pinKey);
+  if(pins[idx])pins[idx].text=text;
+  savePins(pinKey,pins);
+}
+
+function deletePin(pinKey,idx,si,sli){
+  const pins=getSavedPins(pinKey);
+  pins.splice(idx,1);
+  savePins(pinKey,pins);
+  render();
+}
+
+let dragState=null;
+function startDragPin(e,idx,pinKey,si,sli){
+  if(e.target.tagName==='TEXTAREA'||e.target.tagName==='BUTTON')return;
+  e.preventDefault();
+  const wrap=e.currentTarget.parentElement;
+  const rect=wrap.getBoundingClientRect();
+  dragState={idx,pinKey,si,sli,rect,wrap};
+  document.addEventListener('mousemove',onDragPin);
+  document.addEventListener('mouseup',stopDragPin);
+}
+function onDragPin(e){
+  if(!dragState)return;
+  const{idx,pinKey,rect}=dragState;
+  const x=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
+  const y=Math.max(0,Math.min(100,((e.clientY-rect.top)/rect.height)*100));
+  const pins=getSavedPins(pinKey);
+  if(pins[idx]){
+    pins[idx].x=Math.round(x*10)/10;
+    pins[idx].y=Math.round(y*10)/10;
+    savePins(pinKey,pins);
+    // Update pin position live without full re-render
+    const pin=dragState.wrap.querySelectorAll('.pin')[idx];
+    if(pin){pin.style.left=x+'%';pin.style.top=y+'%'}
+  }
+}
+function stopDragPin(){
+  dragState=null;
+  document.removeEventListener('mousemove',onDragPin);
+  document.removeEventListener('mouseup',stopDragPin);
 }
 
 document.addEventListener('keydown',e=>{
