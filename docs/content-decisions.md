@@ -11,12 +11,9 @@ When a session wraps, these get imported into the content editor tool.
 **Section:** Hero (Section 1)
 
 **Art direction:**
-- Remove the speech bubbles from the city scene
-- Remove the "Arcade Saloon" text/signage
-- Clean background image — no text overlays, just the isometric city
-
-**Notes:**
-- This image is used as a full-viewport background with a dark gradient overlay on top, so it doesn't need to be perfectly clean — but visible text elements like speech bubbles and signage labels are distracting under the logo and tagline
+- Do you have a large, clean overview render of the full city? We need a wide isometric shot that shows the scale of the world — no UI, no speech bubbles, no signage text. Just the city.
+- This gets used as a full-viewport hero background with a dark gradient overlay, so it needs to be high-res and wide (at least 1920px).
+- If no clean render exists, we can clean up this slide (remove speech bubbles and Arcade Saloon text) as a fallback.
 
 ---
 
