@@ -539,6 +539,15 @@ function updatePinText(pinKey,idx,text,si,sli){
   const pins=getSavedPins(pinKey);
   if(pins[idx])pins[idx].text=text;
   savePins(pinKey,pins);
+  // Update the annotation list in real-time
+  const slide=document.querySelector(`[data-pin-key="${pinKey}"]`).closest('.slide');
+  if(slide){
+    const items=slide.querySelectorAll('.annotation-item');
+    if(items[idx]){
+      const span=items[idx].querySelector('span:last-child');
+      if(span)span.innerHTML=text?esc(text):'<em style="color:var(--tx-2)">No text</em>';
+    }
+  }
 }
 
 function deletePin(pinKey,idx,si,sli){
