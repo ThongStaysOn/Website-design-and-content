@@ -196,15 +196,15 @@ const STORAGE_KEY='kekspace-content-planner-v2';
 let dirty=false;
 
 const SECTIONS=[
-  {num:'1',title:'Hero / Landing',desc:'Full-screen background, logo, tagline, two CTA buttons',slides:[
+  {num:'1',title:'Hero / Landing',desc:'Cover page. Kekspace + INK branding. Position as a partnership pitch, not a cold intro.',slides:[
     {img:'content/organized/01-hero/city-west-overview.png',name:'city-west-overview.png',status:'Not started',blocks:[
       {label:'Tagline',old:'"Where degens grind and legends are minted"',new_text:'"The social world where meme culture meets real ownership"'}
-    ],notes:'ART QUESTION: Do you have a large clean overview render of the full city? Need a wide isometric shot showing the scale — no UI, no speech bubbles, no text. At least 1920px wide. If not, we clean up this slide as fallback. Also need: Kekspace logo (transparent PNG), Get Pepecoin URL, Play Now URL.'}
+    ],notes:'KRAKEN PITCH: Cover should feature both Kekspace and INK branding. This is a partnership pitch — not a cold intro. ART: Need clean wide city overview, at least 1920px, no UI/speech bubbles.'}
   ]},
   {num:'2',title:'Vision — "What is Kekspace?"',desc:'Answers who, what, and why. The first section after the hero.',slides:[
     {img:'content/organized/02-vision/welcome-pepecoin-origin.png',name:'welcome-pepecoin-origin.png',status:'Approved',blocks:[
       {label:'Welcome text',old:'PepeCoin ($PEPECOIN) is the first and longest-running Pepe-themed cryptocurrency. It originally hatched on March 5th, 2016 on its own proof-of-work blockchain. Fairly mined by the community, with no pre-sale, no insider funding/sniping, and no funny business',new_text:'You made it. Kekspace is what happens when a community mines a frog coin in 2016 and refuses to stop building. A social world powered by Pepecoin — built by the people in it.'}
-    ],notes:'Pepecoin origin details moved to Economy section. This is the warm welcome.'},
+    ],notes:'KRAKEN PITCH: Establish credibility — community since 2016, no presale. Signal: this is an established project looking for the right L2 home, not a new project looking for a chain.'},
     {img:'content/organized/02-vision/about-what-is-kekspace.png',name:'about-what-is-kekspace.png',status:'Approved',blocks:[
       {label:'What is Kekspace?',old:'Kekspace is a social interface for Web3 that blends the social elements of early 2000\'s social MMOs with Web3/DeFi utility.',new_text:'Kekspace is a social interface for Web3 that blends the social elements of early 2000\'s social MMOs with Web3/DeFi utility.'},
       {label:'What can you do in Kekspace?',old:'Play games, collect items, create your own virtual rooms, hang out with frens, access DeFi apps, and contribute funds, assets, and more!',new_text:'Play games, customize your character, decorate your own room, hang out with the community, and earn rewards. That\'s what\'s live right now — with a lot more to come.'},
@@ -212,7 +212,7 @@ const SECTIONS=[
       {label:'Tagline',old:'OWN THE MEME. BECOME THE MEME.',new_text:'OWN THE MEME. BECOME THE MEME.'},
       {label:'Players',old:'By incentivizing developers to make Kekspace their primary form of advertisement in the crypto sphere, this will become a central hub for gaming where social engagement, competition, and monetization are at its core.',new_text:''},
       {label:'Developers',old:'Kekspace is designed to become the major crypto platform for the promotion of gaming and entertainment. By providing developers with an exciting community, a visual landscape, and significant cultural liquidity, developers will enable the success of their products with a fraction of the cost or effort.',new_text:''}
-    ],notes:'Art direction: Replace kekspace_banner.png with a character lineup — a row of colorful, diverse NPCs. Pick the most vibrant characters to show off the art style.'},
+    ],notes:'KRAKEN PITCH: Frame through INK lens — this brings real users and real on-chain activity to the L2. ART: Replace kekspace_banner.png with colorful NPC character lineup.'},
     {img:'content/organized/02-vision/about-audience-producers-flexers.png',name:'about-audience-producers-flexers.png',status:'Not started',blocks:[
       {label:'Producers',old:'Producer\'s will have an amazing platform not only to create, but market everything they do. Kekspace will provide competitive ad locations for producers to buy as top exposure throughout the crypto community.',new_text:''},
       {label:'Flexers',old:'Kekspace will provide endless ways for consumers to stay engaged. Through ownership of NFT\'s, consumers will be able to own virtual land where they can show off their proudest achievements.',new_text:''}
@@ -221,23 +221,23 @@ const SECTIONS=[
       {label:'Page content',old:'',new_text:''}
     ],notes:'Reference only — loading screens.'}
   ]},
-  {num:'3',title:'Economy — "Own the Meme"',desc:'Pepecoin, play-to-value loop, NFT ownership. Primary CTA section.',slides:[
-    {img:'content/organized/03-economy/pepecoin/wallet-connection-ui.png',name:'wallet-connection-ui.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/pepecoin/onchain-skins-wallet.png',name:'onchain-skins-wallet.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+  {num:'3',title:'Economy — "Own the Meme"',desc:'Every player action = on-chain transactions on INK. NFT mints, item trades, currency transfers. This is TVL and volume, not just a game.',slides:[
+    {img:'content/organized/03-economy/pepecoin/wallet-connection-ui.png',name:'wallet-connection-ui.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: Show wallet integration. Key message: every player action generates on-chain transactions on INK.'},
+    {img:'content/organized/03-economy/pepecoin/onchain-skins-wallet.png',name:'onchain-skins-wallet.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: All skins mint on INK. Every collectible = on-chain activity on their L2.'},
     {img:'content/organized/03-economy/pepecoin/about-and-economy-spread.png',name:'about-and-economy-spread.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/play-to-value/loop-exploration-to-crafting.png',name:'loop-exploration-to-crafting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/play-to-value/loop-crafting-to-minting.png',name:'loop-crafting-to-minting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/nfts/nft-gallery-bob-ross.png',name:'nft-gallery-bob-ross.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/nfts/skins-system-overview.png',name:'skins-system-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/play-to-value/loop-exploration-to-crafting.png',name:'loop-exploration-to-crafting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:'Explore → Gather → Craft → Equip or Sell → Mint'}],notes:'KRAKEN PITCH: This loop creates sustained on-chain engagement, not one-time transactions. Players keep coming back.'},
+    {img:'content/organized/03-economy/play-to-value/loop-crafting-to-minting.png',name:'loop-crafting-to-minting.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:'Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property.'}],notes:''},
+    {img:'content/organized/03-economy/nfts/nft-gallery-bob-ross.png',name:'nft-gallery-bob-ross.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: All NFTs mint on INK. Every piece of art, every collectible = on-chain activity.'},
+    {img:'content/organized/03-economy/nfts/skins-system-overview.png',name:'skins-system-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: Cosmetic NFTs are the highest-volume, lowest-friction entry point for new users into INK.'},
     {img:'content/organized/03-economy/nfts/skins-lootboxes-exclusivity.png',name:'skins-lootboxes-exclusivity.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
     {img:'content/organized/03-economy/nfts/nft-equipment-erc721.png',name:'nft-equipment-erc721.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
     {img:'content/organized/03-economy/nfts/equipment-upgrade-enchant.png',name:'equipment-upgrade-enchant.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
-    {img:'content/organized/03-economy/nfts/furniture-grid-placement.png',name:'furniture-grid-placement.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+    {img:'content/organized/03-economy/nfts/furniture-grid-placement.png',name:'furniture-grid-placement.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: Furniture items are NFTs. Every decoration purchase = on-chain transaction on INK.'},
     {img:'content/organized/03-economy/nfts/furniture-decorated-rooms.png',name:'furniture-decorated-rooms.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
     {img:'content/organized/03-economy/nfts/furniture-system-spread.png',name:'furniture-system-spread.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''}
   ]},
-  {num:'4',title:'World — "Step Into the Grid"',desc:'City overview, 8 zone cards, Kekpads teaser.',slides:[
-    {img:'content/organized/04-world/city-overview/city-east-overview.png',name:'city-east-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
+  {num:'4',title:'World — "Step Into the Grid"',desc:'This isn\'t a single game — it\'s a platform. Multiple zones, multiple activities. Every zone = potential brand integration (like The Krakening proved).',slides:[
+    {img:'content/organized/04-world/city-overview/city-east-overview.png',name:'city-east-overview.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: Show the scale. This is a platform, not just a game.'},
     {img:'content/organized/04-world/city-overview/city-west-manual.png',name:'city-west-manual.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:''},
     {img:'content/organized/04-world/zones/zone-spawn.png',name:'zone-spawn.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Where everyone arrives'}],notes:''},
     {img:'content/organized/04-world/zones/zone-arcade-saloon.png',name:'zone-arcade-saloon.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'Games and tickets'}],notes:''},
@@ -248,27 +248,27 @@ const SECTIONS=[
     {img:'content/organized/04-world/zones/zone-gm-coffee.png',name:'zone-gm-coffee.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The social hangout'}],notes:''},
     {img:'content/organized/04-world/zones/zone-touch-grass-park.png',name:'zone-touch-grass-park.png',status:'Not started',blocks:[{label:'Zone description',old:'',new_text:'The chill zone'}],notes:''}
   ]},
-  {num:'5',title:'Gameplay — "More Than Just Hanging Out"',desc:'KekCreator, minigames, quests, HUD.',slides:[
-    {img:'content/organized/05-gameplay/kekcreator/characters-anatomy-diagram.png',name:'characters-anatomy-diagram.png',status:'Not started',blocks:[{label:'KekCreator copy',old:'',new_text:'Thousands of combinations. Every slot is a layer. Every layer is a statement.'}],notes:''},
+  {num:'5',title:'Gameplay — "More Than Just Hanging Out"',desc:'Each minigame = separate engagement loop. More games = more reasons to return = more on-chain activity on INK.',slides:[
+    {img:'content/organized/05-gameplay/kekcreator/characters-anatomy-diagram.png',name:'characters-anatomy-diagram.png',status:'Not started',blocks:[{label:'KekCreator copy',old:'',new_text:'Thousands of combinations. Every slot is a layer. Every layer is a statement.'}],notes:'KRAKEN PITCH: Character investment = player retention. Players who build an identity stick around and keep transacting.'},
     {img:'content/organized/05-gameplay/minigames/arcade-minigames-overview.png',name:'arcade-minigames-overview.png',status:'Not started',blocks:[{label:'Minigames hook',old:'',new_text:'Every game earns tickets. Tickets earn rewards. Rewards have real value.'}],notes:''},
     {img:'content/organized/05-gameplay/minigames/fishing-mechanic-license.png',name:'fishing-mechanic-license.png',status:'Not started',blocks:[{label:'Fishing description',old:'',new_text:'Cast, catch, collect'}],notes:''},
-    {img:'content/organized/05-gameplay/minigames/pokek-poker-table.png',name:'pokek-poker-table.png',status:'Not started',blocks:[{label:'Pokek description',old:'',new_text:'On-chain poker'}],notes:''},
+    {img:'content/organized/05-gameplay/minigames/pokek-poker-table.png',name:'pokek-poker-table.png',status:'Not started',blocks:[{label:'Pokek description',old:'',new_text:'On-chain poker'}],notes:'KRAKEN PITCH: DeFi-adjacent gaming. Real stakes, real pots, real on-chain settlement. High-value transactions on INK.'},
     {img:'content/organized/05-gameplay/quests/ranking-badges-leaderboards.png',name:'ranking-badges-leaderboards.png',status:'Not started',blocks:[{label:'Quests & Progression',old:'Every action inside kek.space contributes to a persistent progression ecosystem where playing earns badges, climbing leaderboards shapes status, and daily activities outside the game compound rewards.',new_text:'NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer\'s Book tracks your journey. The more you play, the more you earn, the higher you climb.'}],notes:''},
     {img:'content/organized/05-gameplay/hud/hud-annotated-callouts.png',name:'hud-annotated-callouts.png',status:'Not started',blocks:[{label:'HUD caption',old:'',new_text:'Player info, chat, navigation, action bar, settings — everything a player needs, nothing they don\'t.'}],notes:''}
   ]},
-  {num:'6',title:'Events & Partnerships — "Proof It Works"',desc:'Krakening, seasonal events, partner pitch.',slides:[
+  {num:'6',title:'Events & Partnerships — "Proof It Works"',desc:'THE PROOF SECTION. The Krakening already happened. We already proved this works. Now imagine it on INK with deeper integration.',slides:[
     {img:'content/organized/06-events/krakening/krakening-kraken-creature.png',name:'krakening-kraken-creature.png',status:'Not started',blocks:[{label:'Krakening description',old:'The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid\'s history.',new_text:'Kraken\'s identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there.'},
-      {label:'Quote line',old:'',new_text:'Not a banner ad. A living brand experience inside a living world.'}],notes:''},
-    {img:'content/organized/06-events/krakening/krakening-exclusive-items-crowd.png',name:'krakening-exclusive-items-crowd.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'Crop: crowd shot from bottom, exclusive items grid from top.'},
-    {img:'content/organized/06-events/halloween/halloween-trick-or-treat.png',name:'halloween-trick-or-treat.png',status:'Not started',blocks:[{label:'Halloween description',old:'',new_text:'Maze, costumes, cursed candies, themed quests'}],notes:''},
+      {label:'Quote line',old:'',new_text:'Not a banner ad. A living brand experience inside a living world.'}],notes:'KRAKEN PITCH: This is the key section. We already proved this works. Show the numbers. "Now imagine it on INK with deeper integration."'},
+    {img:'content/organized/06-events/krakening/krakening-exclusive-items-crowd.png',name:'krakening-exclusive-items-crowd.png',status:'Not started',blocks:[{label:'Content',old:'',new_text:''}],notes:'KRAKEN PITCH: Exclusives still being traded = lasting value. NEW SLIDE NEEDED: Krakening by-the-numbers stats page.'},
+    {img:'content/organized/06-events/halloween/halloween-trick-or-treat.png',name:'halloween-trick-or-treat.png',status:'Not started',blocks:[{label:'Halloween description',old:'',new_text:'Maze, costumes, cursed candies, themed quests'}],notes:'KRAKEN PITCH: Seasonal events drive engagement spikes. This is the kind of content that brings users to INK during key moments.'},
     {img:'content/organized/06-events/christmas/christmas-tree-scene.png',name:'christmas-tree-scene.png',status:'Not started',blocks:[{label:'Christmas description',old:'',new_text:'Advent calendar, daily gifts, world transformation'}],notes:''},
   ]},
-  {num:'7',title:'Community — "Built by the People in It"',desc:'Gallery, social posts, stats, billboard network.',slides:[
-    {img:'content/organized/07-community/scenes/community-social-collage.png',name:'community-social-collage.png',status:'Not started',blocks:[{label:'Section subtitle',old:'',new_text:'A community that shows up, stays loud, and keeps building.'}],notes:'Crop individual crowd shots and social media posts from this page.'},
-    {img:'content/organized/07-community/billboards/billboard-network-city.png',name:'billboard-network-city.png',status:'Not started',blocks:[{label:'Billboard Network',old:'Kek.space features a distributed in-game billboard network designed for brands, creators, and community promotions.',new_text:'An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static.'}],notes:''}
+  {num:'7',title:'Community — "Built by the People in It"',desc:'Real users, real activity. Not a ghost chain project. These people show up.',slides:[
+    {img:'content/organized/07-community/scenes/community-social-collage.png',name:'community-social-collage.png',status:'Not started',blocks:[{label:'Section subtitle',old:'',new_text:'A community that shows up, stays loud, and keeps building.'}],notes:'KRAKEN PITCH: This isn\'t a ghost chain project. These are real, active users who show up. Show the crowd shots.'},
+    {img:'content/organized/07-community/billboards/billboard-network-city.png',name:'billboard-network-city.png',status:'Not started',blocks:[{label:'Billboard Network',old:'Kek.space features a distributed in-game billboard network designed for brands, creators, and community promotions.',new_text:'An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static.'}],notes:'KRAKEN PITCH: Billboard network = revenue layer AND marketing channel. INK ecosystem projects could advertise inside Kekspace to reach engaged crypto-native users.'}
   ]},
-  {num:'8',title:'Roadmap — "What\'s Next"',desc:'Delivered / In Progress / On the Horizon. No images needed.',slides:[]},
-  {num:'9',title:'Closing — CTAs',desc:'Final conversion. Two big buttons, social links, partner link. No images needed.',slides:[]}
+  {num:'8',title:'Roadmap — "What\'s Next"',desc:'What INK enables: lower gas for microtransactions, faster minting, cross-game interoperability. INK unlocks things that weren\'t possible before.',slides:[]},
+  {num:'9',title:'The Ask & Closing',desc:'Clear ask: what does Kekspace want from the INK partnership? Grants, co-marketing, technical support, ecosystem placement. End with contact info.',slides:[]}
 ];
 
 // Load saved edits from localStorage
