@@ -102,51 +102,7 @@ Kill: All callout boxes, fake file paths, error text.
 
 ---
 
-## 09 — Zone: Spawn
-
-**Old:** Billboard callouts, "In-game billboard with rentable space", KRAKEN LOGO labels, "Fresh start point"
-
-**New:**
-> "Where everyone arrives. The central hub of Kekspace — billboards overhead, shops nearby, and the whole city waiting."
-
-Kill: All callout labels, technical billboard descriptions.
-
----
-
-## 10 — Zone: Amplexus
-
-**Old:** "NIGHTCLUB_FAULT_SOURCE / INITIATING STACK DUMP / SEROTONIN_LEAK / BROKEN_MIRROR_LOOP" + "Entry unlocked under grid protocol" + "SYSTEM HALTED / CAUSE: EXCESS INPUT FROM NIGHTCLUB SUBROUTINES"
-
-**New:**
-> "The nightclub that never closes. Dance floors, DJs, and VIP access. Amplexus is where the community comes to party."
-
-Kill: Everything. Every single system error, stack dump, and protocol reference.
-
----
-
-## 11 — Zone: Arcade Saloon
-
-**Old:** "the spirits left the rig in overfarm mode. Step in. Claim tickets. Break the counter." + "arcadeKernel.exe"
-
-**New:**
-> "Games and tickets. Hit the arcade, compete in minigames, and earn rewards you can actually use."
-
-Kill: All .exe references, "spirits left the rig" flavor text.
-
----
-
-## 12 — Zone: Cemetery
-
-**Old:** "THE REAPER LEFT THE GATE UNLEASHED" + "The graveyard hums with packet ghosts and half-buried scripts" + "Dead Broadcast: The grid wants to see if you can walk among its most deleted objects"
-
-**New:**
-> "The dark and mysterious side. Graveyards, ghosts, and quests for the brave. Some corners of Kekspace don't want to be found."
-
-Kill: "packet ghosts", "half-buried scripts", "deleted objects", all glitch narrative.
-
----
-
-## 13 — Characters Anatomy
+## 09 — Characters Anatomy
 
 **Old:** "Grid online. Dive in and mod your avatar till the RAM cries. Thousands of combos to flex on the pixel map. Max customization until you're just background NPC dust."
 
@@ -157,7 +113,7 @@ The anatomy diagram itself is great — keep it as-is.
 
 ---
 
-## 14 — Minigames
+## 10 — Minigames
 
 **Old:** "arcadeKernel.exe // booting minigames..." + "SysERR04/irpg.exe" + "SysERR04/balancing.exe"
 
@@ -173,7 +129,7 @@ Kill: All .exe labels, kernel boot text, system error labels.
 
 ---
 
-## 15 — Pokek Poker
+## 11 — Pokek Poker
 
 **Old:** "THE ON-CHAIN PEPE ARENA" + "EVERY HAND IS PLAYED USING IN-GAME CURRENCY EARNED THROUGH EXPLORATION AND THE GAME" + "DESIGNED FOR COMPETITION"
 
@@ -184,7 +140,7 @@ Kill: "ON-CHAIN PEPE ARENA", overcaps.
 
 ---
 
-## 16 — Quests & Badges
+## 12 — Quests & Badges
 
 **Old:** "THE COMPETITIVE LAYER OF KEK SPACE" + "Every action inside kek.space contributes to a persistent progression ecosystem where playing earns badges, climbing leaderboards shapes status"
 
@@ -195,7 +151,7 @@ Kill: "competitive layer", "persistent progression ecosystem"
 
 ---
 
-## 17 — The Krakening
+## 13 — The Krakening
 
 **Old:** "The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid's history. The event generated thousands of in-game interactions and social posts, proving the potential of branded experiences to drive organic engagement."
 
@@ -206,7 +162,7 @@ Kill: "competitive layer", "persistent progression ecosystem"
 
 ---
 
-## 18 — Krakening Exclusives
+## 14 — Krakening Exclusives
 
 **Old:** "LIMITED REWARDS, LASTING IMPACT" + "A NIGHT THAT UNITED THE VIRTUAL WORLD"
 
@@ -215,7 +171,7 @@ Kill: "competitive layer", "persistent progression ecosystem"
 
 ---
 
-## 19 — Halloween
+## 15 — Halloween
 
 **Old:** "The spirits (devs) are restless. An ominous darkness has encroached upon Kekspace" + "THE LABYRINTH HUNGERS" + "Some frans swear they heard the frog breathe"
 
@@ -226,7 +182,7 @@ Kill: "THE LABYRINTH HUNGERS", "spirits (devs) are restless", all horror narrati
 
 ---
 
-## 20 — Community Scenes
+## 16 — Community Scenes
 
 **Old:** "Chaos, screenshots, raids, gatherings the grid never planned. Each crowd shot proves the world stays alive and independent. The community redraws the map as it moves."
 
@@ -237,7 +193,7 @@ Let the screenshots speak. Minimal text.
 
 ---
 
-## 21 — Billboard Network
+## 17 — Billboard Network
 
 **Old:** "Kek.space features a distributed in-game billboard network designed for brands, creators, and community promotions" + "BILLBOARDS ARE NOT STATIC IMAGES / PLAYERS CAN INTERACT WITH THEM"
 
@@ -246,7 +202,7 @@ Let the screenshots speak. Minimal text.
 
 ---
 
-## 22 — Kekpads
+## 18 — Kekpads
 
 **Old:** "KEKESTATES BUY OR RENT" + real estate marketing language + access roles and permissions details
 
@@ -257,7 +213,7 @@ Kill: "KEKESTATES", all real-estate language, role/permission details.
 
 ---
 
-## 23 — Furniture & Rooms
+## 19 — Furniture & Rooms
 
 **Old:** "Static void rewrites into a tight flex-zone. Every block is placed with packet precision; every corner aching on-chain character." + "craft your zone. shape reality."
 
@@ -268,7 +224,7 @@ Kill: "static void rewrites", "packet precision", "aching on-chain character"
 
 ---
 
-## 24 — Creator API
+## 20 — Creator API
 
 **Old:** "A PERMISSIONLESS LAYER FOR COMMUNITY-MADE MINIGAMES" + "Creators don't fork the game, they extend it" + technical SDK details
 
@@ -279,7 +235,7 @@ Kill: "PERMISSIONLESS LAYER", technical event hooks, server-authoritative valida
 
 ---
 
-## 25 — Epic Games Store
+## 21 — Epic Games Store
 
 **Old:** "EPIC GAMES STORE FRONT PAGE / 70M MONTHLY ACTIVE USERS" + "Free-to-play, core, one-tap on-chain frog mode"
 
@@ -290,7 +246,7 @@ Kill: "one-tap on-chain frog mode"
 
 ---
 
-## 26 — Back Cover
+## 22 — Back Cover
 
 Clean. Logo centered. Maybe the tagline again:
 > "The social world where meme culture meets real ownership"
