@@ -123,7 +123,9 @@ select.status-select{font-family:var(--font-mono);font-size:.65rem;padding:2px 6
 
 /* Content block within a slide — visually distinct per block */
 .block{margin:12px 16px;background:var(--bg-0);border:1px solid var(--bg-3);border-radius:8px;overflow:hidden;border-left:3px solid var(--cyan)}
-.block-label{font-family:var(--font-mono);font-size:.8rem;font-weight:700;color:var(--cyan);padding:10px 14px;background:var(--bg-2);border-bottom:1px solid var(--bg-3);letter-spacing:.03em}
+.block-label{font-family:var(--font-mono);font-size:.8rem;font-weight:700;color:var(--cyan);padding:10px 14px;background:var(--bg-2);border-bottom:1px solid var(--bg-3);letter-spacing:.03em;cursor:text;outline:none}
+.block-label:focus{background:var(--bg-1);outline:1px solid var(--cyan);outline-offset:-1px}
+.block-label:hover{background:var(--bg-1)}
 
 .pair{padding:12px 14px}
 .pair-label{font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700}
@@ -337,7 +339,7 @@ function render(){
         const isEmpty=!currentNew||!currentNew.trim();
 
         html+=`<div class="block">
-          <div class="block-label">${block.label||'Content'}</div>`;
+          <div class="block-label" contenteditable="true" data-label-si="${si}" data-label-sli="${sli}" data-label-bi="${bi}" oninput="onLabelEdit(${si},${sli},${bi},this.textContent)">${block.label||'Content'}</div>`;
 
         if(block.old){
           html+=`<div class="pair">
@@ -369,15 +371,14 @@ function render(){
 }
 
 function addBlock(si,sli){
-  const name=prompt('Name this content block:');
-  if(name===null)return;
   const slide=SECTIONS[si].slides[sli];
   const bi=slide.blocks.length;
-  slide.blocks.push({label:name||'Untitled',old:'',new_text:''});
+  slide.blocks.push({label:'Untitled',old:'',new_text:''});
   render();
-  const key=getKey(si,sli,bi,'new');
-  const el=document.querySelector(`[data-key="${key}"]`);
-  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.focus()}
+  // Focus the label so they can name it right away
+  const labelEl=document.querySelectorAll(`[data-label-si="${si}"][data-label-sli="${sli}"]`);
+  const last=labelEl[labelEl.length-1];
+  if(last){last.scrollIntoView({behavior:'smooth',block:'center'});last.focus();document.execCommand('selectAll')}
 }
 
 function updateProgress(){
@@ -572,6 +573,12 @@ function deletePin(pinKey,idx,si,sli){
   pins.splice(idx,1);
   savePins(pinKey,pins);
   render();
+}
+
+function onLabelEdit(si,sli,bi,text){
+  SECTIONS[si].slides[sli].blocks[bi].label=text;
+  dirty=true;
+  onEdit(`${si}-${sli}-label-${bi}`,text);
 }
 
 function togglePinEdit(e,pinEl){
