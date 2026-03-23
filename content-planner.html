@@ -355,11 +355,12 @@ function render(){
 }
 
 function addBlock(si,sli){
+  const name=prompt('Name this content block:');
+  if(name===null)return;
   const slide=SECTIONS[si].slides[sli];
   const bi=slide.blocks.length;
-  slide.blocks.push({label:'New block',old:'',new_text:''});
+  slide.blocks.push({label:name||'Untitled',old:'',new_text:''});
   render();
-  // Scroll to the new block
   const key=getKey(si,sli,bi,'new');
   const el=document.querySelector(`[data-key="${key}"]`);
   if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.focus()}
