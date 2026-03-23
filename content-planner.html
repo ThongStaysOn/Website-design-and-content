@@ -68,6 +68,15 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .pin{position:absolute;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
 .pin:hover{box-shadow:0 2px 16px rgba(255,255,255,.3);z-index:11}
 .pin:active{cursor:grabbing}
+.pin-edit{position:absolute;top:30px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.95);border:2px solid;border-radius:6px;padding:8px;min-width:200px;max-width:280px;z-index:20;box-shadow:0 6px 24px rgba(0,0,0,.6);display:none}
+.pin-edit.open{display:block}
+.pin-edit textarea{width:100%;font-family:var(--font-sans);font-size:.85rem;background:var(--bg-2);color:var(--tx-0);border:1px solid var(--bg-3);border-radius:4px;padding:8px;outline:none;resize:none;min-height:50px;line-height:1.5}
+.pin-edit textarea:focus{border-color:var(--green)}
+.pin-edit textarea::placeholder{color:var(--tx-2)}
+.pin--0 .pin-edit{border-color:#f472b6}.pin--1 .pin-edit{border-color:#a855f7}.pin--2 .pin-edit{border-color:#22d3ee}
+.pin--3 .pin-edit{border-color:#4ade80}.pin--4 .pin-edit{border-color:#fb923c}.pin--5 .pin-edit{border-color:#ef4444}
+.pin--6 .pin-edit{border-color:#eab308}.pin--7 .pin-edit{border-color:#06b6d4}.pin--8 .pin-edit{border-color:#8b5cf6}
+.pin--9 .pin-edit{border-color:#ec4899}
 .pin--0{background:#f472b6}.pin--1{background:#a855f7}.pin--2{background:#22d3ee}.pin--3{background:#4ade80}
 .pin--4{background:#fb923c}.pin--5{background:#ef4444}.pin--6{background:#eab308}.pin--7{background:#06b6d4}
 .pin--8{background:#8b5cf6}.pin--9{background:#ec4899}
@@ -487,8 +496,12 @@ function savePins(key,pins){
 function renderPins(pins,pinKey,si,sli){
   return pins.map((p,i)=>`
     <div class="pin pin--${i%10}" style="left:${p.x}%;top:${p.y}%" data-pin-idx="${i}" data-pin-key="${pinKey}"
-      onmousedown="startDragPin(event,${i},'${pinKey}',${si},${sli})">
+      onmousedown="startDragPin(event,${i},'${pinKey}',${si},${sli})"
+      onclick="togglePinEdit(event,this)">
       ${i+1}
+      <div class="pin-edit" onclick="event.stopPropagation()">
+        <textarea placeholder="What needs to change here..." oninput="updatePinText('${pinKey}',${i},this.value,${si},${sli})">${esc(p.text)}</textarea>
+      </div>
     </div>`).join('');
 }
 
@@ -531,6 +544,18 @@ function updatePinText(pinKey,idx,text,si,sli){
   const pins=getSavedPins(pinKey);
   if(pins[idx])pins[idx].text=text;
   savePins(pinKey,pins);
+  // Sync: update the notes panel text if it exists
+  const noteEl=document.querySelector(`.pin-note-text[data-pinkey="${pinKey}"][data-pinidx="${idx}"]`);
+  if(noteEl&&noteEl!==document.activeElement)noteEl.textContent=text;
+  // Sync: update the pin edit textarea if edited from notes panel
+  const wrap=document.querySelector(`[data-pin-key="${pinKey}"]`);
+  if(wrap){
+    const pinEls=wrap.querySelectorAll('.pin');
+    if(pinEls[idx]){
+      const ta=pinEls[idx].querySelector('.pin-edit textarea');
+      if(ta&&ta!==document.activeElement)ta.value=text;
+    }
+  }
 }
 
 function deletePin(pinKey,idx,si,sli){
@@ -540,10 +565,34 @@ function deletePin(pinKey,idx,si,sli){
   render();
 }
 
+function togglePinEdit(e,pinEl){
+  if(e.target.tagName==='TEXTAREA')return;
+  if(didDrag)return;
+  const edit=pinEl.querySelector('.pin-edit');
+  // Close all other open edits
+  document.querySelectorAll('.pin-edit.open').forEach(el=>{
+    if(el!==edit)el.classList.remove('open');
+  });
+  edit.classList.toggle('open');
+  if(edit.classList.contains('open')){
+    const ta=edit.querySelector('textarea');
+    if(ta)setTimeout(()=>ta.focus(),50);
+  }
+}
+
+// Close pin edits when clicking outside
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.pin')){
+    document.querySelectorAll('.pin-edit.open').forEach(el=>el.classList.remove('open'));
+  }
+});
+
 let dragState=null;
+let didDrag=false;
 function startDragPin(e,idx,pinKey,si,sli){
   if(e.target.tagName==='TEXTAREA'||e.target.tagName==='BUTTON')return;
   e.preventDefault();
+  didDrag=false;
   const wrap=e.currentTarget.parentElement;
   const rect=wrap.getBoundingClientRect();
   dragState={idx,pinKey,si,sli,rect,wrap};
@@ -552,6 +601,7 @@ function startDragPin(e,idx,pinKey,si,sli){
 }
 function onDragPin(e){
   if(!dragState)return;
+  didDrag=true;
   const{idx,pinKey,rect}=dragState;
   const x=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
   const y=Math.max(0,Math.min(100,((e.clientY-rect.top)/rect.height)*100));
