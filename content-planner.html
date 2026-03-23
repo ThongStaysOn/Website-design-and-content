@@ -68,11 +68,11 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .pin{position:absolute;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
 .pin:hover{box-shadow:0 2px 16px rgba(255,255,255,.3);z-index:11}
 .pin:active{cursor:grabbing}
-.pin-edit{position:absolute;top:30px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.95);border:2px solid;border-radius:6px;padding:8px;min-width:200px;max-width:280px;z-index:20;box-shadow:0 6px 24px rgba(0,0,0,.6);display:none}
+.pin-edit{position:absolute;top:32px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.93);border:1.5px solid;border-radius:12px;padding:6px;min-width:140px;max-width:200px;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.5);display:none}
 .pin-edit.open{display:block}
-.pin-edit textarea{width:100%;font-family:var(--font-sans);font-size:.85rem;background:var(--bg-2);color:var(--tx-0);border:1px solid var(--bg-3);border-radius:4px;padding:8px;outline:none;resize:none;min-height:50px;line-height:1.5}
-.pin-edit textarea:focus{border-color:var(--green)}
-.pin-edit textarea::placeholder{color:var(--tx-2)}
+.pin-edit::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:rgba(8,8,15,.93);border-left:1.5px solid;border-top:1.5px solid;border-color:inherit;rotate:45deg}
+.pin-edit textarea{width:100%;font-family:var(--font-sans);font-size:.75rem;background:transparent;color:var(--tx-0);border:none;padding:4px 6px;outline:none;resize:none;min-height:28px;max-height:80px;line-height:1.4}
+.pin-edit textarea::placeholder{color:var(--tx-2);font-size:.7rem}
 .pin--0 .pin-edit{border-color:#f472b6}.pin--1 .pin-edit{border-color:#a855f7}.pin--2 .pin-edit{border-color:#22d3ee}
 .pin--3 .pin-edit{border-color:#4ade80}.pin--4 .pin-edit{border-color:#fb923c}.pin--5 .pin-edit{border-color:#ef4444}
 .pin--6 .pin-edit{border-color:#eab308}.pin--7 .pin-edit{border-color:#06b6d4}.pin--8 .pin-edit{border-color:#8b5cf6}
