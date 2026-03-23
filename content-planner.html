@@ -71,28 +71,22 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .pin--0{background:#f472b6}.pin--1{background:#a855f7}.pin--2{background:#22d3ee}.pin--3{background:#4ade80}
 .pin--4{background:#fb923c}.pin--5{background:#ef4444}.pin--6{background:#eab308}.pin--7{background:#06b6d4}
 .pin--8{background:#8b5cf6}.pin--9{background:#ec4899}
-.pin-line{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:2px;height:20px;pointer-events:none}
-.pin--0 .pin-line{background:#f472b6}.pin--1 .pin-line{background:#a855f7}.pin--2 .pin-line{background:#22d3ee}
-.pin--3 .pin-line{background:#4ade80}.pin--4 .pin-line{background:#fb923c}.pin--5 .pin-line{background:#ef4444}
-.pin--6 .pin-line{background:#eab308}.pin--7 .pin-line{background:#06b6d4}.pin--8 .pin-line{background:#8b5cf6}
-.pin--9 .pin-line{background:#ec4899}
-.pin-tooltip{position:absolute;top:46px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.92);border:1px solid;border-radius:6px;padding:6px 8px;min-width:160px;max-width:240px;z-index:12;box-shadow:0 4px 16px rgba(0,0,0,.5)}
-.pin--0 .pin-tooltip{border-color:#f472b6}.pin--1 .pin-tooltip{border-color:#a855f7}.pin--2 .pin-tooltip{border-color:#22d3ee}
-.pin--3 .pin-tooltip{border-color:#4ade80}.pin--4 .pin-tooltip{border-color:#fb923c}.pin--5 .pin-tooltip{border-color:#ef4444}
-.pin--6 .pin-tooltip{border-color:#eab308}.pin--7 .pin-tooltip{border-color:#06b6d4}.pin--8 .pin-tooltip{border-color:#8b5cf6}
-.pin--9 .pin-tooltip{border-color:#ec4899}
-.pin-tooltip textarea{width:100%;font-family:var(--font-sans);font-size:.8rem;background:transparent;color:var(--tx-0);border:none;outline:none;resize:none;min-height:36px;line-height:1.5}
-.pin-tooltip textarea::placeholder{color:var(--tx-2)}
-.pin-tooltip-actions{display:flex;justify-content:flex-end;margin-top:4px;gap:4px}
-.pin-delete{background:none;border:none;color:var(--red);font-family:var(--font-mono);font-size:9px;cursor:pointer;padding:2px 6px;opacity:.6}
-.pin-delete:hover{opacity:1}
-.annotations-list{margin:4px 16px 8px;padding:0}
-.annotation-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:.8rem;color:var(--tx-1)}
-.annotation-num{color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.annotation-num--0{background:#f472b6}.annotation-num--1{background:#a855f7}.annotation-num--2{background:#22d3ee}
-.annotation-num--3{background:#4ade80}.annotation-num--4{background:#fb923c}.annotation-num--5{background:#ef4444}
-.annotation-num--6{background:#eab308}.annotation-num--7{background:#06b6d4}.annotation-num--8{background:#8b5cf6}
-.annotation-num--9{background:#ec4899}
+/* Pin notes panel */
+.pin-notes{margin:8px 16px;background:var(--bg-0);border:2px solid var(--bg-3);border-radius:8px;overflow:hidden}
+.pin-notes-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg-2);border-bottom:1px solid var(--bg-3)}
+.pin-notes-title{font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.06em}
+.pin-note{display:flex;gap:10px;padding:10px 14px;border-bottom:1px solid var(--bg-3);align-items:flex-start}
+.pin-note:last-child{border-bottom:none}
+.pin-note-num{color:#fff;font-family:var(--font-mono);font-size:10px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.pin-note-num--0{background:#f472b6}.pin-note-num--1{background:#a855f7}.pin-note-num--2{background:#22d3ee}
+.pin-note-num--3{background:#4ade80}.pin-note-num--4{background:#fb923c}.pin-note-num--5{background:#ef4444}
+.pin-note-num--6{background:#eab308}.pin-note-num--7{background:#06b6d4}.pin-note-num--8{background:#8b5cf6}
+.pin-note-num--9{background:#ec4899}
+.pin-note-text{flex:1;font-family:var(--font-sans);font-size:.85rem;background:var(--bg-2);color:var(--tx-0);border:1px solid var(--bg-3);border-radius:4px;padding:8px 10px;outline:none;resize:none;min-height:32px;line-height:1.6;cursor:text}
+.pin-note-text:focus{border-color:var(--pink);outline:1px solid var(--pink)}
+.pin-note-text:empty::before{content:'Describe what needs to change here...';color:var(--tx-2);font-style:italic}
+.pin-note-delete{background:none;border:none;color:var(--red);font-size:14px;cursor:pointer;opacity:.4;padding:4px;flex-shrink:0;margin-top:2px}
+.pin-note-delete:hover{opacity:1}
 
 /* Empty rewrite highlight */
 .pair-text--new:empty::before,.pair-text--new.is-empty::before{content:'Needs rewrite...';color:var(--pink);opacity:.5;font-style:italic}
@@ -347,17 +341,7 @@ function render(){
 
       html+=`<button class="add-block-btn" onclick="addBlock(${si},${sli})">+ Add content block</button>`;
 
-      // Annotation list below blocks
-      let pinListHtml='';
-      if(pins.length){
-        pinListHtml=`<div class="annotations-list">`;
-        pins.forEach((p,pi)=>{
-          pinListHtml+=`<div class="annotation-item"><span class="annotation-num annotation-num--${pi%10}">${pi+1}</span><span>${esc(p.text)||'<em style="color:var(--tx-2)">No text</em>'}</span></div>`;
-        });
-        pinListHtml+=`</div>`;
-      }
-
-      html+=`${pinListHtml}</div><div class="slide-notes">
+      html+=`${renderPinNotes(pins,pinKey,si,sli)}</div><div class="slide-notes">
         <div class="slide-notes-label">Notes</div>
         <div class="slide-notes-text" contenteditable="true" data-key="${notesKey}" oninput="onEdit(this.dataset.key,this.textContent)">${esc(currentNotes)}</div>
       </div></div>`;
@@ -504,14 +488,21 @@ function renderPins(pins,pinKey,si,sli){
     <div class="pin pin--${i%10}" style="left:${p.x}%;top:${p.y}%" data-pin-idx="${i}" data-pin-key="${pinKey}"
       onmousedown="startDragPin(event,${i},'${pinKey}',${si},${sli})">
       ${i+1}
-      <div class="pin-line"></div>
-      <div class="pin-tooltip" onclick="event.stopPropagation()">
-        <textarea placeholder="What needs to change here..." oninput="updatePinText('${pinKey}',${i},this.value,${si},${sli})">${esc(p.text)}</textarea>
-        <div class="pin-tooltip-actions">
-          <button class="pin-delete" onclick="deletePin('${pinKey}',${i},${si},${sli})">remove</button>
-        </div>
-      </div>
     </div>`).join('');
+}
+
+function renderPinNotes(pins,pinKey,si,sli){
+  if(!pins.length)return'';
+  let html=`<div class="pin-notes"><div class="pin-notes-header"><span class="pin-notes-title">Image Notes</span></div>`;
+  pins.forEach((p,i)=>{
+    html+=`<div class="pin-note">
+      <span class="pin-note-num pin-note-num--${i%10}">${i+1}</span>
+      <div class="pin-note-text" contenteditable="true" data-pinkey="${pinKey}" data-pinidx="${i}" oninput="updatePinText('${pinKey}',${i},this.textContent,${si},${sli})">${esc(p.text)}</div>
+      <button class="pin-note-delete" onclick="deletePin('${pinKey}',${i},${si},${sli})" title="Remove pin">&times;</button>
+    </div>`;
+  });
+  html+=`</div>`;
+  return html;
 }
 
 function addPin(e,pinKey,si,sli){
@@ -539,15 +530,6 @@ function updatePinText(pinKey,idx,text,si,sli){
   const pins=getSavedPins(pinKey);
   if(pins[idx])pins[idx].text=text;
   savePins(pinKey,pins);
-  // Update the annotation list in real-time
-  const slide=document.querySelector(`[data-pin-key="${pinKey}"]`).closest('.slide');
-  if(slide){
-    const items=slide.querySelectorAll('.annotation-item');
-    if(items[idx]){
-      const span=items[idx].querySelector('span:last-child');
-      if(span)span.innerHTML=text?esc(text):'<em style="color:var(--tx-2)">No text</em>';
-    }
-  }
 }
 
 function deletePin(pinKey,idx,si,sli){
