@@ -68,9 +68,14 @@ body{font-family:var(--font-sans);background:var(--bg-0);color:var(--tx-0);line-
 .pin{position:absolute;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;cursor:grab;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:box-shadow .15s}
 .pin:hover{box-shadow:0 2px 16px rgba(255,255,255,.3);z-index:11}
 .pin:active{cursor:grabbing}
-.pin-edit{position:absolute;top:32px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.93);border:1.5px solid;border-radius:12px;padding:6px;min-width:140px;max-width:200px;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.5);display:none}
+/* Pin bubble — always visible when has text, editable on click */
+.pin-bubble{position:absolute;top:30px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.85);border:1.5px solid;border-radius:10px;padding:4px 8px;max-width:180px;z-index:15;box-shadow:0 2px 10px rgba(0,0,0,.4);pointer-events:none;font-family:var(--font-sans);font-size:.7rem;color:var(--tx-0);line-height:1.3;white-space:pre-wrap;word-break:break-word}
+.pin-bubble::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:rgba(8,8,15,.85);border-left:1.5px solid;border-top:1.5px solid;border-color:inherit;rotate:45deg}
+.pin-bubble:empty{display:none}
+.pin-edit{position:absolute;top:30px;left:50%;transform:translateX(-50%);background:rgba(8,8,15,.95);border:1.5px solid;border-radius:12px;padding:6px;min-width:160px;max-width:220px;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.6);display:none}
 .pin-edit.open{display:block}
-.pin-edit::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:rgba(8,8,15,.93);border-left:1.5px solid;border-top:1.5px solid;border-color:inherit;rotate:45deg}
+.pin-edit.open+.pin-bubble{display:none}
+.pin-edit::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:rgba(8,8,15,.95);border-left:1.5px solid;border-top:1.5px solid;border-color:inherit;rotate:45deg}
 .pin-edit textarea{width:100%;font-family:var(--font-sans);font-size:.75rem;background:transparent;color:var(--tx-0);border:none;padding:4px 6px;outline:none;resize:none;min-height:28px;max-height:80px;line-height:1.4}
 .pin-edit textarea::placeholder{color:var(--tx-2);font-size:.7rem}
 .pin--0 .pin-edit{border-color:#f472b6}.pin--1 .pin-edit{border-color:#a855f7}.pin--2 .pin-edit{border-color:#22d3ee}
@@ -500,8 +505,9 @@ function renderPins(pins,pinKey,si,sli){
       onclick="togglePinEdit(event,this)">
       ${i+1}
       <div class="pin-edit" onclick="event.stopPropagation()">
-        <textarea placeholder="What needs to change here..." oninput="updatePinText('${pinKey}',${i},this.value,${si},${sli})">${esc(p.text)}</textarea>
+        <textarea placeholder="Type note..." oninput="updatePinText('${pinKey}',${i},this.value,${si},${sli})">${esc(p.text)}</textarea>
       </div>
+      <div class="pin-bubble">${esc(p.text)}</div>
     </div>`).join('');
 }
 
@@ -544,18 +550,21 @@ function updatePinText(pinKey,idx,text,si,sli){
   const pins=getSavedPins(pinKey);
   if(pins[idx])pins[idx].text=text;
   savePins(pinKey,pins);
-  // Sync: update the notes panel text if it exists
-  const noteEl=document.querySelector(`.pin-note-text[data-pinkey="${pinKey}"][data-pinidx="${idx}"]`);
-  if(noteEl&&noteEl!==document.activeElement)noteEl.textContent=text;
-  // Sync: update the pin edit textarea if edited from notes panel
   const wrap=document.querySelector(`[data-pin-key="${pinKey}"]`);
   if(wrap){
     const pinEls=wrap.querySelectorAll('.pin');
     if(pinEls[idx]){
+      // Sync bubble
+      const bubble=pinEls[idx].querySelector('.pin-bubble');
+      if(bubble)bubble.textContent=text;
+      // Sync edit textarea
       const ta=pinEls[idx].querySelector('.pin-edit textarea');
       if(ta&&ta!==document.activeElement)ta.value=text;
     }
   }
+  // Sync notes panel
+  const noteEl=document.querySelector(`.pin-note-text[data-pinkey="${pinKey}"][data-pinidx="${idx}"]`);
+  if(noteEl&&noteEl!==document.activeElement)noteEl.textContent=text;
 }
 
 function deletePin(pinKey,idx,si,sli){
