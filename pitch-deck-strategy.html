@@ -3,452 +3,647 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Kekspace × INK — Pitch Deck Strategy</title>
+<title>Kekspace × INK — Full Pitch Deck Rewrite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a12;--surface:#12121f;--card:#1a1a2e;--border:#2a2a44;--green:#4ade80;--purple:#a855f7;--cyan:#22d3ee;--orange:#fb923c;--pink:#f472b6;--tx:#f0f0f8;--tx2:#b0b0c8;--tx3:#7878a0}
+:root{--bg:#0a0a12;--surface:#12121f;--card:#1a1a2e;--border:#2a2a44;--green:#4ade80;--purple:#a855f7;--cyan:#22d3ee;--orange:#fb923c;--pink:#f472b6;--red:#ef4444;--tx:#f0f0f8;--tx2:#b0b0c8;--tx3:#7878a0}
 body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
-
-/* Page structure */
-.page{max-width:900px;margin:0 auto;padding:60px 40px;page-break-after:always;min-height:100vh;position:relative}
+.page{max-width:920px;margin:0 auto;padding:48px 40px;page-break-after:always}
 .page:last-child{page-break-after:auto}
 
 /* Cover */
 .cover{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100vh;background:linear-gradient(160deg,#0a0a12 0%,#1a1040 50%,#0a0a12 100%);position:relative;overflow:hidden}
 .cover::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(168,85,247,.15) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(74,222,128,.1) 0%,transparent 50%)}
-.cover-logo{max-width:300px;margin-bottom:24px;image-rendering:pixelated;position:relative}
-.cover h1{font-size:2.8rem;font-weight:700;margin-bottom:8px;letter-spacing:-.02em;position:relative}
+.cover-logo{max-width:280px;margin-bottom:20px;image-rendering:pixelated;position:relative}
+.cover h1{font-size:2.6rem;font-weight:700;letter-spacing:-.02em;position:relative}
 .cover h1 span{color:var(--purple)}
-.cover h2{font-size:1.2rem;color:var(--tx2);font-weight:400;margin-bottom:40px;position:relative}
-.cover-line{width:80px;height:3px;background:linear-gradient(90deg,var(--green),var(--purple));margin:0 auto 32px;position:relative}
-.cover-sub{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--tx3);position:relative}
+.cover h2{font-size:1.1rem;color:var(--tx2);font-weight:400;margin:8px 0 32px;position:relative}
+.cover-line{width:60px;height:3px;background:linear-gradient(90deg,var(--green),var(--purple));margin:0 auto 24px;position:relative}
+.cover-sub{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--tx3);position:relative}
 
-/* Section headers */
-.section-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
-.section-num{background:var(--purple);color:var(--bg);font-weight:700;font-size:1.4rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
-.section-title{font-size:1.8rem;font-weight:700;letter-spacing:-.01em}
-.section-subtitle{color:var(--tx2);font-size:1rem;margin-bottom:32px}
+/* Slide */
+.slide{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:28px;overflow:hidden;page-break-inside:avoid}
+.slide-img{width:100%;max-height:300px;object-fit:contain;background:var(--bg);display:block;border-bottom:1px solid var(--border)}
+.slide-header{display:flex;align-items:center;gap:12px;padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
+.slide-num{background:var(--purple);color:var(--bg);font-weight:700;font-size:1rem;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0}
+.slide-title{font-size:1.15rem;font-weight:600}
+.slide-body{padding:16px 20px}
 
-/* Cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
-.card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.card-icon--green{background:rgba(74,222,128,.15);color:var(--green)}
-.card-icon--purple{background:rgba(168,85,247,.15);color:var(--purple)}
-.card-icon--cyan{background:rgba(34,211,238,.15);color:var(--cyan)}
-.card-icon--orange{background:rgba(251,146,60,.15);color:var(--orange)}
-.card-icon--pink{background:rgba(244,114,182,.15);color:var(--pink)}
-.card-title{font-size:1.1rem;font-weight:600}
-.card-page{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--tx3);margin-left:auto}
-.card p{color:var(--tx2);font-size:.95rem}
-.card strong{color:var(--tx)}
+/* Text fields */
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px}
+.field-label--old{color:var(--red)}
+.field-label--new{color:var(--green)}
+.field-label--kill{color:var(--red)}
+.field-label--kraken{color:var(--cyan)}
+.field-text{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-size:.85rem;color:var(--tx2);line-height:1.7}
+.field-text--old{opacity:.45;text-decoration:line-through;font-size:.8rem}
+.field-text--new{border-color:var(--green);color:var(--tx);font-size:.9rem}
+.field-text--kraken{border-color:var(--cyan);background:rgba(34,211,238,.05);color:var(--cyan);font-size:.85rem;font-style:italic}
+.field-text--kill{border-color:var(--red);border-style:dashed;color:var(--red);opacity:.6;font-size:.8rem}
 
-/* Key message callout */
-.key-msg{background:rgba(74,222,128,.08);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-size:.9rem;color:var(--green)}
-
-/* Image row */
-.img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
-.img-row img{width:100%;border-radius:8px;border:1px solid var(--border)}
-
-/* NPC decoration */
-.npc-float{position:absolute;opacity:.12;image-rendering:pixelated;pointer-events:none}
-
-/* Stat grid */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
-.stat-num{font-size:1.8rem;font-weight:700;color:var(--green)}
-.stat-label{font-size:.8rem;color:var(--tx3);margin-top:4px}
-
-/* New slide callout */
-.new-slide{background:rgba(244,114,182,.08);border:2px dashed var(--pink);border-radius:12px;padding:20px 24px;margin-bottom:20px}
-.new-slide h4{color:var(--pink);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+/* New slide suggestion */
+.new-slide{background:rgba(244,114,182,.06);border:2px dashed var(--pink);border-radius:12px;padding:20px;margin-bottom:28px;page-break-inside:avoid}
+.new-slide h3{color:var(--pink);font-size:.9rem;margin-bottom:8px}
 .new-slide p{color:var(--tx2);font-size:.9rem}
 
-/* Divider */
-.divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);margin:40px 0}
+.divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);margin:48px 0}
 
-/* Timeline */
-.timeline{position:relative;padding-left:32px;margin:24px 0}
-.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--green),var(--purple),var(--pink))}
-.timeline-item{position:relative;margin-bottom:20px}
-.timeline-dot{position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
-.timeline-dot--done{background:var(--green);border-color:var(--green)}
-.timeline-dot--wip{border-color:var(--orange);background:transparent}
-.timeline-dot--new{border-color:var(--pink);background:transparent}
-.timeline-label{font-weight:600;font-size:.95rem}
-.timeline-desc{color:var(--tx2);font-size:.85rem}
+/* Section header */
+.sec-header{font-size:1.5rem;font-weight:700;margin:48px 0 24px;padding-bottom:12px;border-bottom:2px solid var(--purple)}
 
-/* Slide preview image */
-.card-img{width:100%;border-radius:6px;border:1px solid var(--border);margin-bottom:12px;max-height:250px;object-fit:contain;background:var(--bg)}
-
-/* Print styles */
 @media print{
   body{background:#fff;color:#1a1a2e}
-  .page{padding:40px 30px;min-height:auto}
   .cover{background:#f5f0ff;min-height:auto;padding:60px}
   .cover::before{display:none}
-  .card{border-color:#ddd;background:#f8f8fc}
-  .key-msg{background:#f0fdf4}
-  .new-slide{background:#fff0f6}
-  .stat{background:#f8f8fc}
-  .npc-float{display:none}
-  :root{--tx:#1a1a2e;--tx2:#555;--tx3:#888;--bg:#fff;--surface:#f8f8fc;--card:#f8f8fc;--border:#ddd}
+  .slide{border-color:#ddd;background:#f8f8fc}
+  .slide-header{background:#eee}
+  .field-text{background:#fafafa;border-color:#ddd}
+  .field-text--new{border-color:#22c55e}
+  .field-text--kraken{border-color:#0891b2;background:#f0fdfa}
+  .new-slide{background:#fff5f8}
+  :root{--tx:#1a1a2e;--tx2:#555;--tx3:#888}
 }
 </style>
 </head>
 <body>
 
-<!-- =================== COVER =================== -->
+<!-- COVER -->
 <div class="page cover">
   <img src="site/public/images/game-assets/logos/kekspace-logo.png" alt="Kekspace" class="cover-logo"/>
   <h1>Kekspace <span>× INK</span></h1>
-  <h2>A living social world for Kraken's L2</h2>
+  <h2>Full Pitch Deck — Content Rewrite Guide</h2>
   <div class="cover-line"></div>
-  <div class="cover-sub">Pitch Deck Strategy & Content Guide</div>
+  <div class="cover-sub">Every text field transcribed · Rewritten for Kraken/INK · Page by page</div>
 </div>
 
-<!-- =================== THE ANGLE =================== -->
+<!-- PAGE 01 -->
 <div class="page">
-  <div class="section-header">
-    <div class="section-num">!</div>
-    <div class="section-title">The Angle</div>
-  </div>
-  <div class="section-subtitle">This isn't a cold pitch. The Krakening already proved the partnership works.</div>
+<div class="sec-header">Front Matter</div>
 
-  <div class="card">
-    <p>Hundreds of players showed up in real-time. Exclusive collectibles are still being traded. The brand integration felt native, not forced. This deck says:</p>
-    <div class="key-msg"><strong>"We already did this together once. Here's the full picture of what Kekspace is and why it belongs on INK."</strong></div>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-num">2016</div>
-      <div class="stat-label">Pepecoin launched</div>
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/01-cover.png" alt="Cover"/>
+  <div class="slide-header"><div class="slide-num">01</div><div class="slide-title">Cover</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text — Kill all</div>
+      <div class="field-text field-text--kill">"the internet never forgets" · "KEKSPACE FOR FRENS · PEPE EDITION" · "MINT GLORY" · "MASTER THE MEME ECONOMY" · "MINE COAL" · "$$STACK PIZZA" · "Where degens grind and legends are minted"</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">100s</div>
-      <div class="stat-label">Krakening attendees</div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">Kekspace logo + INK logo side by side. One tagline:<br/><strong>"The social world where meme culture meets real ownership"</strong><br/>Clean cover. No feature list. No meme text.</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">70M</div>
-      <div class="stat-label">Epic Store MAU (target)</div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Both brands on the cover together positions this as a partnership from the first second. Not a cold pitch — a collaboration.</div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--purple">&#9733;</div>
-      <div class="card-title">Key Messages for Kraken</div>
-    </div>
-    <p>
-      <strong>Every player action = on-chain transactions on INK.</strong> NFT mints, item trades, currency transfers. This is TVL and transaction volume, not just a game.<br/><br/>
-      <strong>The Krakening proved native brand integration works.</strong> Not banner ads — living experiences inside a living world.<br/><br/>
-      <strong>Kekspace is a platform, not just a game.</strong> Multiple zones, multiple games, creator API, billboard network. Each one generates on-chain activity.<br/><br/>
-      <strong>Epic Games Store distribution = bridge from Web2 to INK.</strong> 70M monthly active users exposed to an INK-native world.
-    </p>
   </div>
 </div>
 
-<!-- =================== SLIDE BY SLIDE =================== -->
-<div class="page">
-  <div class="section-header">
-    <div class="section-num">1</div>
-    <div class="section-title">Slide-by-Slide Messaging</div>
-  </div>
-  <div class="section-subtitle">What to say on each page, and why Kraken should care.</div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--green">1</div>
-      <div class="card-title">Cover</div>
-      <span class="card-page">Page 01</span>
+<!-- PAGE 02 -->
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/02-welcome.png" alt="Welcome"/>
+  <div class="slide-header"><div class="slide-num">02</div><div class="slide-title">Welcome</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text</div>
+      <div class="field-text field-text--old">"PepeCoin ($PEPECOIN) is the first and longest-running Pepe-themed cryptocurrency. It originally hatched on March 8th, 2016 on its own proof-of-work blockchain. Fairly mined by the community, with no pre-sale, no insider funding, no shilling, and no funny business."</div>
     </div>
-    <img class="card-img" src="content/pitch-deck/01-cover.png" alt="Cover"/>
-    <p>Kekspace + INK branding together. Position as a partnership, not a cold pitch. Clean, confident, no feature list.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--green">2</div>
-      <div class="card-title">Welcome</div>
-      <span class="card-page">Page 02</span>
+    <div class="field">
+      <div class="field-label field-label--kill">Also kill</div>
+      <div class="field-text field-text--kill">"pepe_trees.png" · "loading supporting evidence..." · "hodling_masses.png" · "by Pepe Cashew man"</div>
     </div>
-    <img class="card-img" src="content/pitch-deck/02-welcome.png" alt="Welcome"/>
-    <p>Quick intro establishing credibility. Community-mined since 2016, no presale, real history.</p>
-    <div class="key-msg">This is an established community looking for the right L2 home — not a new project looking for a chain.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--green">3</div>
-      <div class="card-title">About the Game</div>
-      <span class="card-page">Page 03</span>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"You made it. Kekspace is what happens when a community mines a frog coin in 2016 and refuses to stop building. A social world powered by Pepecoin — built by the people in it."</div>
     </div>
-    <img class="card-img" src="content/pitch-deck/03-about-the-game.png" alt="About the Game"/>
-    <p>What it is, what you can do, who it's for. Frame through INK's lens: real users, real engagement, real on-chain activity for the L2.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--cyan">4</div>
-      <div class="card-title">Economy & Blockchain</div>
-      <span class="card-page">Page 04</span>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Establishes credibility: 2016, community-mined, no presale. This is an established project looking for the right L2 home — not a new project looking for a chain.</div>
     </div>
-    <img class="card-img" src="content/pitch-deck/04-economy-blockchain.png" alt="Economy"/>
-    <p>Wallet integration and on-chain mechanics.</p>
-    <div class="key-msg">Every player action generates on-chain transactions on INK — NFT mints, item trades, currency transfers. This is TVL and transaction volume.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--cyan">5</div>
-      <div class="card-title">NFTs</div>
-      <span class="card-page">Page 05</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/05-nfts.png" alt="NFTs"/>
-    <p>Gallery, minting, collecting. All minting happens on INK. Every piece of art, every collectible = on-chain activity on their L2.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--cyan">6</div>
-      <div class="card-title">Play to Value</div>
-      <span class="card-page">Page 06</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/06-play-to-value.png" alt="Play to Value"/>
-    <p>Explore → Gather → Craft → Equip/Sell → Mint</p>
-    <div class="key-msg">This loop creates sustained on-chain engagement, not one-time transactions. Players keep coming back because progression has real value.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--cyan">7</div>
-      <div class="card-title">Skins & Cosmetics</div>
-      <span class="card-page">Page 07</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/07-skins-cosmetics.png" alt="Skins"/>
-    <p>Character customization with on-chain ownership.</p>
-    <div class="key-msg">Cosmetic NFTs are the highest-volume, lowest-friction entry point for new users into the INK ecosystem.</div>
   </div>
 </div>
 
+<!-- PAGE 03 -->
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/03-about-the-game.png" alt="About"/>
+  <div class="slide-header"><div class="slide-num">03</div><div class="slide-title">About the Game</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">What is Kekspace? — keeping</div>
+      <div class="field-text">"Kekspace is a virtual interface for Web3 that blends the social elements of early 2000's social MMOs with Web3/DeFi utility." ← Keep as-is</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--old">What can I do? — old</div>
+      <div class="field-text field-text--old">"You can socialize, chat, create your own virtual chat rooms, hang out with frens, access DeFi apps, run a company, trade, farm, events, and more!"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">What can you do? — new</div>
+      <div class="field-text field-text--new">"Play games, customize your character, decorate your own room, hang out with the community, and earn rewards. That's what's live right now — with a lot more to come."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--old">Who is it for? — old</div>
+      <div class="field-text field-text--old">"Kekspace is designed for users, projects, developers, communities, and companies who would like a Web3 native space that is both fun and functional."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">Who is it for? — new</div>
+      <div class="field-text field-text--new">"Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. If you're reading this, you're already the right audience."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">Players section: "By incentivizing developers..." · Developers section: "Kekspace is designed to become the major crypto platform..." · "kekspace_banner.png" · "Kekspace Sauce"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">Keep</div>
+      <div class="field-text field-text--new">"OWN THE MEME. BECOME THE MEME." ← keep this tagline</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Frame through INK's lens: this brings real users, real engagement, and real on-chain activity to the L2. Replace kekspace_banner.png with a colorful NPC character lineup.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 04-07 -->
 <div class="page">
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--purple">8</div>
-      <div class="card-title">City Overview</div>
-      <span class="card-page">Page 08</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/08-city-overview.png" alt="City Overview"/>
-    <p>Show the scale of the world.</p>
-    <div class="key-msg">This isn't a single game — it's a platform. Multiple zones, multiple activities, growing constantly.</div>
-  </div>
+<div class="sec-header">Economy & Ownership</div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--purple">9-12</div>
-      <div class="card-title">Zones (Spawn, Amplexus, Arcade, Cemetery)</div>
-      <span class="card-page">Pages 09-12</span>
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/04-economy-blockchain.png" alt="Economy"/>
+  <div class="slide-header"><div class="slide-num">04</div><div class="slide-title">Economy & Blockchain</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"A WEB3 METAVERSE BUILT BY THE PEPECOIN COMMUNITY" · "PepecoinWallet/UI/SendTransaction.cs" · "PepeTransaction(20)Messages(KEKS)" · "BROWSE NFTS IN-GAME. DISCOVER ITEMS TIED TO PEPEVERSE"</div>
     </div>
-    <div class="img-row">
-      <img src="content/pitch-deck/09-zone-spawn.png" alt="Spawn"/>
-      <img src="content/pitch-deck/10-zone-amplexus.png" alt="Amplexus"/>
-      <img src="content/pitch-deck/11-zone-arcade.png" alt="Arcade"/>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Everything in Kekspace runs on Pepecoin. Connect your wallet, earn in-game, and own what you collect. No middlemen, no marketplace fees — just you and the blockchain."</div>
     </div>
-    <p>Showcase variety across 4 zones. Each zone is a potential brand integration opportunity — just like The Krakening proved.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--orange">13</div>
-      <div class="card-title">Characters & Anatomy</div>
-      <span class="card-page">Page 13</span>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Every player action generates on-chain transactions on INK — NFT mints, item trades, currency transfers. This is TVL and transaction volume, not just a game.</div>
     </div>
-    <img class="card-img" src="content/pitch-deck/13-characters-anatomy.png" alt="Characters"/>
-    <p>Deep customization system.</p>
-    <div class="key-msg">Character investment = player retention. Players who build an identity stick around and keep transacting.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--orange">14</div>
-      <div class="card-title">Minigames</div>
-      <span class="card-page">Page 14</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/14-minigames.png" alt="Minigames"/>
-    <p>Multiple game modes. Each minigame is a separate engagement loop. More games = more reasons to return = more on-chain activity.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--orange">15</div>
-      <div class="card-title">Pokek Poker</div>
-      <span class="card-page">Page 15</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/15-pokek-poker.png" alt="Pokek"/>
-    <div class="key-msg">DeFi-adjacent gaming. Real stakes, real pots, real on-chain settlement. High-value transactions on INK.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--orange">16</div>
-      <div class="card-title">Quests & Badges</div>
-      <span class="card-page">Page 16</span>
-    </div>
-    <img class="card-img" src="content/pitch-deck/16-quests-badges.png" alt="Quests"/>
-    <p>Quests create daily active users. Badges create status. Both drive retention and repeat transactions.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--pink">17-18</div>
-      <div class="card-title">The Krakening + Exclusives</div>
-      <span class="card-page">Pages 17-18</span>
-    </div>
-    <div class="img-row" style="grid-template-columns:1fr 1fr">
-      <img src="content/pitch-deck/17-event-krakening.png" alt="Krakening"/>
-      <img src="content/pitch-deck/18-event-krakening-exclusives.png" alt="Exclusives"/>
-    </div>
-    <p><strong>THE PROOF SECTION.</strong> The partnership already happened. Hundreds of players in real-time. Exclusives still trading. Brand felt native.</p>
-    <div class="key-msg">"We already proved this works. Now imagine it on INK with deeper integration."</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--green">19-23</div>
-      <div class="card-title">Halloween, Community, Billboards, Kekpads, Furniture</div>
-      <span class="card-page">Pages 19-23</span>
-    </div>
-    <div class="img-row">
-      <img src="content/pitch-deck/19-event-halloween.png" alt="Halloween"/>
-      <img src="content/pitch-deck/20-community-scenes.png" alt="Community"/>
-      <img src="content/pitch-deck/21-billboard-network.png" alt="Billboards"/>
-    </div>
-    <p>Seasonal events drive engagement spikes. Billboard network = revenue layer AND marketing channel for INK ecosystem projects. Virtual real estate and furniture = NFT transactions on INK.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon card-icon--cyan">24-25</div>
-      <div class="card-title">Creator API + Epic Games Store</div>
-      <span class="card-page">Pages 24-25</span>
-    </div>
-    <div class="img-row" style="grid-template-columns:1fr 1fr">
-      <img src="content/pitch-deck/24-creator-api.png" alt="Creator API"/>
-      <img src="content/pitch-deck/25-epic-games-store.png" alt="Epic Store"/>
-    </div>
-    <p>Creator API turns Kekspace into a platform — third-party devs building on top = exponential growth.</p>
-    <div class="key-msg">Epic Games Store: 70M monthly active users exposed to an INK-native game. The bridge from Web2 to INK.</div>
   </div>
 </div>
 
-<!-- =================== NEW SLIDES =================== -->
-<div class="page">
-  <div class="section-header">
-    <div class="section-num">+</div>
-    <div class="section-title">Suggested New Slides</div>
-  </div>
-  <div class="section-subtitle">7 additional pages to strengthen the Kraken/INK pitch.</div>
+<div class="new-slide">
+  <h3>NEW SLIDE: INK Integration Overview</h3>
+  <p>Insert after page 04. Show how Kekspace integrates with INK specifically — wallet connection flow, transaction architecture, smart contract deployment. Proves this isn't theoretical.</p>
+</div>
 
-  <div class="new-slide">
-    <h4>New: INK Integration Overview</h4>
-    <p>How Kekspace integrates with INK specifically — wallet connection, transaction flow, smart contract deployment. Shows Kraken this isn't theoretical.</p>
-    <p><strong>Position:</strong> After Economy & Blockchain (page 04)</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: On-Chain Activity Metrics</h4>
-    <p>Transaction volume, NFTs minted, wallets connected, daily active users. Kraken cares about TVL and chain activity — show them the numbers.</p>
-    <p><strong>Position:</strong> After Play to Value (page 06)</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: The Krakening — By the Numbers</h4>
-    <p>Hard stats for the event: player count, concurrent users, collectibles minted, social impressions, items still in circulation. Numbers beat screenshots.</p>
-    <p><strong>Position:</strong> After Krakening Exclusives (page 18)</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: Brand Integration Opportunities</h4>
-    <p>All the ways brands can integrate: billboards, events, exclusive collectibles, zone sponsorships, in-game items. Position Kekspace as a marketing platform for INK ecosystem projects.</p>
-    <p><strong>Position:</strong> After Billboard Network (page 21)</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: Roadmap — What INK Enables</h4>
-    <p>Features that become possible because of INK: lower gas for microtransactions, faster minting, cross-game interoperability. INK unlocks things that weren't possible before.</p>
-    <p><strong>Position:</strong> After Creator API (page 24)</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: The Ask</h4>
-    <p>Clear statement of what Kekspace wants from the partnership: grants, co-marketing, technical support, ecosystem placement. Every pitch deck needs a clear ask.</p>
-    <p><strong>Position:</strong> Second-to-last page</p>
-  </div>
-
-  <div class="new-slide">
-    <h4>New: Team / About Meme Time Studios</h4>
-    <p>Brief intro to the team. Even 1 page with names and roles builds trust. Kraken wants to know who they're partnering with.</p>
-    <p><strong>Position:</strong> Before back cover</p>
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/05-nfts.png" alt="NFTs"/>
+  <div class="slide-header"><div class="slide-num">05</div><div class="slide-title">NFTs</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"this isn't decoration. it's verifiable ownership. A fragment of the network sealed inside a frame." · "Each NFT was minted through PEPE MINT, not summoned from the void." · "Let the grid remember your mark."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Art in Kekspace isn't just for looking at — it's ownable. Create, collect, and display NFTs in the gallery. Every piece is minted on-chain through Pepe Paint."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">All NFTs mint on INK. Every piece of art, every collectible = on-chain activity on their L2.</div>
+    </div>
   </div>
 </div>
 
-<!-- =================== FINAL PAGE ORDER =================== -->
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/06-play-to-value.png" alt="Play to Value"/>
+  <div class="slide-header"><div class="slide-num">06</div><div class="slide-title">Play to Value</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"HOW A LIVING GAME ECONOMY TURNS PROGRESS INTO DIGITAL OWNERSHIP" · Dense flowchart with "EXPLORATION CREATES RESOURCES → QUESTS INJECT RARE MATERIALS → MATERIALS BECOME CRAFTABLE OBJECTS"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">One clean diagram: <strong>Explore → Gather → Craft → Equip or Sell → Mint</strong><br/><br/>"Every action feeds a living economy. Resources become items. Items become NFTs. Progress becomes property."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">This loop creates sustained on-chain engagement, not one-time transactions. Players keep coming back because progression has real value. Every cycle = more transactions on INK.</div>
+    </div>
+  </div>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: On-Chain Activity Metrics</h3>
+  <p>Insert after Play to Value. Show hard numbers: transaction volume, NFTs minted, wallets connected, daily active users. Kraken cares about TVL and chain activity — give them the data.</p>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/07-skins-cosmetics.png" alt="Skins"/>
+  <div class="slide-header"><div class="slide-num">07</div><div class="slide-title">Skins & Cosmetics</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"Skins are cosmetic items conceived as digital assets, designed to exist either as NFTs (ERC-1155 or ERC-20) or as cosmetics sold directly for ETH." · All ERC references · "NFT-BASED COLLECTION" · "ETH-BASED FURNITURES"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Dress your character however you want. Skins come from the shop, from events, or from your NFT collection. Mix and match — every outfit is a statement."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Cosmetic NFTs are the highest-volume, lowest-friction entry point for new users into the INK ecosystem. Low cost, high engagement, easy onboard.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 08-12 -->
 <div class="page">
-  <div class="section-header">
-    <div class="section-num">&#8594;</div>
-    <div class="section-title">Final Page Order</div>
-  </div>
-  <div class="section-subtitle">33 pages total — 26 existing + 7 new.</div>
+<div class="sec-header">The World</div>
 
-  <div class="timeline">
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">01. Cover (Kekspace × INK)</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">02. Welcome</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">03. About the Game</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">04. Economy & Blockchain</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">05. INK Integration Overview</div><div class="timeline-desc">NEW — technical alignment</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">06. NFTs</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">07. Play to Value</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">08. On-Chain Activity Metrics</div><div class="timeline-desc">NEW — hard numbers</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">09. Skins & Cosmetics</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">10. City Overview</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">11-14. Zones (4 pages)</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">15. Characters & Anatomy</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">16-18. Minigames, Pokek, Quests</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">19-20. The Krakening + Exclusives</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">21. The Krakening — By the Numbers</div><div class="timeline-desc">NEW — event stats</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">22. Halloween Event</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">23. Community Scenes</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">24. Billboard Network</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">25. Brand Integration Opportunities</div><div class="timeline-desc">NEW — marketing platform</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">26-27. Kekpads + Furniture</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">28. Creator API</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">29. Roadmap — What INK Enables</div><div class="timeline-desc">NEW — INK-specific features</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">30. Epic Games Store</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">31. The Ask</div><div class="timeline-desc">NEW — grants, co-marketing, support</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--new"></span><div class="timeline-label">32. Team / Meme Time Studios</div><div class="timeline-desc">NEW — who we are</div></div>
-    <div class="timeline-item"><span class="timeline-dot timeline-dot--done"></span><div class="timeline-label">33. Back Cover</div></div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-num">26</div>
-      <div class="stat-label">Existing slides</div>
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/08-city-overview.png" alt="City"/>
+  <div class="slide-header"><div class="slide-num">08</div><div class="slide-title">City Overview</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill all text overlays</div>
+      <div class="field-text field-text--kill">"Dune on raw creativity. Lights city, bits scatter..." · "BILLBOARD PLACEHOLDER" · "Size with no excuses, pure noise..." · "CONNECT ZONE/TV" · All dark box text</div>
     </div>
-    <div class="stat">
-      <div class="stat-num" style="color:var(--pink)">7</div>
-      <div class="stat-label">New slides needed</div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">Clean map image, no text overlays. Caption below:<br/>"A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</div>
     </div>
-    <div class="stat">
-      <div class="stat-num" style="color:var(--purple)">33</div>
-      <div class="stat-label">Total pages</div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">This isn't a single game — it's a platform. Multiple zones, multiple activities, growing constantly. Every zone is a potential brand integration opportunity.</div>
     </div>
   </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/09-zone-spawn.png" alt="Spawn"/>
+  <div class="slide-header"><div class="slide-num">09</div><div class="slide-title">Zone: Spawn</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"In-game billboard with rentable space. Your brand sits in a high-traffic zone..." · All billboard callout labels · "LET'S GOOOO" · "MHT EXFO" · "KEKSPACE.IO" · "CHANGE LIVES"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Where everyone arrives. The central hub of Kekspace — billboards overhead, shops nearby, and the whole city waiting."</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/10-zone-amplexus.png" alt="Amplexus"/>
+  <div class="slide-header"><div class="slide-num">10</div><div class="slide-title">Zone: Amplexus</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill everything</div>
+      <div class="field-text field-text--kill">"NIGHTCLUB_FRUIT_SOURCE" · "INITIATING STACK DUMP" · "ACCESS_SCRAMBLER / OPEN_SHAKER / BASS_OVERCLOCK / DANCEFLOOR_THRASH / NEON_FEEDBACK" · "SYSTEM HALTED" · "CAUSE: EXCESS INPUT FROM NIGHTCLUB SUBROUTINES" · "REBOOT ONLY AFTER PURGING CORRUPTED DESIRES" · "ROI: grid space x holder access" · "Empty connected avatar grid protocol..." · "Stand by while the System decides if you're cleared or coiled."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"The nightclub that never closes. Dance floors, DJs, and VIP access. Amplexus is where the community comes to party."</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/11-zone-arcade.png" alt="Arcade"/>
+  <div class="slide-header"><div class="slide-num">11</div><div class="slide-title">Zone: Arcade Saloon</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"the gold's still on the board and nobody's cashing in. Sit down. Pick a machine. See if the odds are real." · "System32/Generation.exe"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Games and tickets. Hit the arcade, compete in minigames, and earn rewards you can actually use."</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/12-zone-cemetery.png" alt="Cemetery"/>
+  <div class="slide-header"><div class="slide-num">12</div><div class="slide-title">Zone: Cemetery</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"THE REAPER LEFT. THE GATE UNLEASHED." · "The graveyard hums with pixel ghosts and half-buried scripts." · "Your memes can't follow you here." · "Rest, you beautiful frog..."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"The dark and mysterious side. Graveyards, ghosts, and quests for the brave. Some corners of Kekspace don't want to be found."</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 13-16 -->
+<div class="page">
+<div class="sec-header">Gameplay</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/13-characters-anatomy.png" alt="Characters"/>
+  <div class="slide-header"><div class="slide-num">13</div><div class="slide-title">Characters & Anatomy</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"Grid online. Dive in and mod your avatar till the RAM cries. Thousands of combos to flex on the pixel map. But customization died you're just background NPC dust." · "frog_sinewsebb6f.obj" · "F:/kekspace/Wardrobe/MINDGEAR.txt" · "maybe we have more colors"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Thousands of combinations. Every slot is a layer. Every layer is a statement. Head, hair, shirt, pants, shoes, pet, backpack, glasses, gloves — all modular, all yours."<br/><br/>Keep the anatomy diagram labels (hat, pet, hair, head, glasses, etc.) — they're already clean.</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Character investment = player retention. Players who build an identity stick around and keep transacting on INK.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/14-minigames.png" alt="Minigames"/>
+  <div class="slide-header"><div class="slide-num">14</div><div class="slide-title">Minigames</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"ArcadeKernel.exe // booting.minigames.v.1..." · "SYS_BOOT" · "SysKEKS/kekbowling.exe" · "SysKEKS/kfps.exe" · "SysKEKS/combat/arcade_faceGame" · "SysKEKS/whack-a-meme.exe" · All .exe filenames</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">Clean game screenshots with simple labels:<br/>• Survivor — wave-based shooter<br/>• Frog Bowling — classic lanes<br/>• Whack-A-Meme — tap and smash<br/><br/>"Every game earns tickets. Tickets earn rewards. Rewards have real value."</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/15-pokek-poker.png" alt="Pokek"/>
+  <div class="slide-header"><div class="slide-num">15</div><div class="slide-title">Pokek Poker</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text</div>
+      <div class="field-text field-text--old">"THE ON-CHAIN PEPE ARENA" · "EVERY HAND IS PLAYED USING PB, THE NATIVE POKER CURRENCY POWERED BY YOUR WALLET." · "DESIGNED FOR COMPETITION" · "LINKED SESSIONS / HIGHER ENGAGEMENT / STRONGER ECOSYSTEM LIQUIDITY"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"On-chain poker. Sit down, buy in with in-game currency, and play for real stakes. Wallet-connected, real-time, competitive."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">DeFi-adjacent gaming. Real stakes, real pots, real on-chain settlement. High-value transactions on INK. "STRONGER ECOSYSTEM LIQUIDITY" — keep this concept, reframe it.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/16-quests-badges.png" alt="Quests"/>
+  <div class="slide-header"><div class="slide-num">16</div><div class="slide-title">Quests & Badges</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"THE COMPETITIVE LAYER OF KEK.SPACE" · "persistent competitive ecosystem" · "EARLY ACHIEVERS ONLY. SOME BADGES FOR PIONEERS ONLY." · "TOP PLAYERS DON'T JUST WIN... THEY BECOME LEGENDS INSIDE THE WORLD."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"NPCs throughout the world offer missions. Complete quests, rank up, earn badges. The Adventurer's Book tracks your journey. The more you play, the more you earn, the higher you climb."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Quests create daily active users. Badges create status. Both drive retention and repeat transactions on INK.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 17-19 -->
+<div class="page">
+<div class="sec-header">Events — The Proof Section</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/17-event-krakening.png" alt="Krakening"/>
+  <div class="slide-header"><div class="slide-num">17</div><div class="slide-title">The Krakening</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text</div>
+      <div class="field-text field-text--old">"The Kraken Midnight Gathering united hundreds of players in real time, creating one of the most active nights in the grid's history. The event generated thousands of in-game interactions and social posts, proving the potential of branded experiences to drive organic engagement."<br/><br/>"Kraken's identity was seamlessly absorbed into the game world, from themed outfits and assets to environmental lighting and event branding — creating a fully immersive collaboration that blurred the line between digital culture and interactive storytelling."<br/><br/>"A timed airdrop rewarded active presence. During the Krakening, raining tickets simply for staying connected as the event unfolded."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade. Ticket rain rewarded players just for being there."<br/><br/><strong>"Not a banner ad. A living brand experience inside a living world."</strong></div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">THIS IS THE KEY SLIDE. You already did this together. It worked. "We already proved this works. Now imagine it on INK with deeper integration."</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/18-event-krakening-exclusives.png" alt="Exclusives"/>
+  <div class="slide-header"><div class="slide-num">18</div><div class="slide-title">Krakening Exclusives</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text</div>
+      <div class="field-text field-text--old">"LIMITED REWARDS, LASTING IMPACT" · "Participants collected time-limited collectibles and cosmetics, now considered rare items. The Kraken collaboration set a new standard for future community-driven events, defining how partnerships can enhance both gameplay and player identity."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Limited edition collectibles from the Krakening event. Still being traded. Proof that branded experiences create lasting value."</div>
+    </div>
+  </div>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: The Krakening — By the Numbers</h3>
+  <p>Hard stats page: concurrent players, total attendees, collectibles minted, items still in circulation, social media impressions, tweets, Discord activity. Numbers beat screenshots. This is what convinces the business team.</p>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/19-event-halloween.png" alt="Halloween"/>
+  <div class="slide-header"><div class="slide-num">19</div><div class="slide-title">Halloween Event</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"The spirits claim any restless. An ominous darkness has descended upon Kekspace..." · "THE LABYRINTH HUNGERS" · "The maze runs the town script. Corridors spawn random drops and grid rips." · "kek-maze-entrance-9001.fb.js.tsx" · "horrors you have to face in the maze..."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"The world transforms with the seasons. Halloween brought a maze, costumes, cursed candies, and themed quests — with exclusive loot for those who showed up."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Seasonal events drive engagement spikes. This is the kind of content that brings users to INK during key moments — predictable, repeatable bursts of on-chain activity.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 20-23 -->
+<div class="page">
+<div class="sec-header">Community & Your Space</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/20-community-scenes.png" alt="Community"/>
+  <div class="slide-header"><div class="slide-num">20</div><div class="slide-title">Community Scenes</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"COMMUNITY IN MOTION" · "Chaos, screenshots, raids, gatherings the grid never planned. Each crowd shot proves the world stays alive and independent. The community redraws the map as it moves." · "UNSCRIPTED COMMUNITY SCENES"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"A community that shows up, stays loud, and keeps building."<br/><br/>Let the crowd screenshots speak. Minimal text. The images ARE the proof.</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">This isn't a ghost chain project. These are real, active users who show up. Every person in these screenshots is a potential wallet on INK.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/21-billboard-network.png" alt="Billboards"/>
+  <div class="slide-header"><div class="slide-num">21</div><div class="slide-title">Billboard Network</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"Kek.space features a pixel-themed in-game billboard system..." (too long) · "NFTS CREATED WITHIN THE ECOSYSTEM" · "OWN VISIBILITY IN..." · All the bullet points about redirecting and marketplace pages</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"An in-game advertising network where brands and creators promote to an engaged audience. Billboards are placed across high-traffic zones — interactive, not static."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Billboard network = revenue layer AND marketing channel. INK ecosystem projects could advertise inside Kekspace to reach engaged crypto-native users. This is distribution for the entire INK ecosystem.</div>
+    </div>
+  </div>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: Brand Integration Opportunities</h3>
+  <p>All the ways brands can integrate into Kekspace: billboards, events (like The Krakening), exclusive collectibles, zone sponsorships, in-game items, themed quests. Position Kekspace as a marketing platform for the entire INK ecosystem.</p>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/22-kekpads.png" alt="Kekpads"/>
+  <div class="slide-header"><div class="slide-num">22</div><div class="slide-title">Kekpads</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"KEKESTATES BUY OR RENT" · "for SALE" · All real-estate marketing language · "TYPE:// SOFT KEKPADS" / "TYPE:// NET KEKPADS" · "SMALLER ROOMS ACQUIRED WITH TICKETS..." · Detailed room type descriptions</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Own and customize your own private room. Decorate it, invite friends, make it yours."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Virtual real estate on INK. Each room is an on-chain asset. Ownership, customization, and social utility — all generating transactions.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/23-furniture-rooms.png" alt="Furniture"/>
+  <div class="slide-header"><div class="slide-num">23</div><div class="slide-title">Furniture & Rooms</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"VOID FLEX SUITE" · "Static void room flips into a tight flex zone. Every block placed with packet precision, every corner echoing old-net minimalism." · "SEASONAL GRID STACK" · "Built space patched like a hot-fix module..." · "craft your zone. shape reality."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Grid-based room building. Place furniture, set the vibe, and make your space your own. Seasonal items keep it fresh."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">Every furniture item is an NFT. Every decoration purchase = an on-chain transaction on INK. Seasonal drops create recurring buying cycles.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 24-26 -->
+<div class="page">
+<div class="sec-header">The Future</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/24-creator-api.png" alt="Creator API"/>
+  <div class="slide-header"><div class="slide-num">24</div><div class="slide-title">Creator API</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"A PERMISSIONLESS LAYER FOR COMMUNITY-MADE MINIGAMES" · "Not a closed mod tool. Not a private SDK." · All technical primitives list · "PREDEFINED MECHANICAL PRIMITIVES / EVENT HOOKS / SECURE DATA CHANNELS / SERVER-AUTHORITATIVE VALIDATION" · "no accounts / no screenshots / your wallet is your identity"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"An open API for the community to build their own games inside Kekspace. Design, test, and publish — without forking anything."<br/><br/>Keep: "Creators don't fork the game, they extend it." — good line.</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">This turns Kekspace into a platform, not just a game. Third-party developers building on top = exponential growth of on-chain activity on INK. Every new minigame is another engagement loop generating transactions.</div>
+    </div>
+  </div>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: Roadmap — What INK Enables</h3>
+  <p>Features that become possible specifically because of INK: lower gas fees for microtransactions (furniture purchases, ticket rewards), faster minting for event drops, cross-game item interoperability with other INK projects. Show Kraken that Kekspace isn't just porting to INK — INK unlocks things that weren't possible before.</p>
+</div>
+
+<div class="slide">
+  <img class="slide-img" src="content/pitch-deck/25-epic-games-store.png" alt="Epic"/>
+  <div class="slide-header"><div class="slide-num">25</div><div class="slide-title">Epic Games Store</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current text (some is good)</div>
+      <div class="field-text">"EPIC GAMES STORE FRONTPAGE // 78M MONTHLY ACTIVE USERS" · "Free-to-Play. Own Everything." · "Built on Epic. Powered by Ink." · "FULL ON-CHAIN ON INK" · "Instant PEP rewards from tickets/quests. NFT mints, trades, slots, P2P swaps. Sub-second txs, near-zero fees on Superchain."</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kill">Kill</div>
+      <div class="field-text field-text--kill">"Free-to-play core, one-tap on-chain frog mode" · "Kek.space - On-Chain Social Chaos"</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">"Kekspace on the Epic Games Store. 78M monthly active users. Free to play. Every transaction on INK."<br/><br/>Keep the "FULL ON-CHAIN ON INK" box — it's strong. Clean up the bullet points:<br/>• Instant rewards from quests and games<br/>• NFT mints, trades, and P2P swaps<br/>• Sub-second transactions, near-zero fees on INK</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--kraken">Kraken/INK angle</div>
+      <div class="field-text field-text--kraken">THIS IS THE HEADLINE FOR KRAKEN. 78M monthly active users exposed to an INK-native game. The bridge from Web2 to INK. This single slide justifies the entire partnership.</div>
+    </div>
+  </div>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: The Ask</h3>
+  <p>Clear statement of what Kekspace wants from the partnership. Be specific: grants (how much?), co-marketing (what kind?), technical support (for what?), ecosystem placement (where?). Every pitch deck needs a clear ask — don't make them guess.</p>
+</div>
+
+<div class="new-slide">
+  <h3>NEW SLIDE: Team / About Meme Time Studios</h3>
+  <p>Brief intro to who's behind this. Names, roles, relevant experience. Even 1 page builds trust. Kraken's business team needs to know who they're signing a deal with.</p>
+</div>
+
+<div class="slide">
+  <div class="slide-header"><div class="slide-num">26</div><div class="slide-title">Back Cover</div></div>
+  <div class="slide-body">
+    <div class="field">
+      <div class="field-label field-label--old">Current: blank page</div>
+      <div class="field-text">Empty — just a border frame with halftone texture.</div>
+    </div>
+    <div class="field">
+      <div class="field-label field-label--new">New version</div>
+      <div class="field-text field-text--new">Kekspace logo + INK logo<br/><br/><strong>"The social world where meme culture meets real ownership"</strong><br/><br/>Discord · Telegram · Twitter/X · pepecoin.io<br/><br/>Contact: [email]</div>
+    </div>
+  </div>
+</div>
 </div>
 
 </body>
