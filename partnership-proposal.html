@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kekspace × INK — Partnership Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #0a0a12;
+  --bg-secondary: #0f0f1e;
+  --bg-card: #14142a;
+  --bg-elevated: #1a1a36;
+  --bg-ask: #1a0e2e;
+
+  --text-primary: #e8e8f0;
+  --text-secondary: #a0a0b8;
+  --text-muted: #6a6a82;
+
+  --green: #22d97f;
+  --green-dim: rgba(34, 217, 127, 0.12);
+  --green-border: rgba(34, 217, 127, 0.35);
+
+  --cyan: #00c8ff;
+  --cyan-dim: rgba(0, 200, 255, 0.10);
+  --cyan-border: rgba(0, 200, 255, 0.35);
+
+  --pink: #ff4da6;
+  --pink-dim: rgba(255, 77, 166, 0.10);
+  --pink-border: rgba(255, 77, 166, 0.35);
+
+  --purple: #9b59ff;
+  --purple-dim: rgba(155, 89, 255, 0.10);
+
+  --gold: #ffc857;
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --max-width: 960px;
+  --nav-height: 60px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 20px);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(0, 200, 255, 0.3);
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--cyan);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--green);
+}
+
+/* ============================================
+   STICKY NAV
+   ============================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 18, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-brand img {
+  height: 32px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.nav-links a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section + .section {
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(155, 89, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-logo {
+  width: 180px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .accent-green { color: var(--green); }
+.hero h1 .accent-cyan { color: var(--cyan); }
+.hero h1 .times { color: var(--text-muted); font-weight: 400; }
+
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.hero-tagline {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid var(--cyan-border);
+  padding: 8px 20px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ============================================
+   CALLOUT BOXES
+   ============================================ */
+.callout {
+  padding: 24px 28px;
+  border-radius: 12px;
+  margin: 28px 0;
+  border-left: 4px solid;
+  position: relative;
+}
+
+.callout--green {
+  background: var(--green-dim);
+  border-color: var(--green);
+}
+.callout--green strong,
+.callout--green .callout-label { color: var(--green); }
+
+.callout--cyan {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+}
+.callout--cyan strong,
+.callout--cyan .callout-label { color: var(--cyan); }
+
+.callout--pink {
+  background: var(--pink-dim);
+  border-color: var(--pink);
+}
+.callout--pink strong,
+.callout--pink .callout-label { color: var(--pink); }
+
+.callout-label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.callout p {
+  margin-bottom: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   STAT CARDS
+   ============================================ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.stat-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+  color: var(--green);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.stat-card:nth-child(2) .stat-number { color: var(--cyan); }
+.stat-card:nth-child(3) .stat-number { color: var(--purple); }
+.stat-card:nth-child(4) .stat-number { color: var(--gold); }
+.stat-card:nth-child(5) .stat-number { color: var(--pink); }
+.stat-card:nth-child(6) .stat-number { color: var(--green); }
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ============================================
+   BULLET LISTS
+   ============================================ */
+.feature-list {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.feature-list li {
+  position: relative;
+  padding: 10px 0 10px 28px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  line-height: 1.6;
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.feature-list li strong {
+  color: var(--text-primary);
+}
+
+.feature-list--cyan li::before { background: var(--cyan); }
+.feature-list--pink li::before { background: var(--pink); }
+.feature-list--purple li::before { background: var(--purple); }
+
+/* ============================================
+   ZONE LIST (special two-col grid for world)
+   ============================================ */
+.zone-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.zone-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.zone-item strong {
+  color: var(--green);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ============================================
+   PLAY-TO-VALUE FLOW
+   ============================================ */
+.flow-section {
+  margin: 40px 0;
+}
+
+.flow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 32px 0;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  min-width: 120px;
+  position: relative;
+}
+
+.flow-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 12px;
+  border: 2px solid;
+  position: relative;
+}
+
+.flow-step:nth-child(1) .flow-icon { background: rgba(34, 217, 127, 0.12); border-color: var(--green); color: var(--green); }
+.flow-step:nth-child(3) .flow-icon { background: rgba(0, 200, 255, 0.10); border-color: var(--cyan); color: var(--cyan); }
+.flow-step:nth-child(5) .flow-icon { background: rgba(155, 89, 255, 0.10); border-color: var(--purple); color: var(--purple); }
+.flow-step:nth-child(7) .flow-icon { background: rgba(255, 200, 87, 0.10); border-color: var(--gold); color: var(--gold); }
+.flow-step:nth-child(9) .flow-icon { background: rgba(255, 77, 166, 0.10); border-color: var(--pink); color: var(--pink); }
+
+.flow-label {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.flow-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  max-width: 100px;
+}
+
+.flow-arrow {
+  font-size: 22px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin: 0 4px;
+  padding-bottom: 30px;
+}
+
+/* ============================================
+   ON-CHAIN ACTIVITY GRID
+   ============================================ */
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.activity-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.activity-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--cyan-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.activity-item strong {
+  color: var(--text-primary);
+}
+
+/* ============================================
+   IMAGE BLOCKS
+   ============================================ */
+.img-block {
+  margin: 36px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--bg-card);
+}
+
+.img-block img {
+  width: 100%;
+  display: block;
+}
+
+.img-block figcaption {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ============================================
+   THE ASK — SPECIAL SECTION
+   ============================================ */
+.section--ask {
+  background: var(--bg-ask);
+  position: relative;
+  overflow: hidden;
+}
+
+.section--ask::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+}
+
+.ask-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.ask-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--pink-border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.ask-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+.ask-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.ask-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.badge {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  background: var(--bg-card);
+}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.contact-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+}
+
+.contact-item .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+.contact-item .value {
+  font-size: 14px;
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer p {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   INK ENABLES - FEATURES GRID
+   ============================================ */
+.enables-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.enable-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 200, 255, 0.15);
+  border-radius: 12px;
+  padding: 24px 22px;
+}
+
+.enable-card h4 {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.enable-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.enable-card--wide {
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   SEASONAL EVENT CARDS
+   ============================================ */
+.event-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 28px 0;
+}
+
+.event-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.event-card--halloween::before {
+  background: linear-gradient(90deg, #ff6b00, #9b59ff);
+}
+.event-card--christmas::before {
+  background: linear-gradient(90deg, #22d97f, #ff4da6);
+}
+
+.event-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.event-card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+
+  .section { padding: 56px 0; }
+
+  .hero { padding: 72px 0 56px; }
+
+  .hero-logo { width: 140px; }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zone-grid,
+  .ask-grid,
+  .enables-grid,
+  .event-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  .flow-step {
+    padding: 12px 16px;
+  }
+
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .callout {
+    padding: 20px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  :root {
+    --bg-primary: #fff;
+    --bg-secondary: #f8f8fa;
+    --bg-card: #f4f4f8;
+    --bg-elevated: #eee;
+    --bg-ask: #fef0f5;
+    --text-primary: #111;
+    --text-secondary: #444;
+    --text-muted: #777;
+    --green: #0a8a4a;
+    --cyan: #0078a0;
+    --pink: #c0246a;
+    --purple: #6a3ab0;
+    --gold: #b08a00;
+    --green-dim: #e8f8f0;
+    --cyan-dim: #e0f4fc;
+    --pink-dim: #fce8f2;
+    --green-border: #0a8a4a;
+    --cyan-border: #0078a0;
+    --pink-border: #c0246a;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+  }
+
+  .nav { display: none; }
+
+  .section {
+    padding: 32px 0;
+    break-inside: avoid;
+  }
+
+  .hero {
+    padding: 40px 0 24px;
+  }
+
+  .hero::before { display: none; }
+
+  .section--ask::before { display: none; }
+
+  .section--ask {
+    background: #fef0f5;
+  }
+
+  .stat-card,
+  .ask-card,
+  .enable-card,
+  .event-card,
+  .zone-item,
+  .activity-item,
+  .callout {
+    break-inside: avoid;
+  }
+
+  .img-block {
+    break-inside: avoid;
+  }
+
+  .stat-card:hover,
+  .ask-card:hover,
+  .enable-card:hover {
+    transform: none;
+  }
+
+  a { color: inherit; text-decoration: underline; }
+
+  .hero-tagline {
+    background: #e0f4fc;
+    color: #0078a0;
+    border-color: #0078a0;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="site/public/images/game-assets/logos/kekspace-logo.png" alt="Kekspace">
+      <span>&times; INK</span>
+    </div>
+    <div class="nav-links">
+      <a href="#what-is-kekspace">The Game</a>
+      <a href="#pepecoin">Pepecoin</a>
+      <a href="#economy">Economy</a>
+      <a href="#world">The World</a>
+      <a href="#krakening">Krakening</a>
+      <a href="#events">Events</a>
+      <a href="#billboards">Billboards</a>
+      <a href="#creator-api">Creator API</a>
+      <a href="#epic">Epic Games</a>
+      <a href="#ink-enables">Why INK</a>
+      <a href="#the-ask">The Ask</a>
+      <a href="#about">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero" id="top">
+  <div class="container">
+    <img class="hero-logo" src="site/public/images/game-assets/logos/kekspace-logo.png" alt="Kekspace Logo">
+    <h1>
+      <span class="accent-green">Kekspace</span>
+      <span class="times">&times;</span>
+      <span class="accent-cyan">INK</span>
+    </h1>
+    <p class="hero-subtitle">Partnership Proposal</p>
+    <span class="hero-tagline">The social world where meme culture meets real ownership</span>
+  </div>
+</header>
+
+<!-- ========== THE SHORT VERSION ========== -->
+<section class="section" id="short-version">
+  <div class="container">
+    <h2>The Short Version</h2>
+    <p class="lead">Kekspace is a social virtual world powered by Pepecoin &mdash; the oldest frog on the blockchain. We've been building since 2016 and we already ran a successful event with Kraken. Now we want to bring the entire game on-chain through INK.</p>
+    <div class="callout callout--green">
+      <span class="callout-label">Key Point</span>
+      <p>Every item players collect, every skin they wear, every room they decorate, every game they play &mdash; all of it becomes on-chain activity on INK. We're not pitching a concept. We're pitching a live product with real users, real engagement, and proof that brand integration works inside our world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT IS KEKSPACE ========== -->
+<section class="section" id="what-is-kekspace">
+  <div class="container">
+    <h2>What is Kekspace?</h2>
+    <p class="lead">Kekspace is a social interface for Web3 that blends the social elements of early 2000s social MMOs with on-chain utility. Think of the virtual worlds people grew up in &mdash; Habbo Hotel, Club Penguin, early Second Life &mdash; rebuilt with real digital ownership on the blockchain.</p>
+    <p>Players hang out in a sprawling isometric pixel city. They customize characters from head to toe, play arcade games, earn tickets, complete quests, decorate private rooms, collect NFTs, and trade with each other. The world runs seasonal events, hosts community gatherings, and keeps growing.</p>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">Not a pitch deck</span>
+      <p>It's not a metaverse pitch deck. It's a live game with people in it.</p>
+    </div>
+
+    <h3>What can you do in Kekspace?</h3>
+    <ul class="feature-list">
+      <li><strong>Play games</strong> &mdash; Survivor (wave-based shooter), Frog Bowling, Whack-A-Meme, with Pokek (on-chain poker) and Fishing coming soon</li>
+      <li><strong>Customize your character</strong> &mdash; thousands of combinations across 15+ equipment slots: hats, hair, shirts, pants, shoes, glasses, pets, backpacks, and more</li>
+      <li><strong>Decorate your own room</strong> &mdash; grid-based furniture system with seasonal items</li>
+      <li><strong>Complete quests</strong> &mdash; NPCs throughout the world offer missions, with a ranking and badge system tracking progression</li>
+      <li><strong>Collect and trade</strong> &mdash; skins, furniture, and equipment are ownable on-chain as NFTs</li>
+      <li><strong>Hang out</strong> &mdash; chat, emotes, community events, and a world that's always active</li>
+    </ul>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/10-minigames.png" alt="Kekspace Minigames">
+      <figcaption>Arcade minigames inside Kekspace &mdash; from Survivor to Frog Bowling</figcaption>
+    </figure>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/09-characters-anatomy.png" alt="Character Anatomy">
+      <figcaption>Thousands of cosmetic combinations across 15+ equipment slots</figcaption>
+    </figure>
+
+    <h3>Who is it for?</h3>
+    <p>Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. Kekspace attracts crypto-native users who are already comfortable with wallets and on-chain transactions &mdash; the exact audience INK wants to onboard.</p>
+  </div>
+</section>
+
+<!-- ========== WHY PEPECOIN ========== -->
+<section class="section" id="pepecoin">
+  <div class="container">
+    <h2>Why Pepecoin?</h2>
+    <p class="lead">Pepecoin is the first and longest-running Pepe-themed cryptocurrency. It launched on March 5th, 2016 on its own proof-of-work blockchain before migrating to Ethereum as an ERC-20 token. Community-mined from day one. No presale. No insider allocation. No venture capital. No funny business.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">2016</div>
+        <div class="stat-label">Pepecoin launched</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">PoW</div>
+        <div class="stat-label">Original blockchain &mdash; community-mined</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Presale / insider allocation / VC funding</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years of ecosystem history</div>
+      </div>
+    </div>
+
+    <p>Pepecoin is the fuel that powers everything in Kekspace &mdash; in-game purchases, NFT minting, marketplace transactions, and rewards. It's not a governance token bolted on after the fact. It's been the core of this ecosystem for a decade.</p>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">INK Integration</span>
+      <p>When Kekspace moves to INK, Pepecoin transactions move with it. Every in-game action becomes an on-chain transaction on Kraken's L2.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== THE ECONOMY ========== -->
+<section class="section" id="economy">
+  <div class="container">
+    <h2>The Economy &mdash; Why INK Should Care</h2>
+    <p class="lead">Kekspace isn't just a game with a token attached. The entire economy generates real on-chain activity:</p>
+
+    <!-- PLAY-TO-VALUE FLOW -->
+    <div class="flow-section">
+      <h3>The Play-to-Value Loop</h3>
+
+      <div class="flow-container">
+        <div class="flow-step">
+          <div class="flow-icon">&#x1F50D;</div>
+          <div class="flow-label">Explore</div>
+          <div class="flow-desc">Discover zones &amp; resources</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">
+          <div class="flow-icon">&#x1F48E;</div>
+          <div class="flow-label">Gather</div>
+          <div class="flow-desc">Collect materials &amp; drops</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">
+          <div class="flow-icon">&#x2692;</div>
+          <div class="flow-label">Craft</div>
+          <div class="flow-desc">Combine into items</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">
+          <div class="flow-icon">&#x2B50;</div>
+          <div class="flow-label">Equip / Sell</div>
+          <div class="flow-desc">Use or trade with players</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">
+          <div class="flow-icon">&#x26D3;</div>
+          <div class="flow-label">Mint</div>
+          <div class="flow-desc">Own permanently on-chain</div>
+        </div>
+      </div>
+
+      <p>Every action feeds a living economy. Players explore different zones to gather resources. Resources are combined through crafting to create items. Items can be equipped for gameplay advantage or sold to other players. The best items can be minted as NFTs &mdash; permanently owned on-chain.</p>
+
+      <div class="callout callout--green">
+        <span class="callout-label">Sustained engagement</span>
+        <p>This loop creates <strong>sustained engagement</strong>, not one-time transactions. Players return daily because progression has real value. Every cycle through this loop generates transactions on INK.</p>
+      </div>
+    </div>
+
+    <!-- ON-CHAIN ACTIVITY -->
+    <h3>What this means for INK in numbers</h3>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <div class="activity-icon">&#x1F3A8;</div>
+        <div><strong>Every character customization</strong> = potential NFT mint</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">&#x1FA91;</div>
+        <div><strong>Every furniture purchase</strong> = on-chain transaction</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">&#x1F3C6;</div>
+        <div><strong>Every quest reward</strong> = token transfer</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">&#x1F0CF;</div>
+        <div><strong>Every poker hand</strong> = real-time on-chain settlement</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">&#x1F4B1;</div>
+        <div><strong>Every item trade</strong> = P2P marketplace transaction</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">&#x1F389;</div>
+        <div><strong>Every seasonal event</strong> = spike in minting and trading activity</div>
+      </div>
+    </div>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">For INK</span>
+      <p>This is TVL, transaction volume, and daily active wallets &mdash; not just a game.</p>
+    </div>
+
+    <!-- NFTs -->
+    <h3>NFTs &amp; Digital Ownership</h3>
+    <p>Skins, furniture, equipment &mdash; everything players earn or create in Kekspace is ownable on-chain. Items can be crafted, upgraded, enchanted, and traded. Cosmetic NFTs are the highest-volume, lowest-friction entry point for new users into the INK ecosystem: low cost, high engagement, easy onboard.</p>
+  </div>
+</section>
+
+<!-- ========== THE WORLD ========== -->
+<section class="section" id="world">
+  <div class="container">
+    <h2>The World</h2>
+    <p class="lead">Kekspace isn't a single game &mdash; it's a platform. The city is a sprawling isometric pixel world with multiple zones, each with its own vibe:</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/08-city-overview.png" alt="City Overview">
+      <figcaption>The sprawling isometric world of Kekspace</figcaption>
+    </figure>
+
+    <div class="zone-grid">
+      <div class="zone-item"><strong>The Hub</strong> The central spawn point, covered in billboards and surrounded by shops</div>
+      <div class="zone-item"><strong>Amplexus</strong> A nightclub with dance floors, DJs, and VIP access</div>
+      <div class="zone-item"><strong>Arcade Saloon</strong> A full arcade with multiple minigames and ticket rewards</div>
+      <div class="zone-item"><strong>GM Coffee</strong> A coffee shop for socializing</div>
+      <div class="zone-item"><strong>Adventure Guild</strong> A quest hub with missions and lore</div>
+      <div class="zone-item"><strong>Touch Grass Park</strong> A chill outdoor zone</div>
+      <div class="zone-item"><strong>Kekmart</strong> A shopping district</div>
+      <div class="zone-item"><strong>Cemetery &amp; Kekmaze</strong> The dark side, with seasonal Halloween content</div>
+      <div class="zone-item"><strong>Pepe Gallery</strong> An NFT art gallery</div>
+      <div class="zone-item"><strong>And more</strong> Expanding regularly</div>
+    </div>
+
+    <p>Each zone is a potential brand integration opportunity. The Krakening event proved that brands can be embedded natively into the game world &mdash; not as banner ads, but as living experiences players actually participate in.</p>
+
+    <h3>Kekpads &mdash; Player-Owned Spaces</h3>
+    <p>Players can own and customize private rooms called Kekpads. Each room is built on a grid-based system with a full furniture catalog. Rooms serve as social hubs, personal spaces, and event venues. Every Kekpad is an on-chain asset. Every furniture item is an NFT. Every decoration purchase is a transaction on INK.</p>
+  </div>
+</section>
+
+<!-- ========== THE KRAKENING ========== -->
+<section class="section" id="krakening">
+  <div class="container">
+    <h2>Proof It Works &mdash; The Krakening</h2>
+    <p class="lead">We don't need to speculate about whether brand integration works inside Kekspace. We already did it.</p>
+
+    <p><strong>The Krakening</strong> was a live event in partnership with Kraken. Here's what happened:</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/13-event-krakening.png" alt="The Krakening Event">
+      <figcaption>The Krakening &mdash; a live brand integration event inside Kekspace</figcaption>
+    </figure>
+
+    <ul class="feature-list feature-list--cyan">
+      <li>Kraken's identity was embedded natively into the game world &mdash; <strong>themed outfits, environmental lighting, event branding, and custom quests</strong></li>
+      <li><strong>Hundreds of players gathered in real-time</strong> for a midnight event</li>
+      <li>Exclusive limited-edition collectibles were distributed &mdash; <strong>and they're still being traded</strong></li>
+      <li>A "ticket rain" mechanic rewarded players simply for being present and engaged</li>
+      <li>The event generated <strong>thousands of in-game interactions and social media posts</strong></li>
+      <li>Community engagement spiked across Discord, Telegram, and Twitter</li>
+    </ul>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/14-event-krakening-exclusives.png" alt="Krakening Exclusive Collectibles">
+      <figcaption>Exclusive limited-edition Krakening collectibles &mdash; still actively traded</figcaption>
+    </figure>
+
+    <div class="callout callout--green">
+      <span class="callout-label">Not a banner ad</span>
+      <p>Not a banner ad. A living brand experience inside a living world.</p>
+    </div>
+
+    <p>The Krakening set the standard for how brand partnerships can work in virtual worlds. It wasn't forced. It felt like part of the game. Players didn't just see the brand &mdash; they participated in it.</p>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">What's next</span>
+      <p>Now imagine this on INK &mdash; with deeper on-chain integration, lower fees for microtransactions, and native wallet connectivity through Kraken.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SEASONAL EVENTS ========== -->
+<section class="section" id="events">
+  <div class="container">
+    <h2>Seasonal Events Drive Engagement Spikes</h2>
+    <p class="lead">Kekspace doesn't just run one event. The world transforms with the seasons:</p>
+
+    <div class="event-cards">
+      <div class="event-card event-card--halloween">
+        <h3>Halloween</h3>
+        <p>The entire world goes dark. A maze spawns with cursed candies, themed quests, and exclusive costumes. Players who complete the labyrinth earn limited-edition loot.</p>
+      </div>
+      <div class="event-card event-card--christmas">
+        <h3>Christmas 2025</h3>
+        <p>Snow covers every zone. An advent calendar gives daily gifts. The Christmas tree becomes a community gathering point. Exclusive seasonal items drive a burst of minting and trading.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">Repeatable value for INK</span>
+      <p>Each seasonal event is a predictable, repeatable burst of on-chain activity on INK. Events drive player return rates, new user onboarding, and social media visibility &mdash; exactly the kind of engagement spikes that matter for an L2.</p>
+    </div>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/16-community-scenes.png" alt="Community Scenes">
+      <figcaption>Community events and social gatherings across Kekspace</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========== BILLBOARD NETWORK ========== -->
+<section class="section" id="billboards">
+  <div class="container">
+    <h2>The Billboard Network &mdash; Distribution for INK Ecosystem Projects</h2>
+    <p class="lead">Kekspace features an in-game billboard network placed across high-traffic zones in the city. Billboards are not static images &mdash; players can interact with them to view expanded content, access external links, or browse NFT collections.</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/17-billboard-network.png" alt="Billboard Network">
+      <figcaption>Interactive billboard network throughout high-traffic zones</figcaption>
+    </figure>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">More than advertising</span>
+      <p>This is more than advertising. It's a <strong>distribution channel for the entire INK ecosystem.</strong></p>
+    </div>
+
+    <ul class="feature-list feature-list--cyan">
+      <li>INK-native projects can advertise inside Kekspace to reach <strong>engaged, crypto-native users</strong></li>
+      <li>Billboards can promote <strong>token launches, NFT drops, DeFi products, and community events</strong></li>
+      <li>The billboard network generates <strong>revenue for both Kekspace and the INK ecosystem</strong></li>
+      <li>Every billboard interaction is <strong>traceable on-chain</strong></li>
+    </ul>
+
+    <div class="callout callout--green">
+      <span class="callout-label">For Kraken</span>
+      <p>The billboard network turns Kekspace into a <strong>marketing platform for INK</strong>, not just a game on INK.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CREATOR API ========== -->
+<section class="section" id="creator-api">
+  <div class="container">
+    <h2>The Creator API &mdash; Exponential Growth</h2>
+    <p class="lead">Kekspace is building a public-facing Creator API that lets the community design, test, and publish their own minigames inside the world. Creators don't fork the game &mdash; they extend it.</p>
+
+    <div class="callout callout--green">
+      <span class="callout-label">Exponential on-chain growth</span>
+      <p>Every new community-made minigame is another engagement loop. Another reason for players to log in. Another source of on-chain transactions. This is how a game becomes a platform, and how on-chain activity on INK grows exponentially without Kekspace having to build everything itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EPIC GAMES STORE ========== -->
+<section class="section" id="epic">
+  <div class="container">
+    <h2>Epic Games Store &mdash; The Bridge from Web2 to INK</h2>
+    <p class="lead">Kekspace is positioning for distribution through the Epic Games Store. The numbers speak for themselves:</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">78M</div>
+        <div class="stat-label">Monthly active users on Epic</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">Free</div>
+        <div class="stat-label">Zero friction entry point</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">INK</div>
+        <div class="stat-label">Every transaction settles on-chain</div>
+      </div>
+    </div>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/21-epic-games-store.png" alt="Epic Games Store">
+      <figcaption>Kekspace on the Epic Games Store &mdash; Web2 meets Web3</figcaption>
+    </figure>
+
+    <p>This is the Web2-to-Web3 bridge that every L2 wants. Millions of gamers, many of whom have never touched crypto, exposed to an INK-native game where on-chain ownership is baked into the experience &mdash; not a separate step, not a wallet popup, just gameplay that happens to be on-chain.</p>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">For Kraken</span>
+      <p>This is distribution at a scale that most INK projects can only dream of.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT INK ENABLES ========== -->
+<section class="section" id="ink-enables">
+  <div class="container">
+    <h2>What INK Enables for Kekspace</h2>
+    <p class="lead">Moving to INK isn't just a chain migration. It unlocks capabilities that weren't possible before:</p>
+
+    <div class="enables-grid">
+      <div class="enable-card">
+        <h4>Lower Gas Fees</h4>
+        <p>Microtransactions become viable. Players can buy a 50-cent furniture item without paying more in gas than the item is worth.</p>
+      </div>
+      <div class="enable-card">
+        <h4>Faster Minting</h4>
+        <p>Sub-second transactions mean event drops can happen in real-time. No waiting, no failed mints, no frustrated players.</p>
+      </div>
+      <div class="enable-card">
+        <h4>Native Kraken Wallet Integration</h4>
+        <p>Players coming from Kraken's exchange already have a wallet. The onboarding friction drops to near zero.</p>
+      </div>
+      <div class="enable-card">
+        <h4>Ecosystem Interoperability</h4>
+        <p>Items from Kekspace could potentially be used in other INK-native games and applications. A skin you earn in Kekspace could show up somewhere else on the Superchain.</p>
+      </div>
+      <div class="enable-card enable-card--wide">
+        <h4>Kraken's Brand Trust</h4>
+        <p>Players who might be skeptical of "another blockchain game" feel differently when it's on Kraken's own L2. The trust transfer is real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== THE ASK ========== -->
+<section class="section section--ask" id="the-ask">
+  <div class="container">
+    <h2>What We're Looking For</h2>
+    <p class="lead">We're not asking Kraken to take a bet on a whitepaper. Kekspace is live. The community is real. The Krakening proved the partnership works. Here's what we need to go deeper:</p>
+
+    <div class="ask-grid">
+      <div class="ask-card">
+        <h3>Grant Support</h3>
+        <p>Development funding to accelerate the INK integration &mdash; smart contract migration, wallet connectivity, gas optimization, and the Creator API.</p>
+      </div>
+      <div class="ask-card">
+        <h3>Co-Marketing</h3>
+        <p>Joint announcements, featured placement in INK ecosystem communications, and coordinated event marketing. The Krakening showed that co-marketed events drive real engagement. Let's do it again, bigger, natively on INK.</p>
+      </div>
+      <div class="ask-card">
+        <h3>Technical Support</h3>
+        <p>Access to INK developer resources, documentation, and engineering support for the on-chain integration. Priority support during high-traffic events.</p>
+      </div>
+      <div class="ask-card">
+        <h3>Ecosystem Placement</h3>
+        <p>Visibility within the INK ecosystem &mdash; featured in the project directory, mentioned in ecosystem updates, and positioned as a flagship social application on the L2.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="section" id="about">
+  <div class="container">
+    <h2>About Meme Time Studios</h2>
+    <p class="lead">Meme Time Studios is the team behind Kekspace. We've been building in the Pepecoin ecosystem since the beginning &mdash; not as a funded startup, but as a community-driven team that ships product.</p>
+
+    <p>The game is built on Unity with SmartFoxServer networking, supports real-time multiplayer, and runs a full on-chain economy. The art team creates all pixel art in-house. The development team has shipped seasonal events, brand partnerships, minigames, a furniture system, a character creation tool, and a quest engine &mdash; all live, all in production.</p>
+
+    <div class="about-badges">
+      <span class="badge">Unity</span>
+      <span class="badge">SmartFoxServer</span>
+      <span class="badge">Real-time Multiplayer</span>
+      <span class="badge">On-chain Economy</span>
+      <span class="badge">In-house Pixel Art</span>
+      <span class="badge">Seasonal Events</span>
+      <span class="badge">Brand Partnerships</span>
+      <span class="badge">NFT Marketplace</span>
+      <span class="badge">Quest Engine</span>
+    </div>
+
+    <div class="callout callout--green">
+      <span class="callout-label">Our ethos</span>
+      <p>We build, we ship, and we don't stop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="section" id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="label">Website</div>
+        <div class="value">kekspace.io</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Twitter / X</div>
+        <div class="value">[handle]</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Discord</div>
+        <div class="value">[invite link]</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Telegram</div>
+        <div class="value">[link]</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Email</div>
+        <div class="value">[contact email]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <p>Kekspace &times; INK &mdash; The social world where meme culture meets real ownership.</p>
+  </div>
+</footer>
+
+</body>
+</html>
