@@ -195,13 +195,18 @@ Visibility within the INK ecosystem — featured in the project directory, menti
 
 ---
 
-## About Meme Time Studios
+## About the Pepecoin Team
 
-Meme Time Studios is the team behind Kekspace. We've been building in the Pepecoin ecosystem since the beginning — not as a funded startup, but as a community-driven team that ships product.
+Pepecoin is community-built and community-run. No corporate entity. No boardroom. Just a team of builders who showed up in 2016 and never left.
 
-The game is built on Unity with SmartFoxServer networking, supports real-time multiplayer, and runs a full on-chain economy. The art team creates all pixel art in-house. The development team has shipped seasonal events, brand partnerships, minigames, a furniture system, a character creation tool, and a quest engine — all live, all in production.
+The team behind Kekspace grew out of the Pepecoin community itself. Developers, artists, designers, and community managers — all working together because they believe a frog coin from 2016 deserves a world to live in.
 
-We build, we ship, and we don't stop.
+- **Development** — Built on Unity with SmartFoxServer networking. Real-time multiplayer, full on-chain economy, live in production.
+- **Art** — All pixel art created in-house. Isometric environments, character sprites, NPC designs, furniture, and seasonal content — hundreds of assets and growing.
+- **Community** — Active across Discord, Telegram, and Twitter. The community doesn't just play the game — they shape it. Event ideas, feature requests, and bug reports come from the people in the world.
+- **Track record** — Shipped seasonal events, brand partnerships (The Krakening), minigames, a furniture system, character creation, a quest engine, and a billboard network. All live. All in production.
+
+This isn't a team that writes roadmaps. It's a team that ships.
 
 ---
 
