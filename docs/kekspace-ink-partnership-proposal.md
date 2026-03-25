@@ -1,197 +1,313 @@
-# Kekspace × INK: Partnership Proposal
+# Kekspace × Ink: Partnership Proposal
 
 ---
 
 ## The Short Version
 
-Kekspace is a social virtual world powered by Pepecoin — the oldest frog on the blockchain. We've been building since 2016 and we already ran a successful event with Kraken. Now we want to bring the entire game on-chain through INK.
+Kekspace is a live browser-based social world for Web3. For Ink, it turns dApps into places.
 
-Every item players collect, every skin they wear, every room they decorate, every game they play — all of it becomes on-chain activity on INK. We're not pitching a concept. We're pitching a live product with real users, real engagement, and proof that brand integration works inside our world.
+Instead of asking users to jump between fragmented tabs, dashboards and chat apps, Kekspace lets them bridge in, verify, trade, lend, discover communities, display onchain identity, and coordinate around projects — inside a lightweight browser world that is already live in public beta.
+
+We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan.
+
+**Kraken has the rails; Kekspace gives those rails a social interface.**
 
 ---
 
 ## What is Kekspace?
 
-Kekspace is a social interface for Web3 that blends the social elements of early 2000s social MMOs with on-chain utility. Think of the virtual worlds people grew up in — Habbo Hotel, Club Penguin, early Second Life — rebuilt with real digital ownership on the blockchain.
+Kekspace is a social interface for Web3 that blends the social elements of early 2000s MMOs with real onchain utility. Think of the virtual worlds people grew up in — Habbo Hotel, Club Penguin, early Second Life — rebuilt with real digital ownership on the blockchain.
 
 Players hang out in a sprawling isometric pixel city. They customize characters from head to toe, play arcade games, earn tickets, complete quests, decorate private rooms, collect NFTs, and trade with each other. The world runs seasonal events, hosts community gatherings, and keeps growing.
 
-It's not a metaverse pitch deck. It's a live game with people in it.
+It is not a metaverse pitch deck. It is a live game with people in it.
 
 ### What can you do in Kekspace?
 
-- **Play games** — Survivor (wave-based shooter), Frog Bowling, Whack-A-Meme, with Pokek (on-chain poker) and Fishing coming soon
+- **Play games** — Survivor (wave-based shooter), Frog Bowling, Whack-A-Meme, with Pokek (onchain poker) and Fishing coming soon
 - **Customize your character** — thousands of combinations across 15+ equipment slots: hats, hair, shirts, pants, shoes, glasses, pets, backpacks, and more
 - **Decorate your own room** — grid-based furniture system with seasonal items
 - **Complete quests** — NPCs throughout the world offer missions, with a ranking and badge system tracking progression
-- **Collect and trade** — skins, furniture, and equipment are ownable on-chain as NFTs
-- **Hang out** — chat, emotes, community events, and a world that's always active
+- **Collect and trade** — skins, furniture, and equipment are ownable onchain as NFTs
+- **Hang out** — chat, emotes, community events, and a world that is always active
 
 ### Who is it for?
 
-Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. Kekspace attracts crypto-native users who are already comfortable with wallets and on-chain transactions — the exact audience INK wants to onboard.
+Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. Kekspace attracts crypto-native users who are already comfortable with wallets and onchain transactions — the exact audience Ink wants to onboard.
 
 ---
 
 ## Why Pepecoin?
 
-Pepecoin is the first and longest-running Pepe-themed cryptocurrency. It launched on March 5th, 2016 on its own proof-of-work blockchain before migrating to Ethereum as an ERC-20 token. Community-mined from day one. No presale. No insider allocation. No venture capital. No funny business.
+Pepecoin is the first and longest-running Pepe-themed cryptocurrency. It launched on March 5th, 2016 on its own proof-of-work blockchain before migrating to Ethereum as an ERC-20 token. Community-mined from day one. No presale. No insider allocation. No venture capital.
 
-Pepecoin is the fuel that powers everything in Kekspace — in-game purchases, NFT minting, marketplace transactions, and rewards. It's not a governance token bolted on after the fact. It's been the core of this ecosystem for a decade.
+Pepecoin is the fuel that powers everything in Kekspace — in-game purchases, NFT minting, marketplace transactions, and rewards. It is not a governance token bolted on after the fact. It has been the core of this ecosystem for a decade.
 
-When Kekspace moves to INK, Pepecoin transactions move with it. Every in-game action becomes an on-chain transaction on Kraken's L2.
-
----
-
-## The Economy — Why INK Should Care
-
-Kekspace isn't just a game with a token attached. The entire economy generates real on-chain activity:
-
-### The Play-to-Value Loop
-
-**Explore → Gather → Craft → Equip or Sell → Mint**
-
-Every action feeds a living economy. Players explore different zones to gather resources. Resources are combined through crafting to create items. Items can be equipped for gameplay advantage or sold to other players. The best items can be minted as NFTs — permanently owned on-chain.
-
-This loop creates **sustained engagement**, not one-time transactions. Players return daily because progression has real value. Every cycle through this loop generates transactions on INK.
-
-### What this means for INK in numbers
-
-- **Every character customization** = potential NFT mint
-- **Every furniture purchase** = on-chain transaction
-- **Every quest reward** = token transfer
-- **Every poker hand** = real-time on-chain settlement
-- **Every item trade** = P2P marketplace transaction
-- **Every seasonal event** = spike in minting and trading activity
-
-This is TVL, transaction volume, and daily active wallets — not just a game.
-
-### NFTs & Digital Ownership
-
-Skins, furniture, equipment — everything players earn or create in Kekspace is ownable on-chain. Items can be crafted, upgraded, enchanted, and traded. Cosmetic NFTs are the highest-volume, lowest-friction entry point for new users into the INK ecosystem: low cost, high engagement, easy onboard.
+When Kekspace deploys on Ink, Pepecoin transactions move with it. Every in-game action becomes an onchain transaction on Kraken's L2.
 
 ---
 
-## The World
+## Why Ink?
 
-Kekspace isn't a single game — it's a platform. The city is a sprawling isometric pixel world with multiple zones, each with its own vibe:
+Kekspace and Pepecoin were born around Ethereum, and that remains part of the identity. But the next chapter we want to build — a live social layer for DeFi onboarding, protocol discovery and coordination — is a better fit for Ink's current environment.
 
-- **The Hub** — the central spawn point, covered in billboards and surrounded by shops
-- **Amplexus** — a nightclub with dance floors, DJs, and VIP access
-- **Arcade Saloon** — a full arcade with multiple minigames and ticket rewards
-- **GM Coffee** — a coffee shop for socializing
-- **Adventure Guild** — a quest hub with missions and lore
-- **Touch Grass Park** — a chill outdoor zone
-- **Kekmart** — a shopping district
-- **Cemetery & Kekmaze** — the dark side, with seasonal Halloween content
-- **Pepe Gallery** — an NFT art gallery
-- **And more expanding regularly**
+Ink is the right home for the next stage because it already has live DeFi applications that need better distribution and differentiation. Ink's low fees, DeFi-first positioning, Kraken distribution, existing live apps, bridge support and account abstraction tooling make it the best place to ship these modules now.
 
-Each zone is a potential brand integration opportunity. The Krakening event proved that brands can be embedded natively into the game world — not as banner ads, but as living experiences players actually participate in.
-
-### Kekpads — Player-Owned Spaces
-
-Players can own and customize private rooms called Kekpads. Each room is built on a grid-based system with a full furniture catalog. Rooms serve as social hubs, personal spaces, and event venues. Every Kekpad is an on-chain asset. Every furniture item is an NFT. Every decoration purchase is a transaction on INK.
+For this stage, Ink is not just another chain integration. It is the primary home of the product work we are building.
 
 ---
 
-## Proof It Works — The Krakening
+## How Kekspace Helps Ink Achieve Its Goals
 
-We don't need to speculate about whether brand integration works inside Kekspace. We already did it.
+| Ink Goal | How Kekspace Helps | Why It Matters |
+| --- | --- | --- |
+| Better retail onboarding | An Ink arrival district with bridge, verification, questing and guided first actions | Makes Ink easier to understand and lowers the "first five minutes" failure rate |
+| Better app discovery | Protocol rooms / booths / terminals for Nado, Tydro, Velodrome and other apps | Gives existing protocols a visual distribution layer |
+| More user retention | Social rooms, persistent identity, badges, events and community hubs | Gives users a reason to stay after the first transaction |
+| More DeFi usage | Embedded actions inside the game world | Translates curiosity into bridge / trade / lend / LP actions |
+| Better Kraken-to-onchain conversion | Kekspace can complement Kraken Wallet, Kraken Connect and Kraken Verify | Makes Ink feel like a destination, not just infrastructure |
+| Stronger ecosystem coordination | Project-owned rooms function as richer website/chatroom/event spaces | Useful for communities, launches, education and protocol growth |
+| A distinctive viral surface | Drop Parties and game-native launch events give Ink a culturally differentiated buzz mechanism | Important if Ink wants attention that feels native to crypto internet culture |
 
-**The Krakening** was a live event in partnership with Kraken. Here's what happened:
+**Our go-to-market is simple: take Ink's products to market.**
 
-- Kraken's identity was embedded natively into the game world — themed outfits, environmental lighting, event branding, and custom quests
-- **Hundreds of players gathered in real-time** for a midnight event
-- Exclusive limited-edition collectibles were distributed — **and they're still being traded**
-- A "ticket rain" mechanic rewarded players simply for being present and engaged
-- The event generated **thousands of in-game interactions and social media posts**
-- Community engagement spiked across Discord, Telegram, and Twitter
-
-**Not a banner ad. A living brand experience inside a living world.**
-
-The Krakening set the standard for how brand partnerships can work in virtual worlds. It wasn't forced. It felt like part of the game. Players didn't just see the brand — they participated in it.
-
-Now imagine this on INK — with deeper on-chain integration, lower fees for microtransactions, and native wallet connectivity through Kraken.
+Kekspace is not just another UI. It is a distribution, differentiation, and retention layer for Ink.
 
 ---
 
-## Seasonal Events Drive Engagement Spikes
+## Integration Modules
 
-Kekspace doesn't just run one event. The world transforms with the seasons:
-
-**Halloween** — The entire world goes dark. A maze spawns with cursed candies, themed quests, and exclusive costumes. Players who complete the labyrinth earn limited-edition loot.
-
-**Christmas 2025** — Snow covers every zone. An advent calendar gives daily gifts. The Christmas tree becomes a community gathering point. Exclusive seasonal items drive a burst of minting and trading.
-
-Each seasonal event is a predictable, repeatable burst of on-chain activity on INK. Events drive player return rates, new user onboarding, and social media visibility — exactly the kind of engagement spikes that matter for an L2.
+Seven modules define the Kekspace deployment on Ink. Each one maps directly to real Ink infrastructure and existing Ink applications.
 
 ---
 
-## The Billboard Network — Distribution for INK Ecosystem Projects
+### 1. Ink Arrival District
 
-Kekspace features an in-game billboard network placed across high-traffic zones in the city. Billboards are not static images — players can interact with them to view expanded content, access external links, or browse NFT collections.
+**The front door to Ink — bridge, verify, quest, go.**
 
-This is more than advertising. It's a **distribution channel for the entire INK ecosystem**:
+A dedicated first-stop area inside Kekspace where users arrive in guest mode or connected mode, connect a wallet or embedded smart account, bridge into Ink, verify their identity, receive a first quest, and get routed into their first protocol action.
 
-- INK-native projects can advertise inside Kekspace to reach engaged, crypto-native users
-- Billboards can promote token launches, NFT drops, DeFi products, and community events
-- The billboard network generates **revenue for both Kekspace and the INK ecosystem**
-- Every billboard interaction is traceable on-chain
+Ink explicitly cares about onboarding, abstraction and UX. Kekspace wraps those values in a flow that is much easier for general users to understand than normal bridge / wallet / dashboard UX. Relay already expresses cross-chain movement in a way that maps naturally to a visual interface: user states intent, the system handles execution, transaction status becomes a journey. InkScore already rewards Bridge IN, which makes the arrival flow even more natural.
 
-For Kraken: the billboard network turns Kekspace into a **marketing platform for INK**, not just a game on INK.
+**Key functions:**
 
----
-
-## The Creator API — Exponential Growth
-
-Kekspace is building a public-facing Creator API that lets the community design, test, and publish their own minigames inside the world. Creators don't fork the game — they extend it.
-
-Every new community-made minigame is another engagement loop. Another reason for players to log in. Another source of on-chain transactions. This is how a game becomes a platform, and how on-chain activity on INK grows exponentially without Kekspace having to build everything itself.
+- Guest mode world entry and wallet connect
+- Optional smart-account / AA-based onboarding
+- Source chain and asset selection with bridge quote
+- Visualized bridge journey with status updates inside the world
+- Kraken Verify "passport office"
+- First quest routing users to Nado, Tydro and other rooms
+- Analytics for connect-to-bridge-to-first-action conversion
 
 ---
 
-## Epic Games Store — The Bridge from Web2 to INK
+### 2. Nado Trading Arcade
 
-Kekspace is positioning for distribution through the Epic Games Store. The numbers speak for themselves:
+**Social trading rooms with installable terminals and builder-code distribution.**
 
-- **78 million monthly active users** on Epic
-- **Free to play** — zero friction entry point
-- Every transaction settles on INK
+A social trading layer built around Nado terminals inside Kekspace. This works at two levels: official Nado areas inside the Ink district, and installable Nado terminals that users, communities and room owners can place in their own rooms. This turns rooms into mini brokerages, communities into trading clubs, and social spaces into distribution surfaces.
 
-This is the Web2-to-Web3 bridge that every L2 wants. Millions of gamers, many of whom have never touched crypto, exposed to an INK-native game where on-chain ownership is baked into the experience — not a separate step, not a wallet popup, just gameplay that happens to be on-chain.
+Nado's own builder messaging is directly aligned with Kekspace's value: onchain infrastructure is no longer the bottleneck — distribution is. Nado's Builder Codes make this especially attractive because Kekspace does not just route attention; it can route activity and monetize that activity natively.
 
-For Kraken: this is distribution at a scale that most INK projects can only dream of.
+**Key functions:**
 
----
-
-## What INK Enables for Kekspace
-
-Moving to INK isn't just a chain migration. It unlocks capabilities that weren't possible before:
-
-- **Lower gas fees** — microtransactions become viable. Players can buy a 50-cent furniture item without paying more in gas than the item is worth.
-- **Faster minting** — sub-second transactions mean event drops can happen in real-time. No waiting, no failed mints, no frustrated players.
-- **Native Kraken wallet integration** — players coming from Kraken's exchange already have a wallet. The onboarding friction drops to near zero.
-- **Ecosystem interoperability** — items from Kekspace could potentially be used in other INK-native games and applications. A skin you earn in Kekspace could show up somewhere else on the Superchain.
-- **Kraken's brand trust** — players who might be skeptical of "another blockchain game" feel differently when it's on Kraken's own L2. The trust transfer is real.
+- Nado trading booths in official Ink areas
+- Installable terminals inside player-made rooms
+- Room-specific builder-code attribution
+- Live market boards and tickers
+- Order entry from terminals
+- Trader leaderboards
+- Future social/copy-trading room mechanics
 
 ---
 
-## What We're Looking For
+### 3. Tydro Bank
 
-We're not asking Kraken to take a bet on a whitepaper. Kekspace is live. The community is real. The Krakening proved the partnership works. Here's what we need to go deeper:
+**The bank of the city — lending made legible.**
 
-### Grant Support
-Development funding to accelerate the INK integration — smart contract migration, wallet connectivity, gas optimization, and the Creator API.
+A dedicated banking district inside Kekspace that turns lending and borrowing into something visually understandable. Tydro is one of the best fits for visual translation because a lot of retail users find lending protocols abstract, intimidating or overly spreadsheet-driven.
 
-### Co-Marketing
-Joint announcements, featured placement in INK ecosystem communications, and coordinated event marketing. The Krakening showed that co-marketed events drive real engagement. Let's do it again, bigger, natively on INK.
+Tydro is currently one of the most important financial apps on Ink. If Kekspace can make Tydro easier for ordinary users to understand and trust, that is useful for deposit growth, borrower activation, capital retention, and broader ecosystem education.
 
-### Technical Support
-Access to INK developer resources, documentation, and engineering support for the on-chain integration. Priority support during high-traffic events.
+**Key functions:**
 
-### Ecosystem Placement
-Visibility within the INK ecosystem — featured in the project directory, mentioned in ecosystem updates, and positioned as a flagship social application on the L2.
+- Deposit desk and supply vault
+- Borrow desk with collateral visualizer
+- Health factor meter and risk warnings
+- "What happens if price moves?" explainer UI
+- Guided quests for first-time lenders and borrowers
+- Optional community vault rooms for projects and guilds
+
+---
+
+### 4. Velodrome Liquidity Bazaar
+
+**AMM education, pool discovery, and LP recruitment.**
+
+A market-style room where users can learn how AMMs work, discover pools, and LP into them through a more visual interface. Velodrome is a good fit because AMMs are powerful but often poorly understood by ordinary users.
+
+For Ink's Superchain liquidity story, Kekspace helps by making pool discovery easier, giving protocols a space to attract LPs, helping users understand stable vs volatile pool logic, and making LP actions feel less abstract.
+
+**Key functions:**
+
+- Liquidity discovery boards
+- Simple stable vs volatile pool explainers
+- Pool explorer and search
+- Deposit LP flow and fee claiming
+- Protocol booths asking users to support liquidity
+- Visual liquidity map of key ecosystem pairs
+
+---
+
+### 5. InkScore + Kraken Verify Social Layer
+
+**Onchain activity becomes socially useful.**
+
+A visible reputation layer that pulls onchain status into the social fabric of the game. InkScore gives users visible progression based on onchain activity. Kraken Verify gives wallets a reusable verified status without exposing personal data. Kekspace turns those into actual social UX.
+
+**Key functions:**
+
+- Verified badges and flairs
+- Room gating by Verify status or InkScore
+- Cosmetics and furniture unlocks tied to real activity
+- Chat signals, emojis and nameplates
+- Visible protocol-specific status markers
+- Asset-holder and hold-duration badges (opt-in)
+- Privacy controls so users decide what wallet-derived signals are visible
+
+---
+
+### 6. Project / Community HQ Rooms
+
+**Enhanced chatrooms, websites and event venues — where protocols live.**
+
+Permanent branded rooms that projects and communities can use as chatrooms, websites, discovery surfaces, event venues and protocol front doors. This is one of the clearest ways Kekspace moves beyond "game world novelty" into actual ecosystem infrastructure.
+
+For Ink apps, these rooms become branded protocol spaces, help desks, onboarding zones, trading clubs, treasury and governance spaces, and event rooms for launches, AMAs and campaigns.
+
+**Key functions:**
+
+- Branded room templates with standard plugin slots for protocol terminals
+- Embedded protocol terminals (Nado, Tydro, bridge kiosks)
+- Token / Verify / score gating
+- Event scheduling and host controls
+- Project announcements and onboarding quests
+- Social hangout space with actual utility attached
+
+---
+
+### 7. Drop Party Launchpad
+
+**A game-native, nostalgic, fair-launch attention engine.**
+
+A launch mechanism inspired by Runescape-style drop parties. A founder configures the launch at a chest. Users gather in the room. Balloons or similar objects drop around the room in timed waves. Players move to pop them. Popping grants a chance at an allocation from the communal launch pool. The event continues until the bonding mechanism or fill condition is complete. Liquidity migrates or routes to the next venue.
+
+The Drop Party is not just a meme idea. It is a potential distribution engine because it combines speculation, nostalgia, visual spectacle, live participation, social ceremony, and a fairness story. The mechanism can be designed to reduce sniping, bundling, pure speed advantage, and cabal-style early concentration — through per-wallet wave limits, random drop positions and timing, Verify-gated rooms, cooldowns, and VRF-backed event randomness.
+
+This is the breakout upside concept — the viral flagship that can generate outsized attention and cultural distribution for Ink. It is framed as a phase 2 / co-design milestone alongside the core deployment.
+
+---
+
+## Phased Roadmap
+
+### Priority ordering
+
+| Priority | Module | Rationale |
+| --- | --- | --- |
+| 1 | Ink Arrival District | Cleanest answer to why Ink, why now, what ships first, how success is measured |
+| 2 | Nado Trading Arcade | Nado explicitly values distribution; Builder Codes make it monetizable |
+| 3 | Tydro Bank | Major protocol on Ink; visual clarity matters most for lending UX |
+| 4 | InkScore / Verify social layer | Strong retention and identity module; makes the world feel meaningfully onchain |
+| 5 | Project / Community HQ rooms | Expands Kekspace from protocol wrapper into ecosystem coordination surface |
+| 6 | Velodrome Liquidity Bazaar | Valuable supporting piece; likely phase 2 unless design work is already ahead |
+| 7 | Drop Party Launchpad | High upside, high virality; better framed as phase 2 or separate co-design module |
+
+### 30-60 Day Milestone Plan
+
+**Days 0-15 — Ink Onboarding Foundation**
+
+- Finalize Ink integration spec and analytics instrumentation plan
+- Wallet / connect / initial AA plumbing
+- Bridge portal prototype
+- Initial Verify / InkScore profile hooks
+
+**Days 15-30 — Ink Arrival District Launch**
+
+- Ship live arrival district
+- Guest flow: wallet connect, bridge, verify, first quest
+- Measure wallet-connect and bridge completion funnel
+- Launch first Nado trading terminal with Builder Code attribution
+
+**Days 30-45 — First Protocol Integrations**
+
+- Launch Tydro Bank core flows
+- Add score / badge / verify-driven social signals
+- Launch first 1-2 partner / community rooms
+
+**Days 45-60 — Ecosystem Expansion + Readout**
+
+- Expand to 2-4 partner rooms
+- Add first liquidity discovery layer (Velodrome)
+- Run first co-marketed activation
+- Publish KPI readout: visits, connects, bridges, referred actions, retention, partner room usage
+
+**Stretch / Phase 2**
+
+- Drop Party design spec and prototype flow
+- Security and mechanism review
+- Potential test deployment or limited event prototype
+
+---
+
+## The Product — Proof It Works
+
+### The Krakening
+
+We do not need to speculate about whether brand integration works inside Kekspace. We already did it. The Krakening was a live event in partnership with Kraken where the brand was embedded natively into the game world — themed outfits, environmental lighting, event branding, and custom quests. Hundreds of players gathered in real-time for a midnight event. Exclusive limited-edition collectibles were distributed and are still being traded. The event generated thousands of in-game interactions and social media posts.
+
+Not a banner ad. A living brand experience inside a living world.
+
+### Seasonal Events Drive Engagement Spikes
+
+The world transforms with the seasons. Halloween turns the entire world dark with a maze, cursed candies, themed quests and exclusive costumes. Christmas covers every zone in snow with an advent calendar, daily gifts and exclusive seasonal items. Each seasonal event is a predictable, repeatable burst of onchain activity — driving player return rates, new user onboarding, and social media visibility.
+
+### The Economy
+
+Kekspace is not just a game with a token attached. The entire economy generates real onchain activity through a play-to-value loop: Explore, Gather, Craft, Equip or Sell, Mint. Every character customization is a potential NFT mint. Every furniture purchase is an onchain transaction. Every quest reward is a token transfer. Every item trade is a P2P marketplace transaction. This is TVL, transaction volume, and daily active wallets — not just a game.
+
+### The Billboard Network
+
+Kekspace features an in-game billboard network placed across high-traffic zones in the city. Players interact with them to view expanded content, access external links, or browse NFT collections. Ink-native projects can advertise inside Kekspace to reach engaged, crypto-native users. The billboard network turns Kekspace into a marketing platform for Ink, not just a game on Ink.
+
+### Epic Games Store
+
+Kekspace is positioning for distribution through the Epic Games Store — 78 million monthly active users, free to play, every transaction settling on Ink. This is the Web2-to-Web3 bridge that every L2 wants. Millions of gamers exposed to an Ink-native game where onchain ownership is baked into the experience.
+
+---
+
+## First-Month KPIs
+
+- 1,000-3,000 unique visits to the Ink district
+- 300-800 wallet connects
+- 100-300 bridge completions into Ink
+- 100+ first protocol actions (trade / lend / LP / verify)
+- 2-4 protocol or community rooms launched
+- 50-150 Kraken Verify completions
+- 20%+ D7 retention among connected users
+
+Tracked from day one: referred Nado volume, referred Tydro supply/borrow volume, room visits, repeat session rate, quest completion rate.
+
+---
+
+## Use of Funds
+
+- **45%** — Engineering and protocol integration work
+- **20%** — Gameplay / UI / UX for Ink-specific rooms and onboarding flows
+- **15%** — Smart contract work and security review for Ink-native modules
+- **10%** — Growth, co-marketing and ecosystem activations
+- **10%** — QA, analytics, live ops and additional team onboarding
+
+The grant accelerates 3-6 months of Ink-specific integration, additional team onboarding, protocol adapters, onboarding flows, analytics, and the first wave of ecosystem-facing rooms and activations.
 
 ---
 
@@ -201,23 +317,23 @@ Pepecoin is community-built and community-run. No corporate entity. No boardroom
 
 The team behind Kekspace grew out of the Pepecoin community itself. Developers, artists, designers, and community managers — all working together because they believe a frog coin from 2016 deserves a world to live in.
 
-- **Development** — Built on Unity with SmartFoxServer networking. Real-time multiplayer, full on-chain economy, live in production.
+- **Development** — Built on Unity with SmartFoxServer networking. Real-time multiplayer, full onchain economy, live in production.
 - **Art** — All pixel art created in-house. Isometric environments, character sprites, NPC designs, furniture, and seasonal content — hundreds of assets and growing.
-- **Community** — Active across Discord, Telegram, and Twitter. The community doesn't just play the game — they shape it. Event ideas, feature requests, and bug reports come from the people in the world.
+- **Community** — Active across Discord, Telegram, and Twitter. The community does not just play the game — they shape it. Event ideas, feature requests, and bug reports come from the people in the world.
 - **Track record** — Shipped seasonal events, brand partnerships (The Krakening), minigames, a furniture system, character creation, a quest engine, and a billboard network. All live. All in production.
 
-This isn't a team that writes roadmaps. It's a team that ships.
+This is not a team that writes roadmaps. It is a team that ships.
 
 ---
 
 ## Contact
 
 **Website:** kekspace.io
-**Twitter/X:** [handle]
+**Twitter/X:** @pepecoins
 **Discord:** [invite link]
-**Telegram:** [link]
-**Email:** [contact email]
+**Telegram:** @pr0m3theus
+**Email:** admin@pepecoin.io
 
 ---
 
-*Kekspace × INK — The social world where meme culture meets real ownership.*
+*Kekspace turns dApps into places.*
