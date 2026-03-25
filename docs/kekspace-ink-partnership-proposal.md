@@ -4,13 +4,11 @@
 
 ## The Short Version
 
-Kekspace is a live browser-based social world for Web3. For Ink, it turns dApps into places.
+Kekspace is a live browser-based social world. Collect items. Flex your drip. Trade gear with other players. Decorate your room. Show up for events. All of this is already happening — but none of it is onchain yet.
 
-Instead of asking users to jump between fragmented tabs, dashboards and chat apps, Kekspace lets them bridge in, verify, trade, lend, discover communities, display onchain identity, and coordinate around projects — inside a lightweight browser world that is already live in public beta.
+Ink changes that. Real ownership, real marketplace trading, real integration with exchanges and dApps. The game exists. The community is here. Ink is where the economy goes live.
 
 We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan.
-
-**Kraken has the rails; Kekspace gives those rails a social interface.**
 
 ---
 
