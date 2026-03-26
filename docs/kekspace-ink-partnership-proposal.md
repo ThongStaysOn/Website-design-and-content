@@ -6,7 +6,7 @@
 
 Kekspace is a live browser-based social world. Collect items. Flex your drip. Trade gear with other players. Decorate your room. Show up for events. All of this is already happening — but none of it is onchain yet.
 
-Ink changes that. Real ownership, real marketplace trading, real integration with exchanges and dApps. The game exists. The community is here. Ink is where the economy goes live.
+Ink changes that. Real ownership, real marketplace trading, real integration with exchanges and dApps. The game exists. The community is here. Ink is where the economy goes live. For Ink's users, Kekspace is the front door — onboarding that doesn't feel like onboarding.
 
 We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan.
 
