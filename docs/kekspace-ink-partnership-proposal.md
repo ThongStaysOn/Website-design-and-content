@@ -199,7 +199,7 @@ A visible reputation layer that pulls onchain status into the social fabric of t
 
 Permanent branded rooms that projects and communities can use as chatrooms, websites, discovery surfaces, event venues and protocol front doors. This is one of the clearest ways Kekspace moves beyond "game world novelty" into actual ecosystem infrastructure.
 
-For Ink apps, these rooms become branded protocol spaces, help desks, onboarding zones, trading clubs, treasury and governance spaces, and event rooms for launches, AMAs and campaigns.
+For Ink apps, these rooms become branded protocol spaces, help desks, onboarding zones, trading clubs, treasury and governance spaces, and event rooms for launches, AMAs and campaigns. The underlying SmartFoxServer infrastructure also supports live audio and video, opening the door to in-world podcasts, live streams, voice AMAs, and broadcast events without leaving the game.
 
 **Key functions:**
 
@@ -208,6 +208,7 @@ For Ink apps, these rooms become branded protocol spaces, help desks, onboarding
 - Token / Verify / score gating
 - Event scheduling and host controls
 - Project announcements and onboarding quests
+- Live audio/video rooms for podcasts, AMAs, and streams
 - Social hangout space with actual utility attached
 
 ---
