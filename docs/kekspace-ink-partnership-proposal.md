@@ -327,7 +327,7 @@ The grant accelerates 3-6 months of Ink-specific integration, additional team on
 
 ## About the Pepecoin Team
 
-Pepecoin is community-built and community-run. No corporate entity. No boardroom. Just a team of builders who showed up in 2016 and never left.
+Pepecoin is community-built and community-run. A team of builders who showed up in 2016 and never left.
 
 The team behind Kekspace grew out of the Pepecoin community itself. Developers, artists, designers, and community managers - all working together because they believe a frog coin from 2016 deserves a world to live in.
 
