@@ -31,7 +31,7 @@ It is not a metaverse pitch deck. It is a live game with people in it.
 
 ### Who is it for?
 
-Gamers, communities, creators, and anyone who thinks virtual worlds should be fun again. Kekspace attracts crypto-native users who are already comfortable with wallets — the exact audience Ink wants to onboard.
+Retail gamers who've never used a wallet. Crypto communities looking for a home. Creators who want a stage. Kekspace is the bridge — a game that feels familiar enough to onboard new users and deep enough to keep the degens. Through the Epic Games Store, Kekspace puts an Ink-native world in front of 78 million monthly active users.
 
 ---
 
@@ -52,6 +52,10 @@ Kekspace and Pepecoin were born around Ethereum, and that remains part of the id
 Ink is the right home for the next stage because it already has live DeFi applications that need better distribution and differentiation. Ink's low fees, DeFi-first positioning, Kraken distribution, existing live apps, bridge support and account abstraction tooling make it the best place to ship these modules now.
 
 For this stage, Ink is not just another chain integration. It is the primary home of the product work we are building.
+
+### Distribution Through Epic Games Store
+
+Kekspace is positioning for distribution through the Epic Games Store — 78 million monthly active users, free to play. With Ink as the onchain layer, every transaction settles on Kraken's L2. This is the Web2-to-Web3 bridge that every L2 wants: millions of retail gamers exposed to an Ink-native game where onchain ownership is baked into the experience from day one. One of Ink's own developers flagged this as exactly the kind of exposure the ecosystem needs.
 
 ---
 
@@ -276,10 +280,6 @@ Kekspace is not just a game with a token attached. The entire economy is designe
 ### The Billboard Network
 
 Kekspace features an in-game billboard network placed across high-traffic zones in the city. On Ink, these billboards become interactive onchain surfaces — players interact with them to view expanded content, access external links, or browse NFT collections. Ink-native projects could advertise inside Kekspace to reach engaged, crypto-native users. The billboard network turns Kekspace into a marketing platform for the Ink ecosystem.
-
-### Epic Games Store
-
-Kekspace is positioning for distribution through the Epic Games Store — 78 million monthly active users, free to play. With Ink as the onchain layer, every transaction settles on Kraken's L2. This is the Web2-to-Web3 bridge that every L2 wants: millions of gamers exposed to an Ink-native game where onchain ownership is baked into the experience from day one.
 
 ---
 
