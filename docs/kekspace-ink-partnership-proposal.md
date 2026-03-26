@@ -262,36 +262,36 @@ Deploying Kekspace on Ink is the opportunity to bring all of this onchain. Every
 | 6 | Velodrome Liquidity Bazaar | Valuable supporting piece; likely phase 2 unless design work is already ahead |
 | 7 | Drop Party Launchpad | High upside, high virality; better framed as phase 2 or separate co-design module |
 
-### 30-60 Day Milestone Plan
+### Development Phases
 
-**Days 0-15 - Ink Onboarding Foundation**
+**Phase 1 - Ink Onboarding Foundation**
 
 - Finalize Ink integration spec and analytics instrumentation plan
 - Wallet / connect / initial AA plumbing
 - Bridge portal prototype
 - Initial Verify / InkScore profile hooks
 
-**Days 15-30 - Ink Arrival District Launch**
+**Phase 2 - Ink Arrival District Launch**
 
 - Ship live arrival district
 - Guest flow: wallet connect, bridge, verify, first quest
 - Measure wallet-connect and bridge completion funnel
 - Launch first Nado trading terminal with Builder Code attribution
 
-**Days 30-45 - First Protocol Integrations**
+**Phase 3 - Protocol Integrations**
 
 - Launch Tydro Bank core flows
 - Add score / badge / verify-driven social signals
 - Launch first 1-2 partner / community rooms
 
-**Days 45-60 - Ecosystem Expansion + Readout**
+**Phase 4 - Ecosystem Expansion + Readout**
 
 - Expand to 2-4 partner rooms
 - Add first liquidity discovery layer (Velodrome)
 - Run first co-marketed activation
 - Publish KPI readout: visits, connects, bridges, referred actions, retention, partner room usage
 
-**Stretch / Phase 2**
+**Phase 5 - Drop Party + Stretch Goals**
 
 - Drop Party design spec and prototype flow
 - Security and mechanism review
