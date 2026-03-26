@@ -49,6 +49,22 @@ Kekspace features an in-game billboard network placed across high-traffic zones 
 
 Kekspace is positioning for distribution through the Epic Games Store — 78 million monthly active users, free to play. With Ink as the onchain layer, every transaction settles on Kraken's L2. This is the Web2-to-Web3 bridge that every L2 wants: millions of retail gamers exposed to an Ink-native game where onchain ownership is baked into the experience from day one. One of Ink's own developers flagged this as exactly the kind of exposure the ecosystem needs.
 
+### How a Retail User Ends Up on Ink
+
+1. **Discovers the game** — through Epic Games Store, social media, or a friend
+2. **Plays as a guest** — no wallet needed. Explores the city, plays games, customizes a character
+3. **Wants to keep what they earned** — items, skins, tickets. The game prompts: "connect a wallet to save your progress"
+4. **Connects a wallet** — through Kraken Wallet or any supported option. First onchain moment.
+5. **Bridges to Ink** — guided flow inside the game. Feels like part of the experience, not a separate step.
+6. **Starts owning and trading** — mints a skin, buys furniture, trades an item P2P. Every action is a transaction on Ink.
+7. **Keeps coming back** — daily quests, seasonal events, community gatherings. One-time user becomes a daily active wallet.
+
+The game is the onboarding. By the time they're on Ink, they didn't even realize they were being onboarded.
+
+### The Kraken Wallet Loop
+
+Kraken already has the funnel: exchange user → Kraken Wallet → Ink. What's missing is the destination. Kekspace gives Kraken Wallet users a reason to actually bridge to Ink — not because a dashboard told them to, but because there's a world on the other side with people in it. Kekspace turns Ink from infrastructure into a place worth going to.
+
 ### Why Ink Specifically?
 
 Kekspace and Pepecoin were born around Ethereum, and that remains part of the identity. But the next chapter — a live social layer for DeFi onboarding, protocol discovery and coordination — is a better fit for Ink's current environment.
