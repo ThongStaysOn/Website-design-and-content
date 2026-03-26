@@ -241,16 +241,6 @@ a:hover {
   margin-bottom: 12px;
 }
 
-.hero-oneliner {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-top: 16px;
-  letter-spacing: 0.01em;
-}
-
 /* ============================================
    TYPOGRAPHY
    ============================================ */
@@ -442,6 +432,107 @@ strong {
 .feature-list--cyan li::before { background: var(--cyan); }
 .feature-list--pink li::before { background: var(--pink); }
 .feature-list--purple li::before { background: var(--purple); }
+
+/* ============================================
+   PLAY-TO-VALUE LOOP
+   ============================================ */
+.loop-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 36px 0;
+  flex-wrap: wrap;
+}
+
+.loop-step {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-align: center;
+  min-width: 120px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.loop-step:hover {
+  border-color: rgba(255,255,255,0.16);
+  transform: translateY(-3px);
+}
+
+.loop-step-label {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.loop-step-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.loop-step:nth-child(1) { border-color: var(--green-border); }
+.loop-step:nth-child(1) .loop-step-label { color: var(--green); }
+.loop-step:nth-child(3) { border-color: var(--cyan-border); }
+.loop-step:nth-child(3) .loop-step-label { color: var(--cyan); }
+.loop-step:nth-child(5) { border-color: var(--purple-border); }
+.loop-step:nth-child(5) .loop-step-label { color: var(--purple); }
+.loop-step:nth-child(7) { border-color: var(--pink-border); }
+.loop-step:nth-child(7) .loop-step-label { color: var(--pink); }
+.loop-step:nth-child(9) { border-color: rgba(255, 200, 87, 0.35); }
+.loop-step:nth-child(9) .loop-step-label { color: var(--gold); }
+
+.loop-arrow {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--text-muted);
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   TRANSACTION GRID
+   ============================================ */
+.txn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.txn-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 24px 22px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.txn-card:hover {
+  border-color: rgba(255,255,255,0.14);
+  transform: translateY(-2px);
+}
+
+.txn-card h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.txn-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.txn-card:nth-child(1) h4 { color: var(--green); }
+.txn-card:nth-child(2) h4 { color: var(--cyan); }
+.txn-card:nth-child(3) h4 { color: var(--purple); }
+.txn-card:nth-child(4) h4 { color: var(--pink); }
+.txn-card:nth-child(5) h4 { color: var(--gold); }
+.txn-card:nth-child(6) h4 { color: var(--orange); }
 
 /* ============================================
    INK GOALS TABLE
@@ -947,21 +1038,6 @@ strong {
 }
 
 /* ============================================
-   FOOTER
-   ============================================ */
-.footer {
-  padding: 40px 0;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.04);
-}
-
-.footer p {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* ============================================
    PROOF SECTION GRID
    ============================================ */
 .proof-grid {
@@ -990,6 +1066,21 @@ strong {
 }
 
 /* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer p {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
@@ -1007,7 +1098,8 @@ strong {
 
   .modules-grid,
   .about-grid,
-  .proof-grid {
+  .proof-grid,
+  .txn-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1037,6 +1129,16 @@ strong {
 
   .kpi-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .loop-flow {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .loop-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
   }
 }
 
@@ -1117,7 +1219,9 @@ strong {
   .callout,
   .timeline-item,
   .budget-item,
-  .img-block {
+  .img-block,
+  .txn-card,
+  .loop-step {
     break-inside: avoid;
   }
 
@@ -1147,12 +1251,14 @@ strong {
       <span>&times; Ink</span>
     </div>
     <div class="nav-links">
+      <a href="#short-version">Short Version</a>
       <a href="#what-is-kekspace">The Game</a>
-      <a href="#why-ink">Why Ink</a>
+      <a href="#opportunity">Opportunity</a>
       <a href="#ink-goals">Ink Goals</a>
       <a href="#modules">Modules</a>
-      <a href="#roadmap">Roadmap</a>
       <a href="#proof">Proof</a>
+      <a href="#pepecoin">Pepecoin</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#kpis">KPIs</a>
       <a href="#budget">Budget</a>
       <a href="#about">Team</a>
@@ -1175,7 +1281,7 @@ strong {
   </div>
 </header>
 
-<!-- ========== THE SHORT VERSION ========== -->
+<!-- ========== 1. THE SHORT VERSION ========== -->
 <section class="section" id="short-version">
   <div class="container">
     <h2>The Short Version</h2>
@@ -1183,107 +1289,134 @@ strong {
     <p class="lead">Ink changes that. Real ownership, real marketplace trading, real integration with exchanges and dApps. The game exists. The community is here. Ink is where the economy goes live.</p>
     <div class="callout callout--green">
       <span class="callout-label">Not a concept</span>
-      <p>We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan. Our go-to-market is simple: <strong>take Ink's products to market.</strong></p>
+      <p>We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan.</p>
     </div>
   </div>
 </section>
 
-<!-- ========== WHAT IS KEKSPACE ========== -->
+<!-- ========== 2. WHAT IS KEKSPACE ========== -->
 <section class="section" id="what-is-kekspace">
   <div class="container">
     <h2>What is Kekspace?</h2>
-    <p class="lead">Kekspace is a social interface for Web3 that blends the social elements of early 2000s MMOs with real onchain utility. Think of the virtual worlds people grew up in &mdash; Habbo Hotel, Club Penguin, early Second Life &mdash; rebuilt with real digital ownership on the blockchain.</p>
-    <p>Players hang out in a sprawling isometric pixel city. They customize characters from head to toe, play arcade games, earn tickets, complete quests, decorate private rooms, collect NFTs, and trade with each other. The world runs seasonal events, hosts community gatherings, and keeps growing.</p>
-
-    <div class="callout callout--cyan">
-      <span class="callout-label">Live product</span>
-      <p>It is not a metaverse pitch deck. It is a live game with people in it.</p>
-    </div>
-
-    <h3>What can you do in Kekspace?</h3>
-    <ul class="feature-list">
-      <li><strong>Play games</strong> &mdash; Survivor (wave-based shooter), Frog Bowling, Whack-A-Meme, with Pokek (poker with onchain settlement on Ink) and Fishing coming soon</li>
-      <li><strong>Customize your character</strong> &mdash; thousands of combinations across 15+ equipment slots: hats, hair, shirts, pants, shoes, glasses, pets, backpacks, and more</li>
-      <li><strong>Decorate your own room</strong> &mdash; grid-based furniture system with seasonal items</li>
-      <li><strong>Complete quests</strong> &mdash; NPCs throughout the world offer missions, with a ranking and badge system tracking progression</li>
-      <li><strong>Collect and trade</strong> &mdash; skins, furniture, and equipment designed to be ownable onchain as NFTs through Ink</li>
-      <li><strong>Hang out</strong> &mdash; chat, emotes, community events, and a world that is always active</li>
-    </ul>
+    <p class="lead">Kekspace is a social interface for Web3 that blends the social elements of early 2000s MMOs with onchain utility &mdash; a sprawling isometric pixel city where players customize characters, play arcade games, earn tickets, complete quests, decorate private rooms, and trade with each other. The world runs seasonal events, hosts community gatherings, and keeps growing. It is not a metaverse pitch deck. It is a live game with people in it.</p>
 
     <figure class="img-block">
-      <img src="content/pitch-deck/10-minigames.png" alt="Kekspace Minigames">
-      <figcaption>Arcade minigames inside Kekspace &mdash; from Survivor to Frog Bowling</figcaption>
+      <img src="content/pitch-deck/08-city-overview.png" alt="Kekspace City Overview">
+      <figcaption>The sprawling isometric world of Kekspace</figcaption>
     </figure>
+
+    <h3>Who is it for?</h3>
+    <p>Retail gamers who've never used a wallet. Crypto communities looking for a home. Creators who want a stage. Kekspace is the bridge &mdash; a game that feels familiar enough to onboard new users and deep enough to keep the degens. Through the Epic Games Store, Kekspace puts an Ink-native world in front of 78 million monthly active users.</p>
 
     <figure class="img-block">
       <img src="content/pitch-deck/09-characters-anatomy.png" alt="Character Anatomy">
       <figcaption>Thousands of cosmetic combinations across 15+ equipment slots</figcaption>
     </figure>
-
-    <h3>Who is it for?</h3>
-    <p>Retail gamers who've never used a wallet. Crypto communities looking for a home. Creators who want a stage. Kekspace is the bridge &mdash; a game that feels familiar enough to onboard new users and deep enough to keep the degens. Through the Epic Games Store, Kekspace puts an Ink-native world in front of 78 million monthly active users.</p>
   </div>
 </section>
 
-<!-- ========== WHY PEPECOIN ========== -->
-<section class="section" id="pepecoin">
+<!-- ========== 3. THE OPPORTUNITY FOR INK ========== -->
+<section class="section" id="opportunity">
   <div class="container">
-    <h2>Why Pepecoin?</h2>
-    <p class="lead">Pepecoin is the first and longest-running Pepe-themed cryptocurrency. It launched on March 5th, 2016 on its own proof-of-work blockchain before migrating to Ethereum as an ERC-20 token. Community-mined from day one. No presale. No insider allocation. No venture capital.</p>
+    <h2>The Opportunity for Ink</h2>
 
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="stat-number">2016</div>
-        <div class="stat-label">Pepecoin launched</div>
+    <h3>Every Action = Onchain Activity</h3>
+    <p>Kekspace is not just a game with a token attached. The entire economy is designed around a play-to-value loop:</p>
+
+    <div class="loop-flow">
+      <div class="loop-step">
+        <span class="loop-step-icon">&#x1F30D;</span>
+        <span class="loop-step-label">Explore</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">PoW</div>
-        <div class="stat-label">Original blockchain &mdash; community-mined</div>
+      <span class="loop-arrow">&rarr;</span>
+      <div class="loop-step">
+        <span class="loop-step-icon">&#x1F48E;</span>
+        <span class="loop-step-label">Gather</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">0</div>
-        <div class="stat-label">Presale / insider allocation / VC funding</div>
+      <span class="loop-arrow">&rarr;</span>
+      <div class="loop-step">
+        <span class="loop-step-icon">&#x1F528;</span>
+        <span class="loop-step-label">Craft</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">10+</div>
-        <div class="stat-label">Years of ecosystem history</div>
+      <span class="loop-arrow">&rarr;</span>
+      <div class="loop-step">
+        <span class="loop-step-icon">&#x1F3AD;</span>
+        <span class="loop-step-label">Equip / Sell</span>
+      </div>
+      <span class="loop-arrow">&rarr;</span>
+      <div class="loop-step">
+        <span class="loop-step-icon">&#x26D3;</span>
+        <span class="loop-step-label">Mint</span>
       </div>
     </div>
 
-    <p>Pepecoin is positioned as the fuel that powers Kekspace &mdash; in-game purchases, NFT minting, marketplace transactions, and rewards. It is not a governance token bolted on after the fact. It has been the core of this community for a decade.</p>
+    <p>Deployed on Ink, every character customization becomes a potential NFT mint. Every furniture purchase becomes an onchain transaction. Every quest reward becomes a token transfer. Every item trade becomes a P2P marketplace transaction. This is the opportunity: TVL, transaction volume, and daily active wallets &mdash; not just a game.</p>
 
-    <div class="callout callout--cyan">
-      <span class="callout-label">Ink deployment</span>
-      <p>Deploying Kekspace on Ink is the opportunity to bring all of this onchain. Every in-game action — purchases, trades, mints, rewards — becomes an onchain transaction on Kraken's L2.</p>
+    <h3>What Generates Transactions on Ink</h3>
+
+    <div class="txn-grid">
+      <div class="txn-card">
+        <h4>Character skins and cosmetics</h4>
+        <p>The highest-volume, lowest-friction entry point. Players buy, trade, and flex thousands of combinations.</p>
+      </div>
+      <div class="txn-card">
+        <h4>Furniture and rooms</h4>
+        <p>Every decoration purchase is an onchain transaction. Seasonal drops create recurring buying cycles.</p>
+      </div>
+      <div class="txn-card">
+        <h4>Minigame rewards</h4>
+        <p>Every game earns tickets. Tickets earn rewards. Rewards have real value on Ink.</p>
+      </div>
+      <div class="txn-card">
+        <h4>Pokek poker</h4>
+        <p>Onchain settlement. Real stakes, real pots, high-value transactions.</p>
+      </div>
+      <div class="txn-card">
+        <h4>Item crafting and trading</h4>
+        <p>Players combine resources, create items, and trade P2P. Every step is a transaction.</p>
+      </div>
+      <div class="txn-card">
+        <h4>Billboard network</h4>
+        <p>Brands and Ink-native projects advertise to engaged users. Every interaction is traceable onchain.</p>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ========== WHY INK ========== -->
-<section class="section" id="why-ink">
-  <div class="container">
-    <h2>Why Ink?</h2>
-    <p class="lead">Kekspace and Pepecoin were born around Ethereum, and that remains part of the identity. But the next chapter we want to build &mdash; a live social layer for DeFi onboarding, protocol discovery and coordination &mdash; is a better fit for Ink's current environment.</p>
+    <figure class="img-block">
+      <img src="content/pitch-deck/10-minigames.png" alt="Kekspace Minigames">
+      <figcaption>Arcade minigames inside Kekspace &mdash; every game earns tickets, every ticket earns rewards</figcaption>
+    </figure>
 
-    <p>Ink is the right home for the next stage because it already has live DeFi applications that need better distribution and differentiation. Ink's low fees, DeFi-first positioning, Kraken distribution, existing live apps, bridge support and account abstraction tooling make it the best place to ship these modules now.</p>
+    <h3>The Billboard Network as Distribution for Ink</h3>
+    <p>Kekspace features an in-game billboard network placed across high-traffic zones in the city. On Ink, these billboards become interactive onchain surfaces &mdash; players interact with them to view expanded content, access external links, or browse NFT collections. Ink-native projects could advertise inside Kekspace to reach engaged, crypto-native users. The billboard network turns Kekspace into a marketing platform for the entire Ink ecosystem.</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/17-billboard-network.png" alt="Billboard Network">
+      <figcaption>Interactive billboard network &mdash; a distribution channel for the entire Ink ecosystem</figcaption>
+    </figure>
+
+    <h3>Distribution Through Epic Games Store</h3>
+    <p>Kekspace is positioning for distribution through the Epic Games Store &mdash; 78 million monthly active users, free to play. With Ink as the onchain layer, every transaction settles on Kraken's L2. This is the Web2-to-Web3 bridge that every L2 wants: millions of retail gamers exposed to an Ink-native game where onchain ownership is baked into the experience from day one. One of Ink's own developers flagged this as exactly the kind of exposure the ecosystem needs.</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/21-epic-games-store.png" alt="Epic Games Store">
+      <figcaption>Kekspace on the Epic Games Store &mdash; Web2 meets Web3 at scale</figcaption>
+    </figure>
+
+    <h3>Why Ink Specifically?</h3>
+    <p>Kekspace and Pepecoin were born around Ethereum, and that remains part of the identity. But the next chapter &mdash; a live social layer for DeFi onboarding, protocol discovery and coordination &mdash; is a better fit for Ink's current environment.</p>
+    <p>Ink is the right home because it already has live DeFi applications that need better distribution and differentiation. Low fees make microtransactions viable. Fast minting means event drops happen in real-time. Kraken wallet integration drops onboarding friction to near zero. Account abstraction tooling smooths the path for retail.</p>
 
     <div class="callout callout--green">
       <span class="callout-label">Positioning</span>
       <p>For this stage, Ink is not just another chain integration. It is the primary home of the product work we are building.</p>
     </div>
-
-    <figure class="img-block">
-      <img src="content/pitch-deck/08-city-overview.png" alt="Kekspace City Overview">
-      <figcaption>The sprawling isometric world of Kekspace &mdash; ready for an Ink-native deployment</figcaption>
-    </figure>
   </div>
 </section>
 
-<!-- ========== INK GOALS TABLE ========== -->
+<!-- ========== 4. HOW KEKSPACE HELPS INK ========== -->
 <section class="section" id="ink-goals">
   <div class="container">
     <h2>How Kekspace Helps Ink Achieve Its Goals</h2>
-    <p class="lead">Kekspace is not just another UI. It is a distribution, differentiation, and retention layer for Ink.</p>
 
     <table class="ink-goals-table">
       <thead>
@@ -1339,7 +1472,7 @@ strong {
   </div>
 </section>
 
-<!-- ========== INTEGRATION MODULES ========== -->
+<!-- ========== 5. INTEGRATION MODULES ========== -->
 <section class="section" id="modules">
   <div class="container">
     <h2>Integration Modules</h2>
@@ -1353,13 +1486,15 @@ strong {
         <span class="module-number">Module 1</span>
         <h3>Ink Arrival District</h3>
         <p class="module-subtitle">The front door to Ink &mdash; bridge, verify, quest, go.</p>
-        <p>A dedicated first-stop area where users arrive in guest mode or connected mode, connect a wallet or embedded smart account, bridge into Ink, verify their identity, receive a first quest, and get routed into their first protocol action. Relay expresses cross-chain movement naturally in a visual interface. InkScore already rewards Bridge IN, making the arrival flow seamless.</p>
+        <p>A dedicated first-stop area inside Kekspace where users arrive in guest mode or connected mode, connect a wallet or embedded smart account, bridge into Ink, verify their identity, receive a first quest, and get routed into their first protocol action.</p>
+        <p>Ink explicitly cares about onboarding, abstraction and UX. Kekspace wraps those values in a flow that is much easier for general users to understand than normal bridge / wallet / dashboard UX. Relay already expresses cross-chain movement in a way that maps naturally to a visual interface: user states intent, the system handles execution, transaction status becomes a journey. InkScore already rewards Bridge IN, which makes the arrival flow even more natural.</p>
         <ul class="module-functions">
           <li>Guest mode world entry and wallet connect</li>
           <li>Optional smart-account / AA-based onboarding</li>
-          <li>Visualized bridge journey with live status updates</li>
+          <li>Source chain and asset selection with bridge quote</li>
+          <li>Visualized bridge journey with status updates inside the world</li>
           <li>Kraken Verify "passport office"</li>
-          <li>First quest routing to Nado, Tydro and other rooms</li>
+          <li>First quest routing users to Nado, Tydro and other rooms</li>
           <li>Analytics for connect-to-bridge-to-first-action conversion</li>
         </ul>
       </div>
@@ -1370,14 +1505,16 @@ strong {
         <span class="module-number">Module 2</span>
         <h3>Nado Trading Arcade</h3>
         <p class="module-subtitle">Social trading rooms with installable terminals and builder-code distribution.</p>
-        <p>A social trading layer built around Nado terminals inside Kekspace. Official Nado areas in the Ink district, plus installable terminals that users, communities and room owners can place in their own rooms. Rooms become mini brokerages, communities become trading clubs, and social spaces become distribution surfaces. Nado's Builder Codes let Kekspace route and monetize activity natively.</p>
+        <p>A social trading layer built around Nado terminals inside Kekspace. This works at two levels: official Nado areas inside the Ink district, and installable Nado terminals that users, communities and room owners can place in their own rooms. This turns rooms into mini brokerages, communities into trading clubs, and social spaces into distribution surfaces.</p>
+        <p>Nado's own builder messaging is directly aligned with Kekspace's value: onchain infrastructure is no longer the bottleneck &mdash; distribution is. Nado's Builder Codes make this especially attractive because Kekspace does not just route attention; it can route activity and monetize that activity natively.</p>
         <ul class="module-functions">
           <li>Nado trading booths in official Ink areas</li>
           <li>Installable terminals inside player-made rooms</li>
           <li>Room-specific builder-code attribution</li>
           <li>Live market boards and tickers</li>
+          <li>Order entry from terminals</li>
           <li>Trader leaderboards</li>
-          <li>Future social/copy-trading mechanics</li>
+          <li>Future social/copy-trading room mechanics</li>
         </ul>
       </div>
 
@@ -1387,14 +1524,15 @@ strong {
         <span class="module-number">Module 3</span>
         <h3>Tydro Bank</h3>
         <p class="module-subtitle">The bank of the city &mdash; lending made legible.</p>
-        <p>A dedicated banking district that turns lending and borrowing into something visually understandable. Tydro is one of the most important financial apps on Ink. Kekspace makes it easier for ordinary users to understand and trust &mdash; useful for deposit growth, borrower activation, capital retention, and ecosystem education.</p>
+        <p>A dedicated banking district inside Kekspace that turns lending and borrowing into something visually understandable. Tydro is one of the best fits for visual translation because a lot of retail users find lending protocols abstract, intimidating or overly spreadsheet-driven.</p>
+        <p>Tydro is currently one of the most important financial apps on Ink. If Kekspace can make Tydro easier for ordinary users to understand and trust, that is useful for deposit growth, borrower activation, capital retention, and broader ecosystem education.</p>
         <ul class="module-functions">
           <li>Deposit desk and supply vault</li>
           <li>Borrow desk with collateral visualizer</li>
           <li>Health factor meter and risk warnings</li>
           <li>"What happens if price moves?" explainer UI</li>
           <li>Guided quests for first-time lenders and borrowers</li>
-          <li>Optional community vault rooms</li>
+          <li>Optional community vault rooms for projects and guilds</li>
         </ul>
       </div>
 
@@ -1404,13 +1542,14 @@ strong {
         <span class="module-number">Module 4</span>
         <h3>Velodrome Liquidity Bazaar</h3>
         <p class="module-subtitle">AMM education, pool discovery, and LP recruitment.</p>
-        <p>A market-style room where users learn how AMMs work, discover pools, and LP into them through a more visual interface. For Ink's Superchain liquidity story, Kekspace makes pool discovery easier, helps users understand stable vs volatile pool logic, and makes LP actions feel less abstract.</p>
+        <p>A market-style room where users can learn how AMMs work, discover pools, and LP into them through a more visual interface. Velodrome is a good fit because AMMs are powerful but often poorly understood by ordinary users.</p>
+        <p>For Ink's Superchain liquidity story, Kekspace helps by making pool discovery easier, giving protocols a space to attract LPs, helping users understand stable vs volatile pool logic, and making LP actions feel less abstract.</p>
         <ul class="module-functions">
           <li>Liquidity discovery boards</li>
-          <li>Stable vs volatile pool explainers</li>
+          <li>Simple stable vs volatile pool explainers</li>
           <li>Pool explorer and search</li>
           <li>Deposit LP flow and fee claiming</li>
-          <li>Protocol booths for LP recruitment</li>
+          <li>Protocol booths asking users to support liquidity</li>
           <li>Visual liquidity map of key ecosystem pairs</li>
         </ul>
       </div>
@@ -1421,14 +1560,15 @@ strong {
         <span class="module-number">Module 5</span>
         <h3>InkScore + Kraken Verify Social Layer</h3>
         <p class="module-subtitle">Onchain activity becomes socially useful.</p>
-        <p>A visible reputation layer that pulls onchain status into the social fabric of the game. InkScore gives visible progression based on onchain activity. Kraken Verify gives wallets a reusable verified status without exposing personal data. Kekspace turns those into actual social UX &mdash; badges, gating, cosmetics, and chat signals.</p>
+        <p>A visible reputation layer that pulls onchain status into the social fabric of the game. InkScore gives users visible progression based on onchain activity. Kraken Verify gives wallets a reusable verified status without exposing personal data. Kekspace turns those into actual social UX.</p>
         <ul class="module-functions">
           <li>Verified badges and flairs</li>
           <li>Room gating by Verify status or InkScore</li>
           <li>Cosmetics and furniture unlocks tied to real activity</li>
           <li>Chat signals, emojis and nameplates</li>
+          <li>Visible protocol-specific status markers</li>
           <li>Asset-holder and hold-duration badges (opt-in)</li>
-          <li>Privacy controls for wallet-derived signals</li>
+          <li>Privacy controls so users decide what wallet-derived signals are visible</li>
         </ul>
       </div>
 
@@ -1437,15 +1577,16 @@ strong {
         <div class="module-icon">&#x1F3E0;</div>
         <span class="module-number">Module 6</span>
         <h3>Project / Community HQ Rooms</h3>
-        <p class="module-subtitle">Where protocols live &mdash; chatrooms, websites, and event venues in one.</p>
-        <p>Permanent branded rooms that projects and communities use as chatrooms, websites, discovery surfaces, event venues and protocol front doors. For Ink apps, these become branded protocol spaces, help desks, onboarding zones, trading clubs, treasury and governance spaces, and event rooms for launches, AMAs and campaigns.</p>
+        <p class="module-subtitle">Enhanced chatrooms, websites and event venues &mdash; where protocols live.</p>
+        <p>Permanent branded rooms that projects and communities can use as chatrooms, websites, discovery surfaces, event venues and protocol front doors. This is one of the clearest ways Kekspace moves beyond "game world novelty" into actual ecosystem infrastructure.</p>
+        <p>For Ink apps, these rooms become branded protocol spaces, help desks, onboarding zones, trading clubs, treasury and governance spaces, and event rooms for launches, AMAs and campaigns.</p>
         <ul class="module-functions">
-          <li>Branded room templates with plugin slots</li>
+          <li>Branded room templates with standard plugin slots for protocol terminals</li>
           <li>Embedded protocol terminals (Nado, Tydro, bridge kiosks)</li>
           <li>Token / Verify / score gating</li>
           <li>Event scheduling and host controls</li>
           <li>Project announcements and onboarding quests</li>
-          <li>Social hangout space with utility attached</li>
+          <li>Social hangout space with actual utility attached</li>
         </ul>
       </div>
 
@@ -1455,9 +1596,9 @@ strong {
         <span class="module-number">Module 7 &mdash; Breakout Upside</span>
         <h3>Drop Party Launchpad</h3>
         <p class="module-subtitle">A game-native, nostalgic, fair-launch attention engine.</p>
-        <p>A launch mechanism inspired by Runescape-style drop parties. A founder configures the launch at a chest. Users gather in the room. Balloons drop in timed waves. Players move to pop them. Popping grants a chance at an allocation from the communal launch pool. The event continues until the bonding mechanism or fill condition is complete. Liquidity migrates or routes to the next venue.</p>
-        <p>The Drop Party is not just a meme idea. It is a potential distribution engine combining speculation, nostalgia, visual spectacle, live participation, social ceremony, and a fairness story. The mechanism can reduce sniping, bundling, pure speed advantage, and cabal-style early concentration through per-wallet wave limits, random drop positions and timing, Verify-gated rooms, cooldowns, and VRF-backed event randomness.</p>
-        <p>Framed as a phase 2 / co-design milestone alongside the core deployment &mdash; the viral flagship that can generate outsized attention and cultural distribution for Ink.</p>
+        <p>A launch mechanism inspired by Runescape-style drop parties. A founder configures the launch at a chest. Users gather in the room. Balloons or similar objects drop around the room in timed waves. Players move to pop them. Popping grants a chance at an allocation from the communal launch pool. The event continues until the bonding mechanism or fill condition is complete. Liquidity migrates or routes to the next venue.</p>
+        <p>The Drop Party is not just a meme idea. It is a potential distribution engine because it combines speculation, nostalgia, visual spectacle, live participation, social ceremony, and a fairness story. The mechanism can be designed to reduce sniping, bundling, pure speed advantage, and cabal-style early concentration &mdash; through per-wallet wave limits, random drop positions and timing, Verify-gated rooms, cooldowns, and VRF-backed event randomness.</p>
+        <p>This is the breakout upside concept &mdash; the viral flagship that can generate outsized attention and cultural distribution for Ink. It is framed as a phase 2 / co-design milestone alongside the core deployment.</p>
       </div>
 
     </div>
@@ -1469,11 +1610,67 @@ strong {
   </div>
 </section>
 
-<!-- ========== PHASED ROADMAP ========== -->
+<!-- ========== 6. PROOF IT WORKS ========== -->
+<section class="section" id="proof">
+  <div class="container">
+    <h2>Proof It Works</h2>
+
+    <h3>The Krakening</h3>
+    <p>We do not need to speculate about whether brand integration works inside Kekspace. We already did it. The Krakening was a live event in partnership with Kraken where the brand was embedded natively into the game world &mdash; themed outfits, environmental lighting, event branding, and custom quests. Hundreds of players gathered in real-time for a midnight event. Exclusive limited-edition collectibles were distributed and are still being traded. The event generated thousands of in-game interactions and social media posts.</p>
+
+    <figure class="img-block">
+      <img src="content/pitch-deck/13-event-krakening.png" alt="The Krakening Event">
+      <figcaption>The Krakening &mdash; a live brand integration event inside Kekspace</figcaption>
+    </figure>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">Not a banner ad</span>
+      <p>Not a banner ad. A living brand experience inside a living world.</p>
+    </div>
+
+    <h3>Seasonal Events Drive Engagement Spikes</h3>
+    <p>The world transforms with the seasons. Halloween turns the entire world dark with a maze, cursed candies, themed quests and exclusive costumes. Christmas covers every zone in snow with an advent calendar, daily gifts and exclusive seasonal items. On Ink, each seasonal event becomes a predictable, repeatable burst of onchain activity &mdash; driving player return rates, new user onboarding, minting spikes, and social media visibility.</p>
+  </div>
+</section>
+
+<!-- ========== 7. WHY PEPECOIN ========== -->
+<section class="section" id="pepecoin">
+  <div class="container">
+    <h2>Why Pepecoin?</h2>
+    <p class="lead">Pepecoin is the first and longest-running Pepe-themed cryptocurrency. It launched on March 5th, 2016 on its own proof-of-work blockchain before migrating to Ethereum as an ERC-20 token. Community-mined from day one. No presale. No insider allocation. No venture capital.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">2016</div>
+        <div class="stat-label">Pepecoin launched</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">PoW</div>
+        <div class="stat-label">Original blockchain &mdash; community-mined</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Presale / insider allocation / VC funding</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years of ecosystem history</div>
+      </div>
+    </div>
+
+    <p>Pepecoin is positioned as the fuel that powers Kekspace &mdash; in-game purchases, NFT minting, marketplace transactions, and rewards. It is not a governance token bolted on after the fact. It has been the core of this community for a decade.</p>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">Ink deployment</span>
+      <p>Deploying Kekspace on Ink is the opportunity to bring all of this onchain. Every in-game action &mdash; purchases, trades, mints, rewards &mdash; becomes an onchain transaction on Kraken's L2. Ink gives Kekspace the infrastructure to make the entire game economy real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. PHASED ROADMAP ========== -->
 <section class="section" id="roadmap">
   <div class="container">
     <h2>Phased Roadmap</h2>
-    <p class="lead">Leads with onboarding, distribution, real apps and measurable outcomes &mdash; allowing the more ambitious pieces to feel like upside rather than risk.</p>
 
     <h3>Priority Ordering</h3>
     <table class="priority-table">
@@ -1597,64 +1794,7 @@ strong {
   </div>
 </section>
 
-<!-- ========== PROOF IT WORKS ========== -->
-<section class="section" id="proof">
-  <div class="container">
-    <h2>The Product &mdash; Proof It Works</h2>
-
-    <h3>The Krakening</h3>
-    <p>We do not need to speculate about whether brand integration works inside Kekspace. We already did it. The Krakening was a live event in partnership with Kraken where the brand was embedded natively into the game world &mdash; themed outfits, environmental lighting, event branding, and custom quests.</p>
-
-    <figure class="img-block">
-      <img src="content/pitch-deck/13-event-krakening.png" alt="The Krakening Event">
-      <figcaption>The Krakening &mdash; a live brand integration event inside Kekspace</figcaption>
-    </figure>
-
-    <ul class="feature-list feature-list--cyan">
-      <li><strong>Hundreds of players gathered in real-time</strong> for a midnight event</li>
-      <li>Exclusive limited-edition collectibles were distributed &mdash; <strong>and they are still being traded</strong></li>
-      <li>A "ticket rain" mechanic rewarded players for being present and engaged</li>
-      <li>The event generated <strong>thousands of in-game interactions and social media posts</strong></li>
-      <li>Community engagement spiked across Discord, Telegram, and Twitter</li>
-    </ul>
-
-    <div class="callout callout--green">
-      <span class="callout-label">Not a banner ad</span>
-      <p>Not a banner ad. A living brand experience inside a living world.</p>
-    </div>
-
-    <div class="proof-grid">
-      <div class="proof-card">
-        <h3 style="color:var(--purple)">Seasonal Events</h3>
-        <p>The world transforms with the seasons. Halloween turns the entire world dark with a maze, cursed candies, themed quests and exclusive costumes. Christmas covers every zone in snow with an advent calendar, daily gifts and exclusive seasonal items. On Ink, each event becomes a predictable, repeatable burst of onchain activity — minting spikes, trading surges, and social visibility.</p>
-      </div>
-      <div class="proof-card">
-        <h3 style="color:var(--cyan)">The Economy</h3>
-        <p>Not just a game with a token attached. The entire economy is designed around a play-to-value loop: Explore, Gather, Craft, Equip or Sell, Mint. Deployed on Ink, every character customization becomes a potential NFT mint. Every furniture purchase becomes an onchain transaction. This is the opportunity: TVL, transaction volume, and daily active wallets.</p>
-      </div>
-      <div class="proof-card">
-        <h3 style="color:var(--green)">The Billboard Network</h3>
-        <p>In-game billboard network across high-traffic zones. Players interact with billboards to view expanded content, access external links, or browse NFT collections. Ink-native projects can advertise inside Kekspace to reach engaged, crypto-native users. A marketing platform for Ink, not just a game on Ink.</p>
-      </div>
-      <div class="proof-card">
-        <h3 style="color:var(--pink)">Epic Games Store</h3>
-        <p>Positioning for distribution through the Epic Games Store &mdash; 78 million monthly active users, free to play, every transaction settling on Ink. The Web2-to-Web3 bridge that every L2 wants. Millions of gamers exposed to an Ink-native game where onchain ownership is baked into the experience.</p>
-      </div>
-    </div>
-
-    <figure class="img-block">
-      <img src="content/pitch-deck/17-billboard-network.png" alt="Billboard Network">
-      <figcaption>Interactive billboard network &mdash; a distribution channel for the entire Ink ecosystem</figcaption>
-    </figure>
-
-    <figure class="img-block">
-      <img src="content/pitch-deck/21-epic-games-store.png" alt="Epic Games Store">
-      <figcaption>Kekspace on the Epic Games Store &mdash; Web2 meets Web3 at scale</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ========== FIRST MONTH KPIs ========== -->
+<!-- ========== 9. FIRST MONTH KPIs ========== -->
 <section class="section" id="kpis">
   <div class="container">
     <h2>First-Month KPIs</h2>
@@ -1698,7 +1838,7 @@ strong {
   </div>
 </section>
 
-<!-- ========== USE OF FUNDS ========== -->
+<!-- ========== 10. USE OF FUNDS ========== -->
 <section class="section" id="budget">
   <div class="container">
     <h2>Use of Funds</h2>
@@ -1729,7 +1869,7 @@ strong {
   </div>
 </section>
 
-<!-- ========== ABOUT ========== -->
+<!-- ========== 11. ABOUT ========== -->
 <section class="section" id="about">
   <div class="container">
     <h2>About the Pepecoin Team</h2>
@@ -1763,18 +1903,22 @@ strong {
   </div>
 </section>
 
-<!-- ========== CONTACT ========== -->
+<!-- ========== 12. CONTACT ========== -->
 <section class="section" id="contact">
   <div class="container">
     <h2>Contact</h2>
     <div class="contact-grid">
       <div class="contact-item">
         <div class="label">Website</div>
-        <div class="value"><a href="https://kek.space">kekspace.io</a></div>
+        <div class="value"><a href="https://kekspace.io">kekspace.io</a></div>
       </div>
       <div class="contact-item">
         <div class="label">Twitter / X</div>
         <div class="value"><a href="https://x.com/pepecoins">@pepecoins</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Discord</div>
+        <div class="value">[invite link]</div>
       </div>
       <div class="contact-item">
         <div class="label">Telegram</div>
