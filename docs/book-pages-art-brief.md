@@ -2,6 +2,18 @@
 
 14 pages total. 9 new pages to create, 5 existing pages to clean up. Every page supports the Ink partnership proposal.
 
+## IMPORTANT - TONE RULES
+
+**DO NOT USE any of the following on any page:**
+- No fake file paths or filenames (.exe, .png, .dll, .tiff, .sip, .zip, .dot)
+- No glitch/system error text ("SYSTEM HALTED", "SYNTAX ERROR", "FATAL", "STACK DUMP", "INITIATING", "REBOOT")
+- No fake code or terminal language ("arcadeKernel.exe", "SysERR04", "kek-maze-entrance-9001.fb.js.tsx")
+- No "loading..." bars or progress indicators as flavor text
+- No fake crash messages or "DIMENSION NOT RESPONDING" style text
+- No file window UI elements with close buttons and title bars
+
+**The tone is:** clean, confident, professional with personality. Let the art and the game speak. The text should be readable, direct, and useful - not dressed up as broken software.
+
 ---
 
 ## NEW PAGES TO CREATE (9)
