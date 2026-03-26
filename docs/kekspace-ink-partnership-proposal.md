@@ -331,7 +331,7 @@ A team of builders and a community that showed up in 2016, grew, and never left.
 
 The team behind Kekspace grew out of the Pepecoin community itself. Developers, artists, designers, and community managers - all working together because they believe a frog coin from 2016 deserves a world to live in.
 
-- **Development** - Built on Unity with SmartFoxServer networking. Real-time multiplayer, live in production. Onchain economy ready to deploy on Ink.
+- **Development** - Custom-coded from scratch in Unity. Not a template, not a fork, not a no-code builder. Built ground-up with SmartFoxServer networking for real-time multiplayer. Live in production. Onchain economy ready to deploy on Ink.
 - **Art** - All pixel art created in-house. Isometric environments, character sprites, NPC designs, furniture, and seasonal content - hundreds of assets and growing.
 - **Community** - Active across Discord, Telegram, and Twitter. The community does not just play the game - they shape it. Event ideas, feature requests, and bug reports come from the people in the world.
 - **Track record** - Shipped seasonal events, brand partnerships (The Krakening), minigames, a furniture system, character creation, and a quest engine. All live. All in production. Billboard network and more in development.
