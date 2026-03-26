@@ -493,6 +493,131 @@ strong {
 }
 
 /* ============================================
+   ONBOARDING FUNNEL
+   ============================================ */
+.funnel {
+  margin: 36px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 48px;
+}
+
+.funnel::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--green),
+    var(--cyan),
+    var(--purple),
+    var(--pink),
+    var(--gold),
+    var(--orange),
+    var(--green)
+  );
+  opacity: 0.5;
+}
+
+.funnel-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  position: relative;
+}
+
+.funnel-number {
+  position: absolute;
+  left: -48px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.funnel-step:nth-child(1) .funnel-number { border-color: var(--green); color: var(--green); }
+.funnel-step:nth-child(2) .funnel-number { border-color: var(--cyan); color: var(--cyan); }
+.funnel-step:nth-child(3) .funnel-number { border-color: var(--purple); color: var(--purple); }
+.funnel-step:nth-child(4) .funnel-number { border-color: var(--pink); color: var(--pink); }
+.funnel-step:nth-child(5) .funnel-number { border-color: var(--gold); color: var(--gold); }
+.funnel-step:nth-child(6) .funnel-number { border-color: var(--orange); color: var(--orange); }
+.funnel-step:nth-child(7) .funnel-number { border-color: var(--green); color: var(--green); }
+
+.funnel-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px 20px;
+  flex: 1;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.funnel-card:hover {
+  border-color: rgba(255,255,255,0.14);
+  transform: translateX(4px);
+}
+
+.funnel-step:nth-child(1) .funnel-card { border-left: 3px solid var(--green); }
+.funnel-step:nth-child(2) .funnel-card { border-left: 3px solid var(--cyan); }
+.funnel-step:nth-child(3) .funnel-card { border-left: 3px solid var(--purple); }
+.funnel-step:nth-child(4) .funnel-card { border-left: 3px solid var(--pink); }
+.funnel-step:nth-child(5) .funnel-card { border-left: 3px solid var(--gold); }
+.funnel-step:nth-child(6) .funnel-card { border-left: 3px solid var(--orange); }
+.funnel-step:nth-child(7) .funnel-card { border-left: 3px solid var(--green); }
+
+.funnel-card strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.funnel-step:nth-child(1) .funnel-card strong { color: var(--green); }
+.funnel-step:nth-child(2) .funnel-card strong { color: var(--cyan); }
+.funnel-step:nth-child(3) .funnel-card strong { color: var(--purple); }
+.funnel-step:nth-child(4) .funnel-card strong { color: var(--pink); }
+.funnel-step:nth-child(5) .funnel-card strong { color: var(--gold); }
+.funnel-step:nth-child(6) .funnel-card strong { color: var(--orange); }
+.funnel-step:nth-child(7) .funnel-card strong { color: var(--green); }
+
+.funnel-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.callout--emphasis {
+  background: linear-gradient(135deg, var(--green-dim), var(--cyan-dim));
+  border-color: var(--green);
+  text-align: center;
+}
+.callout--emphasis p {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+/* ============================================
    TRANSACTION GRID
    ============================================ */
 .txn-grid {
@@ -1140,6 +1265,21 @@ strong {
     transform: rotate(90deg);
     padding: 4px 0;
   }
+
+  .funnel {
+    padding-left: 40px;
+  }
+
+  .funnel::before {
+    left: 15px;
+  }
+
+  .funnel-number {
+    left: -40px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1221,7 +1361,8 @@ strong {
   .budget-item,
   .img-block,
   .txn-card,
-  .loop-step {
+  .loop-step,
+  .funnel-step {
     break-inside: avoid;
   }
 
@@ -1401,6 +1542,71 @@ strong {
       <img src="content/pitch-deck/21-epic-games-store.png" alt="Epic Games Store">
       <figcaption>Kekspace on the Epic Games Store &mdash; Web2 meets Web3 at scale</figcaption>
     </figure>
+
+    <h3>How a Retail User Ends Up on Ink</h3>
+
+    <div class="funnel">
+      <div class="funnel-step">
+        <span class="funnel-number">1</span>
+        <div class="funnel-card">
+          <strong>Discovers the game</strong>
+          <p>Through Epic Games Store, social media, or a friend.</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">2</span>
+        <div class="funnel-card">
+          <strong>Plays as a guest</strong>
+          <p>No wallet needed. Explores the city, plays games, customizes a character.</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">3</span>
+        <div class="funnel-card">
+          <strong>Wants to keep what they earned</strong>
+          <p>Items, skins, tickets. The game prompts: &ldquo;connect a wallet to save your progress.&rdquo;</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">4</span>
+        <div class="funnel-card">
+          <strong>Connects a wallet</strong>
+          <p>Through Kraken Wallet or any supported option. First onchain moment.</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">5</span>
+        <div class="funnel-card">
+          <strong>Bridges to Ink</strong>
+          <p>Guided flow inside the game. Feels like part of the experience, not a separate step.</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">6</span>
+        <div class="funnel-card">
+          <strong>Starts owning and trading</strong>
+          <p>Mints a skin, buys furniture, trades an item P2P. Every action is a transaction on Ink.</p>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">7</span>
+        <div class="funnel-card">
+          <strong>Keeps coming back</strong>
+          <p>Daily quests, seasonal events, community gatherings. One-time user becomes a daily active wallet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout--emphasis">
+      <p>The game is the onboarding. By the time they're on Ink, they didn't even realize they were being onboarded.</p>
+    </div>
+
+    <h3>The Kraken Wallet Loop</h3>
+
+    <div class="callout callout--cyan">
+      <span class="callout-label">Kraken Funnel</span>
+      <p>Kraken already has the funnel: exchange user &rarr; Kraken Wallet &rarr; Ink. What's missing is the destination. Kekspace gives Kraken Wallet users a reason to actually bridge to Ink &mdash; not because a dashboard told them to, but because there's a world on the other side with people in it. Kekspace turns Ink from infrastructure into a place worth going to.</p>
+    </div>
 
     <h3>Why Ink Specifically?</h3>
     <p>Kekspace and Pepecoin were born around Ethereum, and that remains part of the identity. But the next chapter &mdash; a live social layer for DeFi onboarding, protocol discovery and coordination &mdash; is a better fit for Ink's current environment.</p>
