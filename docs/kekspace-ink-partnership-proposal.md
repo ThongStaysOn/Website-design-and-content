@@ -341,6 +341,16 @@ This is not a team that writes roadmaps. It is a team that ships.
 
 ---
 
+## The Vision: Kekspace as the Home for Ink
+
+Right now the Ink ecosystem is a collection of great apps connected by dashboards and tabs. There's no "place" that ties them together. Kekspace can be that place.
+
+Every Ink app gets a room. Nado has a trading floor. Tydro has a bank. Velodrome has a bazaar. New projects launch inside the world instead of on a separate website. Communities run AMAs, podcasts, and events in their own branded spaces. Identity and reputation become visible and social through InkScore and Verify. And when new users arrive through Epic Games Store or Kraken Wallet, they don't land on a dashboard. They land in a city full of people.
+
+Kekspace becomes the home for Ink by being the place where all the apps, communities, and users actually live together instead of existing on separate tabs.
+
+---
+
 ## Contact
 
 **Website:** kekspace.io
