@@ -84,7 +84,7 @@ site/
 - [ ] **Step 1: Create project directory and package.json**
 
 ```bash
-cd "/Volumes/LETS COOK/Projects/Game Manual"
+cd .
 mkdir -p site/public/images/{zones,events,community,gameplay,economy,social}
 mkdir -p site/src/styles site/src/scripts
 ```
@@ -856,7 +856,7 @@ Replace the empty hero section in `index.html`:
 
 ```bash
 # Use the City West or Spawn screenshot as hero background
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/8.png" site/public/images/hero-bg.png
+cp content/8.png" site/public/images/hero-bg.png
 ```
 
 The user will replace this with a higher-quality or cropped version later.
@@ -951,9 +951,9 @@ git commit -m "feat: add hero section with background, tagline, and CTAs"
 - [ ] **Step 3: Copy placeholder images from existing assets**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/10.png" site/public/images/gameplay/community-gathering.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/1.png" site/public/images/gameplay/character-custom.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesArcadeSaloon.png" site/public/images/zones/arcade-interior.png
+cp content/10.png" site/public/images/gameplay/community-gathering.png
+cp content/1.png" site/public/images/gameplay/character-custom.png
+cp content/other manual/ZonesArcadeSaloon.png" site/public/images/zones/arcade-interior.png
 ```
 
 - [ ] **Step 4: Verify vision section renders**
@@ -1172,9 +1172,9 @@ git commit -m "feat: add vision section with two-column manual-page layout"
 - [ ] **Step 3: Copy placeholder images**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Equipment.png" site/public/images/economy/nft-gear.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/FurnitureSystem2.png" site/public/images/economy/nft-room.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Cosmetic.png" site/public/images/economy/nft-character.png
+cp content/other manual/Equipment.png" site/public/images/economy/nft-gear.png
+cp content/other manual/FurnitureSystem2.png" site/public/images/economy/nft-room.png
+cp content/other manual/Cosmetic.png" site/public/images/economy/nft-character.png
 ```
 
 - [ ] **Step 4: Verify economy section renders**
@@ -1345,14 +1345,14 @@ git commit -m "feat: add economy section with Pepecoin, play-to-value loop, and 
 - [ ] **Step 3: Copy zone screenshots from existing assets**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesSpawn.png" site/public/images/zones/spawn.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesArcadeSaloon.png" site/public/images/zones/arcade-saloon.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesAmplexus.png" site/public/images/zones/amplexus.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesKekmart.png" site/public/images/zones/kekmart.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesAdventureGuild.png" site/public/images/zones/adventure-guild.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesCementery.png" site/public/images/zones/cemetery.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesGMCoffee.png" site/public/images/zones/gm-coffee.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/ZonesTouchGrassPark.png" site/public/images/zones/touch-grass-park.png
+cp content/other manual/ZonesSpawn.png" site/public/images/zones/spawn.png
+cp content/other manual/ZonesArcadeSaloon.png" site/public/images/zones/arcade-saloon.png
+cp content/other manual/ZonesAmplexus.png" site/public/images/zones/amplexus.png
+cp content/other manual/ZonesKekmart.png" site/public/images/zones/kekmart.png
+cp content/other manual/ZonesAdventureGuild.png" site/public/images/zones/adventure-guild.png
+cp content/other manual/ZonesCementery.png" site/public/images/zones/cemetery.png
+cp content/other manual/ZonesGMCoffee.png" site/public/images/zones/gm-coffee.png
+cp content/other manual/ZonesTouchGrassPark.png" site/public/images/zones/touch-grass-park.png
 ```
 
 - [ ] **Step 4: Verify world section renders**
@@ -1565,11 +1565,11 @@ git commit -m "feat: add world section with city overview, zone grid, and kekpad
 - [ ] **Step 3: Copy gameplay screenshots from existing assets**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/5.png" site/public/images/gameplay/anatomy.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/7.png" site/public/images/gameplay/minigames-overview.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/18.png" site/public/images/gameplay/hud.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Fishing.png" site/public/images/gameplay/fishing.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Pokek.png" site/public/images/gameplay/pokek.png
+cp content/5.png" site/public/images/gameplay/anatomy.png
+cp content/7.png" site/public/images/gameplay/minigames-overview.png
+cp content/18.png" site/public/images/gameplay/hud.png
+cp content/other manual/Fishing.png" site/public/images/gameplay/fishing.png
+cp content/other manual/Pokek.png" site/public/images/gameplay/pokek.png
 ```
 
 Copy the minigames overview as placeholder for each missing individual screenshot:
@@ -1778,10 +1778,10 @@ git commit -m "feat: add gameplay section with KekCreator, minigames, quests, an
 - [ ] **Step 3: Copy event screenshots**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/EventKrakening.png" site/public/images/events/krakening-crowd.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Exclusive.png" site/public/images/events/krakening-items.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/EventHalloween.png" site/public/images/events/halloween.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/EventXmas2025.png" site/public/images/events/christmas.png
+cp content/other manual/EventKrakening.png" site/public/images/events/krakening-crowd.png
+cp content/other manual/Exclusive.png" site/public/images/events/krakening-items.png
+cp content/other manual/EventHalloween.png" site/public/images/events/halloween.png
+cp content/other manual/EventXmas2025.png" site/public/images/events/christmas.png
 ```
 
 - [ ] **Step 4: Verify and commit**
@@ -1946,16 +1946,16 @@ Note: Stats show "--" as placeholder. User to provide real numbers.
 - [ ] **Step 3: Copy community screenshots**
 
 ```bash
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/10.png" site/public/images/community/scene-1.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/TheCommunity.png" site/public/images/community/scene-2.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/SocialAndCommunity.png" site/public/images/community/scene-3.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/SocialAndCommunity2.png" site/public/images/community/scene-4.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/BillboardNetwork.png" site/public/images/community/billboard.png
+cp content/10.png" site/public/images/community/scene-1.png
+cp content/other manual/TheCommunity.png" site/public/images/community/scene-2.png
+cp content/other manual/SocialAndCommunity.png" site/public/images/community/scene-3.png
+cp content/other manual/SocialAndCommunity2.png" site/public/images/community/scene-4.png
+cp content/other manual/BillboardNetwork.png" site/public/images/community/billboard.png
 
 # Social media post screenshots — use existing social content as placeholders
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/SocialAndCommunity.png" site/public/images/social/post-1.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/SocialAndCommunity2.png" site/public/images/social/post-2.png
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/TheCommunity.png" site/public/images/social/post-3.png
+cp content/other manual/SocialAndCommunity.png" site/public/images/social/post-1.png
+cp content/other manual/SocialAndCommunity2.png" site/public/images/social/post-2.png
+cp content/other manual/TheCommunity.png" site/public/images/social/post-3.png
 ```
 
 - [ ] **Step 4: Verify and commit**
@@ -2419,7 +2419,7 @@ git commit -m "feat: add responsive breakpoints for tablet and mobile"
 
 ```bash
 # Placeholder — user will replace with actual brand assets
-cp "/Volumes/LETS COOK/Projects/Game Manual/content/other manual/Cover.png" site/public/og-image.png
+cp content/other manual/Cover.png" site/public/og-image.png
 ```
 
 For the favicon, create a simple placeholder or extract from existing assets.
