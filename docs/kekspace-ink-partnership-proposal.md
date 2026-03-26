@@ -308,17 +308,9 @@ Deploying Kekspace on Ink is the opportunity to bring all of this onchain. Every
 
 ---
 
-## Target KPIs
+## What We'll Track
 
-- 1,000-3,000 unique visits to the Ink district
-- 300-800 wallet connects
-- 100-300 bridge completions into Ink
-- 100+ first protocol actions (trade / lend / LP / verify)
-- 2-4 protocol or community rooms launched
-- 50-150 Kraken Verify completions
-- 20%+ D7 retention among connected users
-
-Tracked from day one: referred Nado volume, referred Tydro supply/borrow volume, room visits, repeat session rate, quest completion rate.
+We measure what matters: wallet connects, bridge completions, protocol actions, room visits, retention, and referred volume. The dashboard is shared with Ink from day one.
 
 ---
 
