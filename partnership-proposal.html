@@ -1302,6 +1302,39 @@ strong {
 }
 
 /* ============================================
+   ONBOARDING VISUAL
+   ============================================ */
+.onboard-visual{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:32px 0}
+.onboard-split{display:grid;grid-template-columns:1fr 60px 1fr}
+.onboard-side{padding:24px}
+.onboard-side--game{background:linear-gradient(135deg,#0f1a0f 0%,var(--card) 100%)}
+.onboard-side--ink{background:linear-gradient(135deg,var(--card) 0%,#1a102a 100%)}
+.onboard-side-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px}
+.onboard-scene{border-radius:8px;overflow:hidden;border:1px solid #1a3a1a;margin-bottom:16px}
+.onboard-scene img{width:100%;display:block}
+.onboard-list{display:flex;flex-direction:column;gap:8px}
+.onboard-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:.8rem;color:var(--text-secondary)}
+.onboard-item strong{color:var(--text-primary)}
+.onboard-item--green{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15)}
+.onboard-item--green strong{color:#4ade80}
+.onboard-item--purple{background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15)}
+.onboard-item--purple strong{color:#a855f7}
+.onboard-door{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(74,222,128,.1) 0%,rgba(168,85,247,.1) 100%)}
+.onboard-door-line{width:2px;flex:1;background:linear-gradient(180deg,#4ade80,#a855f7)}
+.onboard-door-circle{width:40px;height:40px;background:linear-gradient(135deg,#4ade80,#a855f7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 16px rgba(74,222,128,.3),0 0 16px rgba(168,85,247,.3);margin:6px 0}
+.onboard-door-text{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-secondary);writing-mode:vertical-lr;text-orientation:mixed;padding:6px 0}
+.onboard-footer{text-align:center;padding:20px;border-top:1px solid var(--border);background:rgba(74,222,128,.03)}
+.onboard-footer p{font-size:.9rem;font-weight:600;color:#4ade80}
+.onboard-footer span{font-size:.75rem;color:var(--text-muted)}
+
+@media (max-width:768px){
+  .onboard-split{grid-template-columns:1fr;gap:0}
+  .onboard-door{flex-direction:row;padding:12px;gap:8px}
+  .onboard-door-line{width:auto;height:2px;flex:1}
+  .onboard-door-text{writing-mode:horizontal-tb}
+}
+
+/* ============================================
    PRINT STYLES
    ============================================ */
 @media print {
@@ -1605,6 +1638,47 @@ strong {
 
     <div class="callout callout--emphasis">
       <p>The game is the onboarding. By the time they're on Ink, they didn't even realize they were being onboarded.</p>
+    </div>
+
+    <!-- Onboarding visual: split view -->
+    <div class="onboard-visual">
+      <div class="onboard-split">
+        <div class="onboard-side onboard-side--game">
+          <div class="onboard-side-label" style="color:#4ade80">What the player sees</div>
+          <div class="onboard-scene"><img src="content/pitch-deck/08-city-overview.png" alt="Game world"/></div>
+          <div class="onboard-list">
+            <div class="onboard-item onboard-item--green"><span>🎮</span><span><strong>Plays games</strong> and earns tickets</span></div>
+            <div class="onboard-item onboard-item--green"><span>👕</span><span><strong>Customizes character</strong> with new gear</span></div>
+            <div class="onboard-item onboard-item--green"><span>🏠</span><span><strong>Decorates room</strong> with furniture</span></div>
+            <div class="onboard-item onboard-item--green"><span>🤝</span><span><strong>Trades items</strong> with other players</span></div>
+            <div class="onboard-item onboard-item--green"><span>🎃</span><span><strong>Shows up</strong> to seasonal events</span></div>
+          </div>
+        </div>
+        <div class="onboard-door">
+          <div class="onboard-door-line"></div>
+          <div class="onboard-door-text">THE GAME</div>
+          <div class="onboard-door-circle">🚪</div>
+          <div class="onboard-door-text">IS THE DOOR</div>
+          <div class="onboard-door-line"></div>
+        </div>
+        <div class="onboard-side onboard-side--ink">
+          <div class="onboard-side-label" style="color:#a855f7">What's happening on Ink</div>
+          <div class="onboard-list">
+            <div class="onboard-item onboard-item--purple"><span>🔗</span><span><strong>Wallet connected</strong> to Ink</span></div>
+            <div class="onboard-item onboard-item--purple"><span>🌉</span><span><strong>Assets bridged</strong> to L2</span></div>
+            <div class="onboard-item onboard-item--purple"><span>🪙</span><span><strong>NFT minted</strong> - skin owned onchain</span></div>
+            <div class="onboard-item onboard-item--purple"><span>📊</span><span><strong>P2P trade</strong> settled onchain</span></div>
+            <div class="onboard-item onboard-item--purple"><span>🏦</span><span><strong>Rewards deposited</strong> to wallet</span></div>
+            <div class="onboard-item onboard-item--purple"><span>🏆</span><span><strong>InkScore increased</strong> from activity</span></div>
+            <div class="onboard-item onboard-item--purple"><span>✅</span><span><strong>Kraken Verify</strong> completed in-world</span></div>
+            <div class="onboard-item onboard-item--purple"><span>📈</span><span><strong>Daily active wallet</strong> on Ink</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-footer">
+        <p>They came to play a game. They left as a daily active wallet on Ink.</p>
+        <span>No tutorials. No dashboards. Just play.</span>
+      </div>
     </div>
 
     <h3>The Kraken Wallet Loop</h3>
