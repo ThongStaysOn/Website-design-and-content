@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kekspace Book - Art Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080f;--card:#12121f;--surface:#1a1a2e;--border:#2a2a44;--green:#4ade80;--purple:#a855f7;--cyan:#22d3ee;--orange:#fb923c;--pink:#f472b6;--red:#ef4444;--tx:#f0f0f8;--tx2:#b0b0c8;--tx3:#7878a0;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);line-height:1.7}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,15,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green);letter-spacing:.08em}
+.topbar span{font-size:12px;color:var(--tx3)}
+
+/* Warning banner */
+.warning{background:rgba(239,68,68,.08);border:2px solid var(--red);border-radius:10px;padding:20px 24px;max-width:900px;margin:24px auto;text-align:center}
+.warning h2{color:var(--red);font-family:var(--mono);font-size:.9rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.warning-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:left;margin-bottom:12px}
+.warning-item{font-size:.8rem;color:var(--tx2);padding:4px 8px;background:rgba(239,68,68,.05);border-radius:4px}
+.warning-item code{color:var(--red);font-family:var(--mono);font-size:.75rem}
+.warning-good{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:12px 16px;margin-top:8px}
+.warning-good p{font-size:.85rem;color:var(--green)}
+
+/* Page card */
+.page-section{max-width:900px;margin:0 auto;padding:40px 24px}
+.page-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:32px;overflow:hidden}
+.page-header{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
+.page-num{font-family:var(--mono);font-size:1.1rem;font-weight:700;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.page-num--new{background:var(--pink);color:var(--bg)}
+.page-num--cleanup{background:var(--cyan);color:var(--bg)}
+.page-title{font-size:1.1rem;font-weight:600}
+.page-tag{font-family:var(--mono);font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.page-tag--new{background:var(--pink);color:var(--bg)}
+.page-tag--cleanup{background:var(--cyan);color:var(--bg)}
+
+.page-body{padding:20px}
+
+/* Text block */
+.text-block{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:16px;margin-bottom:16px}
+.text-block-label{font-family:var(--mono);font-size:.65rem;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-weight:700}
+.text-block p{font-size:.85rem;color:var(--tx);line-height:1.8;margin-bottom:8px}
+.text-block p:last-child{margin-bottom:0}
+.text-block strong{color:var(--green)}
+.text-block .highlight{color:var(--cyan);font-weight:600}
+
+/* Steps list */
+.steps{counter-reset:step}
+.step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.step::before{counter-increment:step;content:counter(step);font-family:var(--mono);font-size:.75rem;font-weight:700;background:var(--purple);color:var(--bg);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-text{font-size:.85rem;color:var(--tx2)}
+.step-text strong{color:var(--tx)}
+
+/* Visual direction */
+.visual-dir{background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.visual-dir-label{font-family:var(--mono);font-size:.65rem;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;font-weight:700}
+.visual-dir p{font-size:.8rem;color:var(--tx2);line-height:1.6}
+
+/* Items grid preview */
+.items-preview{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.items-preview span{font-size:.7rem;color:var(--tx3);padding:4px 10px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-family:var(--mono)}
+
+/* Module grid preview */
+.module-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.module-preview-item{font-size:.65rem;color:var(--tx2);padding:6px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;text-align:center;border-top:2px solid var(--purple)}
+
+/* Source note */
+.source{font-size:.75rem;color:var(--tx3);font-family:var(--mono);padding:8px 12px;background:var(--surface);border-radius:6px;margin-top:12px}
+.source strong{color:var(--cyan)}
+
+/* Section divider */
+.section-divider{max-width:900px;margin:48px auto;padding:0 24px}
+.section-divider h2{font-size:1.2rem;padding-bottom:12px;border-bottom:2px solid var(--purple)}
+
+/* Summary */
+.summary{max-width:900px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.summary-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.summary-num{font-size:2rem;font-weight:700}
+.summary-num--pink{color:var(--pink)}
+.summary-num--cyan{color:var(--cyan)}
+.summary-num--green{color:var(--green)}
+.summary-label{font-size:.8rem;color:var(--tx3);margin-top:4px}
+
+@media(max-width:768px){
+  .warning-grid{grid-template-columns:1fr}
+  .module-preview{grid-template-columns:repeat(2,1fr)}
+  .summary{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>KEKSPACE BOOK - ART BRIEF</h1>
+  <span>14 pages for the Ink partnership proposal</span>
+</div>
+
+<!-- TONE WARNING -->
+<div class="warning">
+  <h2>Important - Do Not Use</h2>
+  <div class="warning-grid">
+    <div class="warning-item">No fake filenames: <code>.exe .png .dll .tiff .sip .zip</code></div>
+    <div class="warning-item">No glitch text: <code>SYSTEM HALTED</code> <code>SYNTAX ERROR</code></div>
+    <div class="warning-item">No fake code: <code>arcadeKernel.exe</code> <code>SysERR04</code></div>
+    <div class="warning-item">No <code>loading...</code> bars or progress indicators</div>
+    <div class="warning-item">No crash messages: <code>DIMENSION NOT RESPONDING</code></div>
+    <div class="warning-item">No fake window UI with close buttons and title bars</div>
+    <div class="warning-item">No <code>FATAL</code> <code>STACK DUMP</code> <code>REBOOT</code> text</div>
+    <div class="warning-item">No <code>INITIATING</code> or boot sequence flavor text</div>
+  </div>
+  <div class="warning-good">
+    <p>The tone is: clean, confident, professional with personality. Let the art and the game speak. Text should be readable, direct, and useful.</p>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="summary-card"><div class="summary-num summary-num--pink">9</div><div class="summary-label">New pages to create</div></div>
+  <div class="summary-card"><div class="summary-num summary-num--cyan">5</div><div class="summary-label">Existing pages to clean</div></div>
+  <div class="summary-card"><div class="summary-num summary-num--green">14</div><div class="summary-label">Total pages</div></div>
+</div>
+
+<!-- ========== NEW PAGES ========== -->
+<div class="section-divider"><h2>New Pages to Create</h2></div>
+
+<div class="page-section">
+
+<!-- PAGE 2 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">2</div>
+    <div class="page-title">The Short Version</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Text for this page</div>
+      <p>"Kekspace is a live browser-based social world. Collect items. Flex your drip. Trade gear with other players. Decorate your room. Show up for events. All of this is already happening - but none of it is onchain yet."</p>
+      <p>"Ink changes that. Real ownership, real marketplace trading, real integration with exchanges and dApps. The game exists. The community is here. <strong>Ink is where the economy goes live.</strong> For Ink's users, Kekspace is the front door - onboarding that doesn't feel like onboarding."</p>
+      <p>"We are not applying with a concept. We are applying with a live product and an Ink-native expansion plan."</p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>Clean, bold text-focused page. Subtle game scene in the background (could use one of the 8K renders at low opacity). This page needs to hit hard and read fast. No clutter.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">6</div>
+    <div class="page-title">Economy & Items Catalog</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Top half - Play-to-value loop</div>
+      <p><strong>Explore → Gather → Craft → Equip or Sell → Mint</strong></p>
+      <p>"Deployed on Ink, every character customization becomes a potential NFT mint. Every furniture purchase becomes an onchain transaction. Every quest reward becomes a token transfer. Every item trade becomes a P2P marketplace transaction."</p>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Bottom half - Items catalog grid</div>
+      <p>Show actual game item sprites in a clean grid. The point is to show VOLUME - look how much stuff is already built and ready to go onchain.</p>
+    </div>
+    <div class="items-preview">
+      <span>Wizard Hat</span><span>Viking Helmet</span><span>Top Hat</span>
+      <span>Thug Life Glasses</span><span>Saiyan Scouter</span><span>Disco Glasses</span>
+      <span>Pepecoin Pet</span><span>Ghost Pet</span><span>Coal Pet</span>
+      <span>Pepe Bed</span><span>Computer Desk</span><span>Monstera Plant</span>
+      <span>Pepe Chair</span><span>Chimney</span><span>Cabinet</span>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>SNES strategy guide style flowchart on top. Item catalog grid on bottom like an RPG inventory screen. Dark background. Each item could have a subtle "mintable on Ink" tag. Pull the most colorful sprites from each category: 2-3 hats, 2-3 glasses, 2-3 pets, 2-3 furniture.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">7</div>
+    <div class="page-title">What Generates Transactions on Ink</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">6 transaction cards</div>
+      <p><strong>Character skins and cosmetics</strong> - the highest-volume, lowest-friction entry point. Players buy, trade, and flex thousands of combinations.</p>
+      <p><strong>Furniture and rooms</strong> - every decoration purchase is an onchain transaction. Seasonal drops create recurring buying cycles.</p>
+      <p><strong>Minigame rewards</strong> - every game earns tickets. Tickets earn rewards. Rewards have real value on Ink.</p>
+      <p><strong>Pokek poker</strong> - onchain settlement. Real stakes, real pots, high-value transactions.</p>
+      <p><strong>Item crafting and trading</strong> - players combine resources, create items, and trade P2P. Every step is a transaction.</p>
+      <p><strong>Billboard network</strong> - brands and Ink-native projects advertise to engaged users. Every interaction is traceable onchain.</p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>6 distinct cards/panels, each with a small icon or game screenshot and the text. Dashboard-style layout. Each card represents a revenue/transaction stream. Use green accent for transaction elements. Think of this as the "money slide" - Ink sees exactly where transactions come from.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">8</div>
+    <div class="page-title">How a Retail User Ends Up on Ink</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">7-step funnel</div>
+      <div class="steps">
+        <div class="step"><span class="step-text"><strong>Discovers the game</strong> - through Epic Games Store, social media, or a friend</span></div>
+        <div class="step"><span class="step-text"><strong>Plays as a guest</strong> - no wallet needed. Explores the city, plays games, customizes a character</span></div>
+        <div class="step"><span class="step-text"><strong>Wants to keep what they earned</strong> - items, skins, tickets. The game prompts: "connect a wallet to save your progress"</span></div>
+        <div class="step"><span class="step-text"><strong>Connects a wallet</strong> - through Kraken Wallet or any supported option. First onchain moment.</span></div>
+        <div class="step"><span class="step-text"><strong>Bridges to Ink</strong> - guided flow inside the game. Feels like part of the experience, not a separate step.</span></div>
+        <div class="step"><span class="step-text"><strong>Starts owning and trading</strong> - mints a skin, buys furniture, trades an item P2P. Every action is a transaction on Ink.</span></div>
+        <div class="step"><span class="step-text"><strong>Keeps coming back</strong> - daily quests, seasonal events, community gatherings. One-time user becomes a daily active wallet.</span></div>
+      </div>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Footer text</div>
+      <p>"The game is the onboarding. By the time they're on Ink, they didn't even realize they were being onboarded."</p>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Kraken Wallet Loop (can combine or make separate)</div>
+      <p>"Kraken already has the funnel: exchange user → Kraken Wallet → Ink. What's missing is the destination."</p>
+      <p>"Kekspace gives Kraken Wallet users a reason to actually bridge to Ink - not because a dashboard told them to, but because there's a world on the other side with people in it."</p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>Vertical journey/funnel winding down the page. Start green (game side) and transition to purple (Ink side) as the user goes deeper. Use a Pepe character walking the path. For the Kraken loop: show Kraken Exchange → Kraken Wallet → Ink → Kekspace as a visual flow with logos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">10</div>
+    <div class="page-title">Seasonal Events + Community</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Left side - Seasonal events</div>
+      <p>"The world transforms with the seasons. Halloween brought a maze, costumes, cursed candies, and themed quests. Christmas covered every zone in snow with an advent calendar, daily gifts, and exclusive seasonal items."</p>
+      <p>"On Ink, each seasonal event becomes a predictable, repeatable burst of onchain activity."</p>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Right side - Community</div>
+      <p>"A community that shows up, stays loud, and keeps building."</p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>Split page. Left: Halloween and Christmas scenes (use existing screenshots, clean them up). Right: Community crowd shots showing real player gatherings. The point is proof - real events, real people.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 11 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">11</div>
+    <div class="page-title">Integration Modules</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">7 modules - one-liner each</div>
+      <p><strong>1. Ink Arrival District</strong> - The front door to Ink. Bridge, verify, quest, go.</p>
+      <p><strong>2. Nado Trading Arcade</strong> - Social trading rooms with installable terminals and builder-code distribution.</p>
+      <p><strong>3. Tydro Bank</strong> - The bank of the city. Lending made legible.</p>
+      <p><strong>4. Velodrome Liquidity Bazaar</strong> - AMM education, pool discovery, and LP recruitment.</p>
+      <p><strong>5. InkScore + Kraken Verify</strong> - Onchain activity becomes socially useful.</p>
+      <p><strong>6. Community HQ Rooms</strong> - Where protocols live. Live audio/video for podcasts, AMAs, streams.</p>
+      <p><strong>7. Drop Party Launchpad</strong> - A game-native, nostalgic, fair-launch attention engine.</p>
+    </div>
+    <div class="module-preview">
+      <div class="module-preview-item">Arrival District</div>
+      <div class="module-preview-item">Nado Arcade</div>
+      <div class="module-preview-item">Tydro Bank</div>
+      <div class="module-preview-item">Velodrome</div>
+      <div class="module-preview-item">InkScore</div>
+      <div class="module-preview-item">HQ Rooms</div>
+      <div class="module-preview-item">Drop Party</div>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>Grid layout - 7 cards, each with an icon and name + one-liner. Clean and scannable. Think skill tree or module select screen. Game-style icons for each module.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 12 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">12</div>
+    <div class="page-title">AI Agents & The Moltiverse</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Header</div>
+      <p>"What happens when AI agents get a body, a world, and a social life?"</p>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Key concepts (pick 3-4 that fit)</div>
+      <p><strong>AI Agents as Playable Characters</strong> - When someone registers an AI agent on Ink, it populates as a character in Kekspace. Login with your wallet, play as your agent.</p>
+      <p><strong>The Moltiverse Inside Kekspace</strong> - AI agents that fish, build, trade, and form relationships. The city becomes a living simulation where AI agents and real players coexist.</p>
+      <p><strong>Agent-Run Businesses</strong> - AI agents run shops, manage rooms, host events, and trade autonomously. Generating transactions on Ink 24/7 even when no humans are online.</p>
+      <p><strong>Wallet-Based Agent Identity</strong> - Each agent has a wallet on Ink. Its activity becomes its visible identity in the game world.</p>
+    </div>
+    <div class="text-block">
+      <div class="text-block-label">Footer</div>
+      <p>"Kekspace gives AI agents on Ink something no other project can: a visual, social, persistent world to live in."</p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>Use existing NPC sprites as "AI agent" examples. Show them in the game world doing things - running a shop, playing poker, walking around. Mix pixel-art game sprites with a subtle futuristic/AI aesthetic. Maybe a circuit-board or neural-network pattern in the background.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 13 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--new">13</div>
+    <div class="page-title">The Vision: Home for Ink</div>
+    <span class="page-tag page-tag--new">New</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Text for this page</div>
+      <p>"Right now the Ink ecosystem is a collection of great apps connected by dashboards and tabs. There's no 'place' that ties them together. Kekspace can be that place."</p>
+      <p>"Every Ink app gets a room. Nado has a trading floor. Tydro has a bank. Velodrome has a bazaar. New projects launch inside the world instead of on a separate website. Communities run AMAs, podcasts, and events in their own branded spaces."</p>
+      <p>"And when new users arrive through Epic Games Store or Kraken Wallet, they don't land on a dashboard. They land in a city full of people."</p>
+      <p><strong>"Kekspace becomes the home for Ink by being the place where all the apps, communities, and users actually live together instead of existing on separate tabs."</strong></p>
+    </div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">Visual direction</div>
+      <p>This is the closer. Show the city with labeled rooms for each Ink app (Nado, Tydro, Velodrome) integrated into the buildings. Or a split: left side shows scattered app logos/dashboards (current state), right side shows them all inside the Kekspace city (the vision). Make it feel like a destination, not infrastructure.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ========== CLEANUP PAGES ========== -->
+<div class="section-divider"><h2>Existing Pages to Clean Up</h2></div>
+
+<div class="page-section">
+
+<!-- PAGE 1 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">1</div>
+    <div class="page-title">Cover</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="visual-dir">
+      <div class="visual-dir-label">What to do</div>
+      <p>Add Ink branding alongside Kekspace. Both logos. Use one of the new 8K renders as background (City 8K recommended). Keep it clean - no feature list, no meme text.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">3</div>
+    <div class="page-title">What is Kekspace</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="source"><strong>Source:</strong> Existing "About the Game" page</div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">What to do</div>
+      <p>Use existing About page but clean up the text to match our approved rewrites. Replace kekspace_banner.png with a colorful NPC character lineup. Remove Players/Developers sections.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">4</div>
+    <div class="page-title">City Overview</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="source"><strong>Source:</strong> New City 8K.png render</div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">What to do</div>
+      <p>Use the new 8K city render. No text overlays needed. Optional small caption: "A sprawling pixel world of shops, nightclubs, secret alleys, and places the community is still discovering."</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">5</div>
+    <div class="page-title">Character Anatomy</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="source"><strong>Source:</strong> Existing anatomy diagram</div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">What to do</div>
+      <p>Keep the labeled character with all slots. It's already clean. Add small text: "Thousands of combinations. Every slot is a layer. Every layer is a statement."</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">9</div>
+    <div class="page-title">The Krakening</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Text for this page</div>
+      <p>"Kraken's identity embedded natively into the game world. Hundreds of players gathered in real-time. Exclusive collectibles that players still trade."</p>
+      <p><strong>"Not a banner ad. A living brand experience inside a living world."</strong></p>
+    </div>
+    <div class="source"><strong>Source:</strong> Existing Krakening event pages</div>
+    <div class="visual-dir">
+      <div class="visual-dir-label">What to do</div>
+      <p>Combine crowd screenshot and exclusive items onto one page. Clean up all old text. Use only the text above.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 14 -->
+<div class="page-card">
+  <div class="page-header">
+    <div class="page-num page-num--cleanup">14</div>
+    <div class="page-title">Back Cover</div>
+    <span class="page-tag page-tag--cleanup">Cleanup</span>
+  </div>
+  <div class="page-body">
+    <div class="text-block">
+      <div class="text-block-label">Content</div>
+      <p>Kekspace logo + Ink logo</p>
+      <p><strong>"The game exists. The community is here. Ink is where the economy goes live."</strong></p>
+      <p>kekspace.io / @pepecoins / Discord / Telegram / admin@pepecoin.io</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
