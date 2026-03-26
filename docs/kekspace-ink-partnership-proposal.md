@@ -14,11 +14,20 @@ We are not applying with a concept. We are applying with a live product and an I
 
 ## What is Kekspace?
 
-Kekspace is a social interface for Web3 that blends the social elements of early 2000s MMOs with onchain utility - a sprawling isometric pixel city where players customize characters, play arcade games, earn tickets, complete quests, decorate private rooms, and trade with each other. The world runs seasonal events, hosts community gatherings, and keeps growing. It is not a metaverse pitch deck. It is a live game with people in it.
+Kekspace is a social interface for Web3 that blends the social elements of early 2000s MMOs with real utility - a sprawling isometric pixel city that keeps growing. It is not a metaverse pitch deck. It is a live game with people in it.
+
+**What players do:**
+
+- Play games - Survivor, Frog Bowling, Whack-A-Meme, with Pokek (poker) and Fishing coming soon
+- Customize characters - thousands of combinations across 15+ equipment slots
+- Decorate private rooms - grid-based furniture system with seasonal items
+- Complete quests - NPCs offer missions, with ranking and badges tracking progression
+- Collect and trade - skins, furniture, and equipment designed to be ownable onchain through Ink
+- Hang out - chat, emotes, community events, and a world that's always active
 
 ### Who is it for?
 
-Retail gamers who've never used a wallet. Crypto communities looking for a home. Creators who want a stage. Kekspace is the bridge - a game that feels familiar enough to onboard new users and deep enough to keep the degens. Through the Epic Games Store, Kekspace puts an Ink-native world in front of 78 million monthly active users.
+Retail gamers who've never used a wallet. Crypto communities looking for a home. Creators who want a stage. Kekspace is the bridge - a game that feels familiar enough to onboard new users and deep enough to keep the degens.
 
 ---
 
@@ -37,9 +46,8 @@ Deployed on Ink, every character customization becomes a potential NFT mint. Eve
 - **Character skins and cosmetics** - the highest-volume, lowest-friction entry point. Players buy, trade, and flex thousands of combinations.
 - **Furniture and rooms** - every decoration purchase is an onchain transaction. Seasonal drops create recurring buying cycles.
 - **Minigame rewards** - every game earns tickets. Tickets earn rewards. Rewards have real value on Ink.
-- **Pokek poker** - on-chain settlement. Real stakes, real pots, high-value transactions.
+- **Pokek poker** - onchain settlement. Real stakes, real pots, high-value transactions.
 - **Item crafting and trading** - players combine resources, create items, and trade P2P. Every step is a transaction.
-- **Billboard network** - brands and Ink-native projects advertise to engaged users. Every interaction is traceable onchain.
 
 ### The Billboard Network as Distribution for Ink
 
@@ -300,7 +308,7 @@ Deploying Kekspace on Ink is the opportunity to bring all of this onchain. Every
 
 ---
 
-## First-Month KPIs
+## Target KPIs
 
 - 1,000-3,000 unique visits to the Ink district
 - 300-800 wallet connects
